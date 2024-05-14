@@ -35,3 +35,15 @@ CREATE TABLE `stok_buku` (
     FOREIGN KEY (`id_buku`) REFERENCES `buku`(`id`),
     FOREIGN KEY (`dipinjam_oleh_id_pengguna`) REFERENCES `pengguna`(`id`)
 );
+
+DROP TABLE IF EXISTS `ulasan`;
+
+CREATE TABLE `ulasan` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `id_buku` INT UNSIGNED NOT NULL,
+    `id_pengguna` INT UNSIGNED NOT NULL,
+    `ulasan` TEXT NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`id_buku`) REFERENCES `buku`(`id`),
+    FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna`(`id`)
+);
