@@ -39,6 +39,20 @@ abstract class Model
         return null;
     }
 
+    /** @return static[] */
+    public static function query(array ...$kondisi): array
+    {
+        $where = [];
+        foreach ($kondisi as [$kolom, $operator, $nilai]) {
+            $where[] = "$kolom $operator " . static::escape($nilai);
+        }
+        $where = implode(' AND ', $where);
+
+        $data = Database::query('SELECT * FROM ' . static::table() . " WHERE $where");
+
+        return array_map(fn($d) => new static($d), $data);
+    }
+
     public function simpan(): bool
     {
         $data = get_object_vars($this);
@@ -50,12 +64,10 @@ abstract class Model
                 continue;
             }
 
-            $data[$k] = match (true) {
-                is_string($n) => $n ? "'$n'" : throw new RuntimeException("Kolom $k tidak boleh kosong"),
-                is_bool($n) => $n ? 'TRUE' : 'FALSE',
-                $n instanceof DateTime => "'" . $n->format('Y-m-d H:i:s') . "'",
-                default => $n,
-            };
+            $data[$k] = static::escape($n);
+            if ($data[$k] === "''") {
+                throw new RuntimeException("Kolom $k tidak boleh kosong");
+            }
         }
 
         if ($this->id === null) {
@@ -91,5 +103,16 @@ abstract class Model
         }
 
         throw new RuntimeException('Nama tabel belum diatur');
+    }
+
+    protected static function escape(mixed $nilai): mixed
+    {
+        return match (true) {
+            is_string($nilai) => "'$nilai'",
+            is_bool($nilai) => $nilai ? 'TRUE' : 'FALSE',
+            is_null($nilai) => 'NULL',
+            $nilai instanceof DateTime => "'" . $nilai->format('Y-m-d H:i:s') . "'",
+            default => $nilai,
+        };
     }
 }
