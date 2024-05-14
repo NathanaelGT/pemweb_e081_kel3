@@ -9,3 +9,12 @@ include 'Ulasan.php';
 include 'Penilaian.php';
 
 session_start();
+
+function pengguna(): ?Pengguna
+{
+    static $pengguna = isset($_SESSION['pengguna'])
+        ? Pengguna::cari($_SESSION['pengguna'])
+        : null;
+
+    return $pengguna;
+}
