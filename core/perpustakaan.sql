@@ -47,3 +47,15 @@ CREATE TABLE `ulasan` (
     FOREIGN KEY (`id_buku`) REFERENCES `buku`(`id`),
     FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna`(`id`)
 );
+
+DROP TABLE IF EXISTS `penilaian`;
+
+CREATE TABLE `penilaian` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `id_buku` INT UNSIGNED NOT NULL,
+    `id_pengguna` INT UNSIGNED NOT NULL,
+    `penilaian` TINYINT UNSIGNED NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`id_buku`) REFERENCES `buku`(`id`),
+    FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna`(`id`)
+);
