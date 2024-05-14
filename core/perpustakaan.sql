@@ -8,7 +8,8 @@ CREATE TABLE `pengguna` (
     `email` VARCHAR(255) NOT NULL,
     `password` VARCHAR(255) NOT NULL,
     `admin` BOOLEAN NOT NULL,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    UNIQUE (`email`)
 );
 
 DROP TABLE IF EXISTS `buku`;
@@ -22,7 +23,8 @@ CREATE TABLE `buku` (
     `terbit` DateTime NOT NULL,
     `penerbit` VARCHAR(255) NOT NULL,
     `isbn` int NOT NULL,
-    PRIMARY KEY (`id`)
+    PRIMARY KEY (`id`),
+    UNIQUE (`isbn`)
 );
 
 DROP TABLE IF EXISTS `stok_buku`;
