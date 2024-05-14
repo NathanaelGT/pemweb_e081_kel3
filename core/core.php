@@ -12,9 +12,13 @@ session_start();
 
 function pengguna(): ?Pengguna
 {
-    static $pengguna = isset($_SESSION['pengguna'])
-        ? Pengguna::cari($_SESSION['pengguna'])
-        : null;
+    static $pengguna = false;
+
+    if ($pengguna === false) {
+        $pengguna = isset($_SESSION['pengguna'])
+            ? Pengguna::cari($_SESSION['pengguna'])
+            : null;
+    }
 
     return $pengguna;
 }
