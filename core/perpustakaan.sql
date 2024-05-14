@@ -24,3 +24,14 @@ CREATE TABLE `buku` (
     `isbn` int NOT NULL,
     PRIMARY KEY (`id`)
 );
+
+DROP TABLE IF EXISTS `stok_buku`;
+
+CREATE TABLE `stok_buku` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `id_buku` INT UNSIGNED NOT NULL,
+    `dipinjam_oleh_id_pengguna` INT UNSIGNED NULL DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`id_buku`) REFERENCES `buku`(`id`),
+    FOREIGN KEY (`dipinjam_oleh_id_pengguna`) REFERENCES `pengguna`(`id`)
+);
