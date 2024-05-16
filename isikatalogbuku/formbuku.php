@@ -6,13 +6,12 @@
     <title>Insert Data Buku</title>
 </head>
 <body>
-
     <h1>Form Data Buku</h1>
-    
+
     <div class="kanan">
         <a href="databuku.php">Lihat Data</a>
     </div>
-    
+
     <?php
     if (isset($_GET['status'])) {
         $status = $_GET['status'];
@@ -23,7 +22,7 @@
         }
     }
     ?>
-    
+
     <br>
     <form method="POST" action="process_form.php">
         <table>

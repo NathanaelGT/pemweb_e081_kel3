@@ -1,6 +1,4 @@
-<?php
-include('../core/Database.php');
-?>
+<?php include '../core/core.php' ?>
 
 <!DOCTYPE html>
 <html>
@@ -12,11 +10,6 @@ include('../core/Database.php');
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="index.js"></script>
 </head>
-
-<?php
-$query = "SELECT * FROM `buku`";
-$result = Database::query($query);
-?>
 
 <body>
     <?php
@@ -39,7 +32,7 @@ $result = Database::query($query);
             <div class="kiri">
                 <a href="formbuku.php">Tambah Data</a>
             </div>
-            
+
             <div class="kanan">
                 <input id="myInput" type="text" placeholder="Search..">
             </div>
@@ -62,19 +55,19 @@ $result = Database::query($query);
             </thead>
 
             <tbody id="myTable">
-                <?php foreach ($result as $data) : ?>
+                <?php foreach (Buku::semua() as $buku) : ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($data['judul']); ?></td>
-                        <td><?php echo htmlspecialchars($data['kategori']); ?></td>
-                        <td><?php echo htmlspecialchars($data['penulis']); ?></td>
-                        <td><?php echo htmlspecialchars($data['sinopsis']); ?></td>
-                        <td><?php echo htmlspecialchars($data['terbit']); ?></td>
-                        <td><?php echo htmlspecialchars($data['penerbit']); ?></td>
-                        <td><?php echo htmlspecialchars($data['isbn']); ?></td>
+                        <td><?php echo htmlspecialchars($buku->getJudul()); ?></td>
+                        <td><?php echo htmlspecialchars($buku->getKategori()); ?></td>
+                        <td><?php echo htmlspecialchars($buku->getPenulis()); ?></td>
+                        <td><?php echo htmlspecialchars($buku->getSinopsis()); ?></td>
+                        <td><?php echo htmlspecialchars($buku->getTerbit()->format('d/m/Y H:i')); ?></td>
+                        <td><?php echo htmlspecialchars($buku->getPenerbit()); ?></td>
+                        <td><?php echo htmlspecialchars($buku->getIsbn()); ?></td>
                         <td>
-                            <p><a class="edit" href="<?php echo "update.php?id=" . $data['id']; ?>">UPDATE//blm ada</a></p>
+                            <p><a class="edit" href="<?php echo "update.php?id=" . $buku->getId(); ?>">UPDATE//blm ada</a></p>
                             <br>
-                            <p><a class="edit" href="<?php echo "delete.php?id=" . $data['id']; ?>">DELETE//blm ada</a></p>
+                            <p><a class="edit" href="<?php echo "delete.php?id=" . $buku->getId(); ?>">DELETE//blm ada</a></p>
                         </td>
                     </tr>
                 <?php endforeach; ?>
