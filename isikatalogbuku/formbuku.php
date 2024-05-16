@@ -10,7 +10,7 @@
     <h1>Form Data Buku</h1>
     
     <div class="kanan">
-        <a href="index.php">Lihat Data</a>
+        <a href="databuku.php">Lihat Data</a>
     </div>
     
     <?php
