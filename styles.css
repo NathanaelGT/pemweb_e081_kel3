@@ -1,0 +1,89 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* header */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+/* tombol */
+.btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* book-list */
+.book-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Ruang antara setiap elemen */
+}
+
+/* book-item */
+.book-item {
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    margin: 10px;
+    width: calc(33.333% - 40px); 
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+}
+
+/* gambar buku */
+.book-item img {
+    width: 150px; 
+    height: auto; 
+    display: block;
+    margin-right: 20px;
+}
+
+/* book-details */
+.book-details {
+    flex: 1;
+}
+
+/* h2 di dalam book-details */
+.book-details h2 {
+    margin-top: 0;
+    font-size: 1.2em;
+}
+
+/* p di dalam book-details */
+.book-details p {
+    margin: 10px 0;
+}
+
+/* tombol di dalam book-details */
+.book-details .btn {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    border-radius: 5px;
+}
