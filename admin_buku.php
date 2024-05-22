@@ -1,5 +1,5 @@
 <?php
-include 'core.php';
+include './core/core.php';
 
 $bukuList = Buku::semua();
 ?>
@@ -26,11 +26,7 @@ $bukuList = Buku::semua();
                         <h2><?= $buku->getJudul() ?></h2>
                         <?php
                         $stokBuku = StokBuku::query(['id_buku', '=', $buku->getId()]);
-                        if (isset($stokBuku[0])) {
-                            $jumlahStok = $stokBuku[0]->getJumlah();
-                        } else {
-                            $jumlahStok = 'Tidak tersedia';
-                        }
+                        $jumlahStok = count($stokBuku) ?: 'Tidak tersedia';
                         ?>
                         <p>Stok: <?= $jumlahStok ?></p>
                         <p>Kategori: <?= $buku->getKategori() ?></p>

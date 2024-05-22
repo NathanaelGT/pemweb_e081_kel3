@@ -1,5 +1,5 @@
 <?php
-include 'core.php';
+include './core/core.php';
 
 $buku = Buku::cari($_GET['id']);
 

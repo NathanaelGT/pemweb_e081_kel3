@@ -1,5 +1,5 @@
 <?php
-include 'core.php';
+include './core/core.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $buku = new Buku();
