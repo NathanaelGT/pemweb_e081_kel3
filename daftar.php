@@ -54,29 +54,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar</title>
-</head>
-<body>
-    <h1>Daftar</h1>
+<?php $head = <<<HTML
+<link href="https://cdn.jsdelivr.net/npm/air-datepicker@3.5.1/air-datepicker.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.5.1/air-datepicker.min.js" defer></script>
+<title>Daftar</title>
+HTML ?>
 
-    <?php include './komponen/info.php' ?>
+<?php include './komponen/open.php' ?>
+<?php include './komponen/header.php' ?>
 
-    <form method="POST">
-        <input type="text" name="email" placeholder="Alamat dmail" />
-        <input type="tel" name="telepon" placeholder="Nomor telepon" />
-        <input type="text" name="name" placeholder="Nama lengkap" />
-        <input type="date" name="tanggal_lahir" placeholder="Tanggal lahir" />
-        <input type="password" name="password" placeholder="Password" />
-        <input type="password" name="konfirmasi_password" placeholder="Konfirmasi password" />
+<main class="auth">
+    <div>
+        <h1>Daftar</h1>
 
-        <button>Daftar</button>
+        <?php include './komponen/info.php' ?>
 
-        <p>Sudah punya akun? <a href="./masuk.php">Masuk di sini</a></p>
-    </form>
-</body>
-</html>
+        <form method="POST">
+            <input type="text" name="email" placeholder="Alamat email" />
+            <input type="tel" name="telepon" placeholder="Nomor telepon" />
+            <input type="text" name="name" placeholder="Nama lengkap" />
+            <input type="text" name="tanggal_lahir" placeholder="Tanggal lahir" />
+            <input type="password" name="password" placeholder="Password" />
+            <input type="password" name="konfirmasi_password" placeholder="Konfirmasi password" />
+
+            <button>Daftar</button>
+
+            <p>Sudah punya akun? <a href="./masuk.php">Masuk di sini</a></p>
+        </form>
+    </div>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        new AirDatepicker('input[name="tanggal_lahir"]', {
+            locale: {
+                days: ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
+                daysShort: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
+                daysMin: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
+                months: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+                monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'],
+                today: 'Hari ini',
+                clear: 'Hapus',
+                dateFormat: 'dd/MM/yyyy',
+                timeFormat: 'hh:mm aa',
+                firstDay: 1
+            }
+        })
+    })
+</script>
+
+<?php include './komponen/close.php' ?>

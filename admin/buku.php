@@ -1,5 +1,7 @@
 <?php
-include './core/core.php';
+include '../core/core.php';
+
+echo 'tes';die;
 
 $bukuList = Buku::semua();
 ?>

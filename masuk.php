@@ -38,25 +38,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar</title>
-</head>
-<body>
-    <h1>Masuk</h1>
+<?php $head = <<<HTML
+<title>Masuk</title>
+HTML ?>
 
-    <?php include './komponen/info.php' ?>
+<?php include './komponen/open.php' ?>
+<?php include './komponen/header.php' ?>
 
-    <form method="POST">
-        <input type="text" name="email" placeholder="Masukkan email yang terdaftar" />
-        <input type="password" name="password" placeholder="Password" />
+<main class="auth">
+    <div>
+        <h1>Masuk</h1>
 
-        <button>Masuk</button>
+        <?php include './komponen/info.php' ?>
 
-        <p>Tidak punya akun? <a href="./daftar.php">Daftar di sini</a></p>
-    </form>
-</body>
-</html>
+        <form method="POST">
+            <input type="text" name="email" placeholder="Masukkan email yang terdaftar" />
+            <input type="password" name="password" placeholder="Password" />
+
+            <button>Masuk</button>
+
+            <p>Tidak punya akun? <a href="./daftar.php">Daftar di sini</a></p>
+        </form>
+    </div>
+</main>
+
+<?php include './komponen/close.php' ?>

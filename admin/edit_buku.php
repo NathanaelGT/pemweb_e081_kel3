@@ -1,5 +1,5 @@
 <?php
-include './core/core.php';
+include '../core/core.php';
 
 $buku = Buku::cari($_GET['id']);
 
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ->setIsbn($_POST['isbn'])
         ->simpan();
 
-    header('Location: admin_buku.php');
+    header('Location: buku.php');
     exit;
 }
 ?>

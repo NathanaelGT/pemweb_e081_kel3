@@ -1,0 +1,166 @@
+:root {
+    --red: #AB290E;
+    --yellow: #E59B25;
+    --blue: #0087C8;
+    --white: #FAFAFA;
+    --light-gray: #D9D9D9;
+    --gray: #404040;
+    --dark-green: #1F2928;
+    --dark-gray: #1F1F29;
+    --dark-brown: #231E21;
+    --black: #000000;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    font-family: "Metropolis", sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    background: var(--gray) url("./background.webp") no-repeat center center;
+    background-size: cover;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    & > main {
+        flex-grow: 1;
+    }
+}
+
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+input, button, textarea, select {
+    font: inherit;
+    border: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: var(--blue);
+}
+
+/* header */
+header nav {
+    width: 100%;
+    display: flex;
+    padding: 0.5em 2rem;
+    background-color: var(--black);
+
+    a {
+        color: var(--white);
+    }
+}
+
+.home-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: "Montserrat", "Metropolis", sans-serif;
+    font-weight: bold;
+}
+
+.spacer {
+    flex-grow: 1;
+}
+
+.logo {
+    width: 3rem;
+}
+
+header nav ul {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    list-style: none;
+}
+
+.info {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.5rem;
+
+    svg {
+        float: right;
+        height: 1rem;
+        cursor: pointer;
+    }
+}
+
+.info-error {
+    background-color: #f8d7da;
+    color: var(--red);
+    border: 1px solid #f5c6cb;
+}
+
+.info-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+/* masuk, daftar */
+main.auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > div {
+        width: 50%;
+        background-color: #40404099;
+        backdrop-filter: blur(1px);
+        text-align: center;
+        color: var(--white);
+        border-radius: 2rem;
+        padding: 2rem 6rem;
+        margin: 4rem;
+    }
+
+    h1, p, a {
+        text-shadow: 0 0 2px var(--black);
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    input {
+        padding: 0.4rem 0.8rem;
+        background-color: var(--white);
+        color: var(--black);
+        border: 1px solid var(--black);
+        border-radius: 0.5rem;
+
+        &:focus {
+            outline-color: var(--yellow);
+        }
+    }
+
+    button {
+        margin: 0 25%;
+        padding: 0.25rem 0.5rem;
+        background-color: var(--yellow);
+        color: var(--white);
+        border-radius: 0.5rem;
+    }
+
+    h1 {
+        margin-bottom: 1.5rem;
+    }
+
+    a {
+        font-weight: bold;
+    }
+}

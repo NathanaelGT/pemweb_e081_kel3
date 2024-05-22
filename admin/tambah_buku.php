@@ -1,5 +1,5 @@
 <?php
-include './core/core.php';
+include '../core/core.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $buku = new Buku();
@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ->setIsbn($_POST['isbn'])
         ->simpan();
 
-    header('Location: admin_buku.php');
+    header('Location: buku.php');
     exit;
 }
 ?>
