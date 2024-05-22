@@ -9,7 +9,7 @@ $bukuList = Buku::semua();
 <head>
     <meta charset="UTF-8">
     <title>Admin - Daftar Buku</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
     <div class="container">
