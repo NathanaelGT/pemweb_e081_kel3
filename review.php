@@ -9,12 +9,19 @@ $buku = Buku::cari($buku_id); //memunculkan info detail buku
 $pengguna = pengguna();
 ?>
 
+<?php $head = <<<HTML
+<title>Home</title>
+HTML ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ulasan</title>
+    <link rel="stylesheet" href="review.css">
+    <?php include './komponen/open.php' ?>
+    <?php include './komponen/header.php' ?>
     <script>
         function toggleReviewForm() {
             var form = document.getElementById('reviewForm');
@@ -27,6 +34,7 @@ $pengguna = pengguna();
     </script>
 </head>
 <body>
+    <!-- Belum ditambah tombol backspace -->
     <h1>Rating dan Ulasan</h1>
     <h2>judul buku : <?= $buku->getJudul() ?></h2>
     <br>
