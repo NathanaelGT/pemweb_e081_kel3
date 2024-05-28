@@ -90,7 +90,7 @@ HTML ?>
                 <?php /** @var Buku $buku */ ?>
                 <?php foreach ($daftarBuku as $buku): ?>
                     <div class="book-overview">
-                        <a href="./detailbuku.php?id=1">
+                        <a href="./detailbuku.php?id=<?= $buku->getId() ?>">
                             <img
                                 src="https://via.placeholder.com/234x342"
                                 alt="Poster <?= $buku->getJudul() ?>"
