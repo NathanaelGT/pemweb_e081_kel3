@@ -1,12 +1,12 @@
 <?php
 
-include 'Database.php';
-include 'Model.php';
-include 'Pengguna.php';
-include 'Buku.php';
-include 'StokBuku.php';
-include 'Ulasan.php';
-include 'Penilaian.php';
+include __DIR__ . '/Database.php';
+include __DIR__ . '/Model.php';
+include __DIR__ . '/Pengguna.php';
+include __DIR__ . '/Buku.php';
+include __DIR__ . '/StokBuku.php';
+include __DIR__ . '/Ulasan.php';
+include __DIR__ . '/Penilaian.php';
 
 session_start();
 
