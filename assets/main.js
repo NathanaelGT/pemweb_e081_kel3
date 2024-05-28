@@ -13,7 +13,22 @@ document.querySelectorAll('.info').forEach(info => {
 
             tag = tag.parentElement
         }
+    })
+})
 
-        console.log(event.target)
+document.querySelectorAll('.input').forEach(inputable => {
+    if (inputable.tagName === 'INPUT') {
+        return
+    }
+
+    const input = inputable.querySelector('input')
+    if (input === null) {
+        return
+    }
+
+    inputable.addEventListener('click', event => {
+        if (event.target !== input) {
+            input.focus()
+        }
     })
 })

@@ -71,12 +71,12 @@ HTML ?>
         <?php include './komponen/info.php' ?>
 
         <form method="POST">
-            <input type="text" name="email" placeholder="Alamat email" />
-            <input type="tel" name="telepon" placeholder="Nomor telepon" />
-            <input type="text" name="name" placeholder="Nama lengkap" />
-            <input type="text" name="tanggal_lahir" placeholder="Tanggal lahir" />
-            <input type="password" name="password" placeholder="Password" />
-            <input type="password" name="konfirmasi_password" placeholder="Konfirmasi password" />
+            <input type="text" name="email" placeholder="Alamat email" class="input" />
+            <input type="tel" name="telepon" placeholder="Nomor telepon" class="input" />
+            <input type="text" name="name" placeholder="Nama lengkap" class="input" />
+            <input type="text" name="tanggal_lahir" placeholder="Tanggal lahir" class="input" />
+            <input type="password" name="password" placeholder="Password" class="input" />
+            <input type="password" name="konfirmasi_password" placeholder="Konfirmasi password" class="input" />
 
             <button>Daftar</button>
 

@@ -53,8 +53,8 @@ HTML ?>
         <?php include './komponen/info.php' ?>
 
         <form method="POST">
-            <input type="text" name="email" placeholder="Masukkan email yang terdaftar" />
-            <input type="password" name="password" placeholder="Password" />
+            <input type="text" name="email" placeholder="Masukkan email yang terdaftar" class="input" />
+            <input type="password" name="password" placeholder="Password" class="input" />
 
             <button>Masuk</button>
 

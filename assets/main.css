@@ -53,7 +53,50 @@ a {
     color: var(--blue);
 }
 
+.input {
+    cursor: text;
+    padding: 0.4rem 0.8rem;
+    background-color: var(--white);
+    color: var(--black);
+    border: 1px solid var(--black);
+    border-radius: 0.5rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    &:focus-within {
+        outline: var(--yellow) 0.125rem solid;
+    }
+
+    * {
+        padding: 0;
+        background-color: transparent;
+        cursor: text;
+
+        &:focus-within {
+            outline: none;
+        }
+    }
+}
+
+select.input {
+    /* https://stackoverflow.com/a/71295590 */
+    border-right: 0.8rem solid transparent;
+    padding-right: 1.2rem;
+}
+
+.input__icon {
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
 /* header */
+header {
+    position: sticky;
+    top: 0;
+}
+
 header nav {
     width: 100%;
     display: flex;
@@ -112,6 +155,126 @@ header nav ul {
     border: 1px solid #c3e6cb;
 }
 
+.page-title {
+    padding: 1.5rem 2rem;
+    color: var(--white);
+    background-color: var(--dark-gray);
+    display: flex;
+    justify-content: space-between;
+}
+
+.page-title__form {
+    display: flex;
+    gap: 1.5rem;
+
+    > select {
+        width: 12rem;
+    }
+
+    > div {
+        width: 16rem;
+    }
+}
+
+.page-section {
+    background-color: var(--dark-green);
+
+    &:not(:last-child) {
+        &::after {
+            content: ' ';
+            display: block;
+            background-color: var(--dark-gray);
+            height: 6rem;
+        }
+    }
+}
+
+.page-section__title {
+    min-width: 16rem;
+    width: fit-content;
+    text-align: center;
+    background-color: var(--light-gray);
+    color: var(--dark-green);
+    padding: 0.5rem 2rem;
+    border-bottom-right-radius: 1rem;
+}
+
+.page-section__content {
+    padding: 3rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 3rem;
+}
+
+.book-overview {
+    display: grid;
+    grid-template-columns: 234px 1fr;
+    gap: 1.5rem;
+    color: var(--white);
+}
+
+.book-overview__image {
+    width: 234px;
+    height: 342px;
+    border-radius: 0.5rem;
+}
+
+.book-overview__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.book-overview__title {
+    font-size: 2rem;
+    font-weight: bold;
+
+    a {
+        color: var(--white);
+    }
+}
+
+.book-overview__rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.book-overview__rating__star__wrapper {
+    display: flex;
+}
+
+.book-overview__rating__star {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-bottom: 0.2rem;
+}
+
+.book-overview__rating__review {
+    margin-left: 1rem;
+    padding: 0.1rem 0.8rem;
+    border-radius: 0.5rem;
+    color: var(--white);
+    background-color: var(--yellow);
+}
+
+.book-overview__table {
+    & td:first-child {
+        width: 8rem;
+    }
+}
+
+.book-overview__synopsis {
+    text-align: justify;
+}
+
+.jumbotron {
+    text-align: center;
+    margin-top: 30vh;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
 /* masuk, daftar */
 main.auth {
     display: flex;
@@ -139,16 +302,8 @@ main.auth {
         gap: 1rem;
     }
 
-    input {
-        padding: 0.4rem 0.8rem;
-        background-color: var(--white);
-        color: var(--black);
-        border: 1px solid var(--black);
-        border-radius: 0.5rem;
-
-        &:focus {
-            outline-color: var(--yellow);
-        }
+    input, button {
+        height: 2.4rem;
     }
 
     button {
