@@ -1,8 +1,6 @@
 <?php
 include '../core/core.php';
 
-echo 'tes';die;
-
 $bukuList = Buku::semua();
 ?>
 
@@ -23,7 +21,7 @@ $bukuList = Buku::semua();
         <div class="book-list">
             <?php foreach ($bukuList as $buku): ?>
                 <div class="book-item">
-                    <img src="cover.jpg" alt="<?= $buku->getJudul() ?>">
+                    <img src="<?= $buku->getCover() ?>" alt="<?= $buku->getJudul() ?>">
                     <div class="book-details">
                         <h2><?= $buku->getJudul() ?></h2>
                         <?php

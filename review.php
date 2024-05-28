@@ -45,7 +45,7 @@ HTML ?>
     </div>
 
     <div class="cover">
-        <img src="cover.jpg" alt="<?= $buku->getJudul() ?>"> 
+        <img src="<?= $buku->getCover() ?>" alt="<?= $buku->getJudul() ?>"> 
         <!-- diganti upload foto cover buku -->
     </div>
 
