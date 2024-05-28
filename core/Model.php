@@ -44,7 +44,7 @@ abstract class Model
     {
         $where = [];
         foreach ($kondisi as [$kolom, $operator, $nilai]) {
-            $where[] = "$kolom $operator " . static::escape($nilai);
+            $where[] = "$kolom $operator " . Database::escape($nilai);
         }
         $where = implode(' AND ', $where);
 
@@ -64,7 +64,7 @@ abstract class Model
                 continue;
             }
 
-            $data[$k] = static::escape($n);
+            $data[$k] = Database::escape($n);
             if ($data[$k] === "''") {
                 throw new RuntimeException("Kolom $k tidak boleh kosong");
             }
@@ -103,17 +103,5 @@ abstract class Model
         }
 
         throw new RuntimeException('Nama tabel belum diatur');
-    }
-
-    protected static function escape(mixed $nilai): mixed
-    {
-        return match (true) {
-            is_string($nilai) => "'$nilai'",
-            is_bool($nilai) => $nilai ? 'TRUE' : 'FALSE',
-            is_null($nilai) => 'NULL',
-            is_array($nilai) => '(' . implode(', ', array_map(static::escape(...), $nilai)) . ')',
-            $nilai instanceof DateTime => "'" . $nilai->format('Y-m-d H:i:s') . "'",
-            default => throw new RuntimeException('Tipe data tidak diketahui'),
-        };
     }
 }

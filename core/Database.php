@@ -73,4 +73,16 @@ class Database
             throw $e;
         }
     }
+
+    public static function escape(mixed $nilai): mixed
+    {
+        return match (true) {
+            is_string($nilai) => "'$nilai'",
+            is_bool($nilai) => $nilai ? 'TRUE' : 'FALSE',
+            is_null($nilai) => 'NULL',
+            is_array($nilai) => '(' . implode(', ', array_map(static::escape(...), $nilai)) . ')',
+            $nilai instanceof DateTime => "'" . $nilai->format('Y-m-d H:i:s') . "'",
+            default => throw new RuntimeException('Tipe data tidak diketahui'),
+        };
+    }
 }
