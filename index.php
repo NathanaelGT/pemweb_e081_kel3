@@ -49,7 +49,7 @@ HTML ?>
 <section class="page-title">
     <h1 class="page-title__title">Katalog Buku Perpustakaan</h1>
 
-    <form method="GET" class="page-title__form">
+    <form method="GET" class="page-title__content">
         <select name="kategori" class="input">
             <?php if (isset($_GET['kategori']) && $_GET['kategori']): ?>
                 <option value>Semua</option>

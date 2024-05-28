@@ -167,17 +167,9 @@ header nav ul {
     font-size: 2rem;
 }
 
-.page-title__form {
+.page-title__content {
     display: flex;
     gap: 1.5rem;
-
-    > select {
-        width: 12rem;
-    }
-
-    > div {
-        width: 16rem;
-    }
 }
 
 .page-section {
