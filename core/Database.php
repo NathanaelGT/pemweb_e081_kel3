@@ -70,6 +70,8 @@ class Database
                 return static::query($query);
             }
 
+            dump($query);
+
             throw $e;
         }
     }
