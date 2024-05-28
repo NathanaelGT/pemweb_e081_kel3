@@ -48,7 +48,7 @@ abstract class Model
         }
         $where = implode(' AND ', $where);
 
-        $data = Database::query('SELECT * FROM ' . static::table() . " WHERE $where");
+        $data = Database::query('SELECT * FROM ' . static::table() . ($where ? " WHERE $where" : ''));
 
         return array_map(fn($d) => new static($d), $data);
     }
