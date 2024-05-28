@@ -10,6 +10,8 @@ include __DIR__ . '/Penilaian.php';
 
 session_start();
 
+$basePath = './';
+
 function pengguna(): ?Pengguna
 {
     static $pengguna = false;
@@ -23,4 +25,36 @@ function pengguna(): ?Pengguna
     return $pengguna;
 }
 
-$basePath = './';
+/**
+ * @template TValue
+ * 
+ * @param TValue  $value
+ * @param mixed  ...$moreValues
+ * @return TValue
+ */
+function dump(mixed $value, mixed ...$moreValues): mixed
+{
+    $backtrace = debug_backtrace()[0];
+    echo '<div style="margin: 1rem; z-index: 999; text-shadow: 0 0 1px #000">';
+    echo '<pre style="padding: 0.5rem 1rem; font-size: 1.3rem; border: 2px solid red">';
+    echo $backtrace['file'] . ':' . $backtrace['line'];
+    echo '</pre>';
+
+    foreach ([$value, ...$moreValues] as $value) {
+        echo '<pre style="padding: 0.5rem 1rem; font-size: 1rem; border: 2px solid red; border-top: none">';
+        var_dump($value);
+        echo '</pre>';
+    }
+
+    echo '<div style="height: 1rem"></div>';
+    echo '</div>';
+
+    return $value;
+}
+
+function dd(mixed ...$values): never
+{
+    dump(...$values);
+
+    die;
+}
