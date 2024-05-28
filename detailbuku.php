@@ -5,83 +5,75 @@ $buku = Buku::cari($_GET['id']);
 ?>
 
 <?php $head = <<<HTML
-<title>Home</title>
+<title>Detail Buku {$buku->getJudul()}</title>
 HTML ?>
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Detail Buku</title>
-        <link rel="stylesheet" href="assets/detailinfobuku.css">
-    </head>
+<?php include './komponen/open.php' ?>
+<?php include './komponen/header.php' ?>
 
-    <body> 
-        <?php include './komponen/open.php' ?>
-        <?php include './komponen/header.php' ?>
-        
-        <div class="grid-atas">
-            <div class="grid-item_atas">
-                <h1>Detail Buku</h1>
+<section class="page-title">
+    <h1 class="page-title__title">Detail Buku</h1>
+
+    <div class="page-title__content">
+        <a href="review.php?id=<?= $buku->getId() ?>" class="btn btn--yellow">Lihat Ulasan</a>
+        <a href="review.php?id=<?= $buku->getId() ?>" class="btn btn--blue">Pinjam Buku</a>
+    </div>
+</section>
+
+<div class="book-detail__wrapper">
+    <div class="book-detail">
+        <img
+            src="https://via.placeholder.com/390x570"
+            alt="Poster <?= $buku->getJudul() ?>"
+            class="book-detail__image"
+        />
+
+        <div class="book-detail__content">
+            <h2 class="book-detail__title"><?= $buku->getJudul() ?></h2>
+
+            <div class="book-detail__rating">
+                <?php $rating = Database::query('SELECT (SUM(penilaian) / COUNT(*)) AS penilaian FROM penilaian WHERE id_buku = ' . $buku->getId())[0]['penilaian'] ?>
+                <?php include './komponen/rating.php' ?>
             </div>
-            <div class="button">
-                <a href="review.php?id=<?= $buku->getId() ?>">Lihat Ulasan</a>
-            </div>
-            <div class="button1">
-                <a href="review.php?id=<?= $buku->getId() ?>">Pinjam Buku</a>
-            </div>
+
+            <p class="book-detail__synopsis">
+                “<?= $buku->getSinopsis() ?>”
+            </p>
+
+            <section class="book-detail__info">
+                <h3 class="book-detail__info__title">Detail Informasi</h3>
+
+                <table class="book-detail__info__table">
+                    <tr>
+                        <td>Judul Buku</td>
+                        <td>: <?= $buku->getJudul() ?></td>
+                    </tr>
+                    <tr>
+                        <td>Penulis</td>
+                        <td>: <?= $buku->getPenulis() ?></td>
+                    </tr>
+                    <tr>
+                        <td>Penerbit</td>
+                        <td>: <?= $buku->getPenerbit() ?></td>
+                    </tr>
+                    <tr>
+                        <td>Tanggal Terbit</td>
+                        <td>: <?= $buku->getTerbit()->format('Y-m-d') ?></td>
+                    </tr>
+                    <tr>
+                        <td>ISBN</td>
+                        <td>: <?= $buku->getIsbn() ?></td>
+                    </tr>
+                    <tr>
+                        <td>Kategori</td>
+                        <td>: <?= $buku->getKategori() ?></td>
+                    </tr>
+                    <tr>
+                        <td>Stok Buku</td>
+                        <td>: <?= Database::query('SELECT COUNT(*) as aggregate FROM stok_buku WHERE id_buku = ' . $buku->getId())[0]['aggregate'] ?></td>
+                    </tr>
+                </table>
+            </section>
         </div>
-
-        <div class="grid-container">
-            <div class="grid-item">
-                <div class="cover">
-                    <img src="cover.jpg" alt="<?= $buku->getJudul() ?>"> 
-                    <!-- diganti upload foto cover buku -->
-                </div>
-            </div>
-            <div class="grid-item">
-                <div class="kanan">
-                    <h1><?= $buku->getJudul() ?></h1>
-                    <p>Rating-wip</p>
-                    <p>"<?= $buku->getSinopsis() ?>"</p>
-                    <br>
-                    <p><b>Detail Informasi</b></p>
-                    <p><table>
-                        <tr>
-                            <td>Judul Buku</td>
-                            <td>: <?= $buku->getJudul() ?></td>
-                        </tr>
-                        <tr>
-                            <td>Penulis</td>
-                            <td>: <?= $buku->getPenulis() ?></td>
-                        </tr>
-                        <tr>
-                            <td>Penerbit</td>
-                            <td>: <?= $buku->getPenerbit() ?></td>
-                        </tr>
-                        <tr>
-                            <td>Tanggal Terbit</td>
-                            <td>: <?= $buku->getTerbit()->format('Y-m-d') ?></td>
-                        </tr>
-                        <tr>
-                            <td>ISBN</td>
-                            <td>: <?= $buku->getIsbn() ?></td>
-                        </tr>
-                        <tr>
-                            <td>Kategori</td>
-                            <td>: <?= $buku->getKategori() ?></td>
-                        </tr>
-                        <tr>
-                            <td>Stok Buku</td>
-                            <td><?php $stokBuku = StokBuku::query(['id_buku', '=', $buku->getId()]); $jumlahStok = count($stokBuku) ?: 'Tidak tersedia';
-                        ?></td>
-                        </tr>
-                    </table></p>
-
-                </div>
-            </div>
-        </div>
-        
-
-    </body>
-</html>
+    </div>
+</div>

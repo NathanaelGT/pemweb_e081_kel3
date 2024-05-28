@@ -91,6 +91,24 @@ select.input {
     height: 1.2rem;
 }
 
+.btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.btn--yellow {
+    background-color: var(--yellow);
+    color: white;
+}
+
+.btn--blue {
+    background-color: var(--blue);
+    color: white;
+}
+
 /* header */
 header {
     position: sticky;
@@ -262,6 +280,58 @@ header nav ul {
 
 .book-overview__synopsis {
     text-align: justify;
+}
+
+.book-detail__wrapper {
+    background-color: var(--dark-gray);
+}
+
+.book-detail {
+    margin: 0 2rem 1.5rem;
+    padding: 2.5rem;
+    border-radius: 0.5rem;
+    color: var(--white);
+    background-color: var(--gray);
+    display: grid;
+    grid-template-columns: 390px 1fr;
+    gap: 2.5rem;
+}
+
+.book-detail__image {
+    width: 390px;
+    height: 570px;
+    border-radius: 0.5rem;
+}
+
+.book-detail__title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.book-detail__rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.book-detail__synopsis {
+    margin: 1.5rem 0;
+}
+
+.book-detail__info {
+    margin-top: 0.5rem;
+}
+
+.book-detail__info__table {
+    padding: 1.25rem;
+    width: 100%;
+    color: var(--black);
+    background-color: var(--white);
+    border-radius: 0.5rem;
+
+    & td:first-child {
+        width: 8rem;
+    }
 }
 
 .jumbotron {
