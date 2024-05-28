@@ -24,6 +24,7 @@ CREATE TABLE `buku` (
     `sinopsis` TEXT NOT NULL,
     `terbit` DateTime NOT NULL,
     `penerbit` VARCHAR(255) NOT NULL,
+    `cover` VARCHAR(255) NULL DEFAULT NULL,
     `isbn` int NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE (`isbn`)
@@ -83,19 +84,19 @@ INSERT INTO `pengguna` (`nama`, `telepon`, `tanggal_lahir`, `email`, `password`,
 ('Adi Putra', '081234567810', '2009-01-01', 'adi.putra@example.com', '$2y$10$S7c7CNC2Wwgwhia77SuhTeXWMmW21RUepTeuaAJEv.mTUjGtecEIS', FALSE),
 ('Maya Puspita', '081234567811', '2010-01-01', 'maya.puspita@example.com', '$2y$10$S7c7CNC2Wwgwhia77SuhTeXWMmW21RUepTeuaAJEv.mTUjGtecEIS', FALSE);
 
-INSERT INTO `buku` (`judul`, `kategori`, `penulis`, `sinopsis`, `terbit`, `penerbit`, `isbn`) VALUES
-('Laskar Pelangi', 'Fiksi', 'Andrea Hirata', 'Laskar Pelangi menceritakan kisah inspiratif tentang anak-anak di sebuah desa kecil di Belitung yang berjuang mendapatkan pendidikan.', '2020-01-01 00:00:00', 'Bentang Pustaka', 123456789),
-('Bumi Manusia', 'Sejarah Fiksi', 'Pramoedya Ananta Toer', 'Bumi Manusia mengisahkan perjalanan hidup Minke, seorang pemuda pribumi yang menentang ketidakadilan kolonial.', '2020-02-01 00:00:00', 'Hasta Mitra', 223456789),
-('Sang Pemimpi', 'Fiksi', 'Andrea Hirata', 'Sang Pemimpi melanjutkan kisah Laskar Pelangi, menyoroti perjalanan hidup Ikal dan Arai yang penuh perjuangan dan impian.', '2020-03-01 00:00:00', 'Bentang Pustaka', 323456789),
-('Negeri 5 Menara', 'Fiksi', 'A. Fuadi', 'Negeri 5 Menara bercerita tentang pengalaman hidup Alif di pondok pesantren yang penuh dengan pelajaran hidup dan persahabatan.', '2020-04-01 00:00:00', 'Gramedia Pustaka Utama', 423456789),
-('Supernova', 'Fiksi Ilmiah', 'Dee Lestari', 'Supernova adalah novel fiksi ilmiah yang menggabungkan elemen ilmu pengetahuan, filsafat, dan romantika.', '2020-05-01 00:00:00', 'Bentang Pustaka', 523456789),
-('Ayat-Ayat Cinta', 'Romantis', 'Habiburrahman El Shirazy', 'Ayat-Ayat Cinta mengisahkan perjalanan cinta dan kehidupan Fahri, seorang mahasiswa Indonesia di Mesir.', '2020-06-01 00:00:00', 'Republika', 623456789),
-('Cantik Itu Luka', 'Sejarah Fiksi', 'Eka Kurniawan', 'Cantik Itu Luka adalah novel epik yang menggabungkan sejarah Indonesia dengan cerita fiksi yang kaya akan karakter dan peristiwa.', '2020-07-01 00:00:00', 'Gramedia Pustaka Utama', 723456789),
-('Perahu Kertas', 'Romantis', 'Dee Lestari', 'Perahu Kertas bercerita tentang perjalanan cinta Kugy dan Keenan yang penuh lika-liku dan pencarian jati diri.', '2020-08-01 00:00:00', 'Bentang Pustaka', 823456789),
-('Pulang', 'Fiksi', 'Leila S. Chudori', 'Pulang mengisahkan tentang kerinduan seorang anak akan kampung halamannya setelah bertahun-tahun hidup di pengasingan politik.', '2020-09-01 00:00:00', 'Kepustakaan Populer Gramedia', 923456789),
-('Ronggeng Dukuh Paruk', 'Sejarah Fiksi', 'Ahmad Tohari', 'Ronggeng Dukuh Paruk adalah kisah tentang kehidupan Srintil, seorang penari ronggeng, dan perjuangannya melawan takdir.', '2020-10-01 00:00:00', 'Gramedia Pustaka Utama', 102345678),
-('Gadis Pantai', 'Sejarah Fiksi', 'Pramoedya Ananta Toer', 'Gadis Pantai bercerita tentang kehidupan seorang gadis pesisir yang menikah dengan seorang priyayi dan menghadapi banyak tantangan.', '2020-11-01 00:00:00', 'Hasta Mitra', 112345678),
-('Dilan: Dia adalah Dilanku Tahun 1990', 'Romantis', 'Pidi Baiq', 'Dilan: Dia adalah Dilanku Tahun 1990 adalah kisah romantis tentang Dilan dan Milea yang berlatar belakang kehidupan remaja di Bandung.', '2020-12-01 00:00:00', 'Pastel Books', 122345678);
+INSERT INTO `buku` (`judul`, `kategori`, `penulis`, `sinopsis`, `terbit`, `penerbit`, `cover`, `isbn`) VALUES
+('Laskar Pelangi', 'Fiksi', 'Andrea Hirata', 'Laskar Pelangi menceritakan kisah inspiratif tentang anak-anak di sebuah desa kecil di Belitung yang berjuang mendapatkan pendidikan.', '2020-01-01 00:00:00', 'Bentang Pustaka', 'https://cdn.gramedia.com/uploads/items/9789793062792_New-Edition-Laskar-Pelangi.jpg', 123456789),
+('Bumi Manusia', 'Sejarah Fiksi', 'Pramoedya Ananta Toer', 'Bumi Manusia mengisahkan perjalanan hidup Minke, seorang pemuda pribumi yang menentang ketidakadilan kolonial.', '2020-02-01 00:00:00', 'Hasta Mitra', 'https://bukukita.com/babacms/displaybuku/98759_f.jpg', 223456789),
+('Sang Pemimpi', 'Fiksi', 'Andrea Hirata', 'Sang Pemimpi melanjutkan kisah Laskar Pelangi, menyoroti perjalanan hidup Ikal dan Arai yang penuh perjuangan dan impian.', '2020-03-01 00:00:00', 'Bentang Pustaka', 'https://cdn.gramedia.com/uploads/items/Sang_Pemimpi_ofLeeOG.jpg', 323456789),
+('Negeri 5 Menara', 'Fiksi', 'A. Fuadi', 'Negeri 5 Menara bercerita tentang pengalaman hidup Alif di pondok pesantren yang penuh dengan pelajaran hidup dan persahabatan.', '2020-04-01 00:00:00', 'Gramedia Pustaka Utama', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1249749162i/6688121.jpg', 423456789),
+('Supernova', 'Fiksi Ilmiah', 'Dee Lestari', 'Supernova adalah novel fiksi ilmiah yang menggabungkan elemen ilmu pengetahuan, filsafat, dan romantika.', '2020-05-01 00:00:00', 'Bentang Pustaka', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1410249029i/1300350.jpg', 523456789),
+('Ayat-Ayat Cinta', 'Romantis', 'Habiburrahman El Shirazy', 'Ayat-Ayat Cinta mengisahkan perjalanan cinta dan kehidupan Fahri, seorang mahasiswa Indonesia di Mesir.', '2020-06-01 00:00:00', 'Republika', 'https://upload.wikimedia.org/wikipedia/id/b/b4/Ayatayatcinta.jpg', 623456789),
+('Cantik Itu Luka', 'Sejarah Fiksi', 'Eka Kurniawan', 'Cantik Itu Luka adalah novel epik yang menggabungkan sejarah Indonesia dengan cerita fiksi yang kaya akan karakter dan peristiwa.', '2020-07-01 00:00:00', 'Gramedia Pustaka Utama', 'https://cdn.gramedia.com/uploads/items/9786020366517_Cantik-Itu-Luka-Hard-Cover---Limited-Edition.jpg', 723456789),
+('Perahu Kertas', 'Romantis', 'Dee Lestari', 'Perahu Kertas bercerita tentang perjalanan cinta Kugy dan Keenan yang penuh lika-liku dan pencarian jati diri.', '2020-08-01 00:00:00', 'Bentang Pustaka', 'https://deelestari.com/wp-content/uploads/2014/09/Perahukertas-1.jpg', 823456789),
+('Pulang', 'Fiksi', 'Leila S. Chudori', 'Pulang mengisahkan tentang kerinduan seorang anak akan kampung halamannya setelah bertahun-tahun hidup di pengasingan politik.', '2020-09-01 00:00:00', 'Kepustakaan Populer Gramedia', 'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1465061573i/16174176.jpg', 923456789),
+('Ronggeng Dukuh Paruk', 'Sejarah Fiksi', 'Ahmad Tohari', 'Ronggeng Dukuh Paruk adalah kisah tentang kehidupan Srintil, seorang penari ronggeng, dan perjuangannya melawan takdir.', '2020-10-01 00:00:00', 'Gramedia Pustaka Utama', 'https://s3-ap-southeast-1.amazonaws.com/ebook-previews/53333/200748/1.jpg', 102345678),
+('Gadis Pantai', 'Sejarah Fiksi', 'Pramoedya Ananta Toer', 'Gadis Pantai bercerita tentang kehidupan seorang gadis pesisir yang menikah dengan seorang priyayi dan menghadapi banyak tantangan.', '2020-11-01 00:00:00', 'Hasta Mitra', 'https://cdn.gramedia.com/uploads/items/98752_f.jpg', 112345678),
+('Dilan: Dia adalah Dilanku Tahun 1990', 'Romantis', 'Pidi Baiq', 'Dilan: Dia adalah Dilanku Tahun 1990 adalah kisah romantis tentang Dilan dan Milea yang berlatar belakang kehidupan remaja di Bandung.', '2020-12-01 00:00:00', 'Pastel Books', 'https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,q_auto:best,w_640/v1529766227/dilan1_rgsiyd.jpg', 122345678);
 
 INSERT INTO `stok_buku` (`id_buku`, `dipinjam_oleh_id_pengguna`) VALUES
 (1, 3), (1, NULL), (1, 8), (1, NULL), (1, NULL), (1, NULL), (1, 13), (1, NULL), (1, NULL), (1, NULL),

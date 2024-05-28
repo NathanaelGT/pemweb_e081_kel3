@@ -92,7 +92,7 @@ HTML ?>
                     <div class="book-overview">
                         <a href="./detailbuku.php?id=<?= $buku->getId() ?>">
                             <img
-                                src="https://via.placeholder.com/234x342"
+                                src="<?= $buku->getCover() ?>"
                                 alt="Poster <?= $buku->getJudul() ?>"
                                 class="book-overview__image"
                             />

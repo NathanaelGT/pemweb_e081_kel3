@@ -23,7 +23,7 @@ HTML ?>
 <div class="book-detail__wrapper">
     <div class="book-detail">
         <img
-            src="https://via.placeholder.com/390x570"
+            src="<?= $buku->getCover() ?>"
             alt="Poster <?= $buku->getJudul() ?>"
             class="book-detail__image"
         />

@@ -16,6 +16,8 @@ class Buku extends Model
 
     protected string $penerbit;
 
+    protected string $cover;
+
     protected int $isbn;
 
     public function getJudul(): string
@@ -86,6 +88,24 @@ class Buku extends Model
     public function setPenerbit(string $penerbit): static
     {
         $this->penerbit = $penerbit;
+
+        return $this;
+    }
+
+    public function getCover(): string
+    {
+        if (str_starts_with($this->cover, 'http')) {
+            return $this->cover;
+        }
+
+        global $basePath;
+
+        return $basePath . $this->cover;
+    }
+
+    public function setCover(string $cover): static
+    {
+        $this->cover = $cover;
 
         return $this;
     }
