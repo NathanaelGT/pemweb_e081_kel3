@@ -80,6 +80,7 @@ class Database
     {
         return match (true) {
             is_string($nilai) => "'$nilai'",
+            is_numeric($nilai) => $nilai,
             is_bool($nilai) => $nilai ? 'TRUE' : 'FALSE',
             is_null($nilai) => 'NULL',
             is_array($nilai) => '(' . implode(', ', array_map(static::escape(...), $nilai)) . ')',
