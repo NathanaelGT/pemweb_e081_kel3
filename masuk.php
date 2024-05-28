@@ -36,9 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die;
     }
 }
-?>
 
-<?php $head = <<<HTML
+$bodyClass = 'bookshelf-background';
+
+$head = <<<HTML
 <title>Masuk</title>
 HTML ?>
 

@@ -52,9 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die;
     }
 }
-?>
 
-<?php $head = <<<HTML
+$bodyClass = 'bookshelf-background';
+
+$head = <<<HTML
 <link href="https://cdn.jsdelivr.net/npm/air-datepicker@3.5.1/air-datepicker.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.5.1/air-datepicker.min.js" defer></script>
 <title>Daftar</title>

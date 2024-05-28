@@ -7,7 +7,7 @@ HTML ?>
 <?php include './komponen/open.php' ?>
 <?php include './komponen/header.php' ?>
 
-<div style="background-color: var(--white)">
+<div>
     <?= 'Hello ' . (pengguna()?->getNama() ?? 'world') . '!' ?>
 </div>
 

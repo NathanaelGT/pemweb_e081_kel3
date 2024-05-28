@@ -20,14 +20,17 @@ body {
     font-family: "Metropolis", sans-serif;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
-    background: var(--gray) url("./background.webp") no-repeat center center;
-    background-size: cover;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 
     & > main {
         flex-grow: 1;
+    }
+
+    &.bookshelf-background {
+        background: var(--gray) url("./bookshelf-background.webp") no-repeat center center;
+        background-size: cover;
     }
 }
 

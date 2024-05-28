@@ -9,4 +9,4 @@
     <link rel="stylesheet" href="<?= $basePath ?? './' ?>assets/main.css">
     <script src="<?= $basePath ?? './' ?>assets/main.js" defer></script>
 </head>
-<body>
+<body <?= isset($bodyClass) ? "class=\"$bodyClass\"" : '' ?>>
