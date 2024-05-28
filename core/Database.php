@@ -70,7 +70,7 @@ class Database
                 return static::query($query);
             }
 
-            dump($query);
+            dump($query, $e->getMessage());
 
             throw $e;
         }
@@ -85,7 +85,7 @@ class Database
             is_null($nilai) => 'NULL',
             is_array($nilai) => '(' . implode(', ', array_map(static::escape(...), $nilai)) . ')',
             $nilai instanceof DateTime => "'" . $nilai->format('Y-m-d H:i:s') . "'",
-            default => throw new RuntimeException('Tipe data tidak diketahui'),
+            default => dd($nilai, 'Tipe data tidak diketahui'),
         };
     }
 }
