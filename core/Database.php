@@ -62,7 +62,7 @@ class Database
             if ($e instanceof mysqli_sql_exception && $e->getCode() === 1146) {
                 $sql = explode(';', file_get_contents(__DIR__ . '/perpustakaan.sql'));
                 foreach ($sql as $q) {
-                    if (trim($q)) {
+                    if ($q = trim($q)) {
                         $mysqli->query($q);
                     }
                 }
