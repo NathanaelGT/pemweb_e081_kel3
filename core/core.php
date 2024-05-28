@@ -37,17 +37,23 @@ function dump(mixed $value, mixed ...$moreValues): mixed
     $backtraces = debug_backtrace();
     $backtrace = $backtraces[0];
     $separator = DIRECTORY_SEPARATOR;
-    for ($index = 1; str_contains($backtrace['file'], "{$separator}core{$separator}"); $index++) {
+    for ($index = 1; str_contains($backtrace['file'] ?? '', "{$separator}core{$separator}"); $index++) {
         $backtrace = $backtraces[$index];
     }
 
     echo '<div style="margin: 1rem; z-index: 999; text-shadow: 0 0 1px #000">';
-    echo '<pre style="margin: 0; padding: 0.5rem 1rem; font-size: 1.3rem; border: 2px solid red">';
-    echo $backtrace['file'] . ':' . $backtrace['line'];
-    echo '</pre>';
+    if (isset($backtrace['file'])) {
+        $line = $backtrace['line'] ?? null;
+
+        echo '<pre style="margin: 0; padding: 0.5rem 1rem; font-size: 1.3rem; text-wrap: wrap; border: 2px solid red">';
+        echo $backtrace['file'] . ($line !== null ? ":$line" : '');
+        echo '</pre>';
+    } else {
+        echo '<div style="border-top: 2px solid red"></div>';
+    }
 
     foreach ([$value, ...$moreValues] as $value) {
-        echo '<pre style="margin: 0; padding: 0.5rem 1rem; font-size: 1rem; border: 2px solid red; border-top: none">';
+        echo '<pre style="margin: 0; padding: 0.5rem 1rem; font-size: 1rem; text-wrap: wrap; border: 2px solid red; border-top: none">';
         var_dump($value);
         echo '</pre>';
     }
