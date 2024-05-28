@@ -22,3 +22,5 @@ function pengguna(): ?Pengguna
 
     return $pengguna;
 }
+
+$basePath = './';
