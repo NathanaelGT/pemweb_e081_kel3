@@ -25,6 +25,32 @@ function pengguna(): ?Pengguna
     return $pengguna;
 }
 
+function array_map_with_keys(callable $callback, array $array): array
+{
+    $hasil = [];
+
+    foreach ($array as $key => $value) {
+        foreach ($callback($value, $key) as $mapKey => $mapValue) {
+            $hasil[$mapKey] = $mapValue;
+        }
+    }
+
+    return $hasil;
+}
+
+function array_group(callable $callback, array $array): array
+{
+    $hasil = [];
+
+    foreach ($array as $key => $value) {
+        foreach ($callback($value, $key) as $mapKey => $mapValue) {
+            $hasil[$mapKey][] = $mapValue;
+        }
+    }
+
+    return $hasil;
+}
+
 /**
  * @template TValue
  * 
