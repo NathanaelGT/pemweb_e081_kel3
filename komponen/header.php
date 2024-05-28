@@ -16,6 +16,7 @@
                 <?php endif ?>
 
                 <li><a href="<?= $basePath ?>keluar.php">Keluar</a></li>
+                <li><a href="<?= $basePath ?>akun_pengguna.php">Profile</a></li>
             <?php else: ?>
                 <li><a href="<?= $basePath ?>masuk.php">Masuk</a></li>
                 <li><a href="<?= $basePath ?>daftar.php">Daftar</a></li>
