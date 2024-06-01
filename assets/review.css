@@ -5,19 +5,26 @@ body{
     box-sizing: border-box;
 }
 
+.layout > div {
+    background-color: #121212 (255, 255, 255, 0.8);
+}
+
 .topnav {
-    overflow: hidden;
     background-color: #121212;
     padding: 15px;
 }
 
 .cover {
-    background-color: #121212;
-    padding: 20px;
-    height: 600px;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
+}
+
+.cover img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px; 
 }
  
 .judul {
@@ -26,14 +33,58 @@ body{
     text-align: center;
 }
 
-.tulisreview, .ulasanuser {
+.tulisreview {
     background-color: #121212;
-    padding: 5px;
+    width: 70%;
     text-align: center;
+    margin: 0 auto;
 }
 
-.tabelreview {
+.ulasanuser{
     text-align: left;
-    padding: 20px;
+    width: 70%;
+    margin: 0 auto;
 }
-  
+
+.form-control {
+    background-color: #3c3c3c;
+    color: #ffffff;
+    border: 1px solid #555555;
+    width: 100%;
+}
+
+.form-control:focus {
+    background-color: #3c3c3c;
+    color: #ffffff;
+    border: 1px solid #888888;
+}
+
+.form-control::placeholder {
+    color: #bbbbbb;
+}
+
+textarea{
+    padding: 10px;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+.btn-success {
+    align-items: right;
+    background-color: #E59B25;
+}
+
+.btn-success:hover {
+    background-color: #E59B25;
+}
+
+.star-rating .bi {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.star-rating .bi.text-warning {
+    color: #ffc107;
+}
+
+
