@@ -7,6 +7,7 @@ include __DIR__ . '/Buku.php';
 include __DIR__ . '/StokBuku.php';
 include __DIR__ . '/Ulasan.php';
 include __DIR__ . '/Penilaian.php';
+include __DIR__ . '/komentar.php';
 
 session_start();
 

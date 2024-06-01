@@ -49,6 +49,16 @@ CREATE TABLE `ulasan` (
     FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna`(`id`)
 );
 
+CREATE TABLE `komentar` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `id_ulasan` INT UNSIGNED NOT NULL,
+    `id_pengguna` INT UNSIGNED NOT NULL,
+    `komentar` TEXT NOT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`id_ulasan`) REFERENCES `ulasan`(`id`),
+    FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna`(`id`)
+);
+
 CREATE TABLE `penilaian` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `id_buku` INT UNSIGNED NOT NULL,
