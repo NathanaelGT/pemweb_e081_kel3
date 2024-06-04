@@ -1,31 +1,25 @@
 <?php
-include './core/core.php'; // Memasukkan core.php untuk koneksi database dan fungsi-fungsi lainnya
+include './core/core.php'; 
 
-// Ambil ID pengguna dari query string
 $id = $_GET['id'];
 
-// Ambil data pengguna berdasarkan ID
 $pengguna = Pengguna::cari($id);
 
-// Jika form disubmit, proses data yang diinput
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nama = $_POST['nama'];
     $telepon = $_POST['telepon'];
-    $tanggal_lahir = $_POST['tanggal_lahir']; // Tetap sebagai string
+    $tanggal_lahir = $_POST['tanggal_lahir'];
     $email = $_POST['email'];
     $admin = isset($_POST['admin']) ? 1 : 0;
 
-    // Update data pengguna
     $pengguna->setNama($nama);
     $pengguna->setTelepon($telepon);
-    $pengguna->setTanggalLahir($tanggal_lahir); // Mengirim string
+    $pengguna->setTanggalLahir($tanggal_lahir);
     $pengguna->setEmail($email);
     $pengguna->setAdmin($admin);
 
-    // Simpan perubahan ke database
     $pengguna->simpan();
 
-    // Redirect kembali ke halaman daftar pengguna
     header('Location: daftar_pengguna.php');
     exit;
 }

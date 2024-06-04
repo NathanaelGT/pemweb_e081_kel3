@@ -1,7 +1,6 @@
 <?php
-include './core/core.php'; // Memasukkan core.php untuk koneksi database dan fungsi-fungsi lainnya
+include './core/core.php';
 
-// Ambil semua pengguna dari database
 $pengguna = Pengguna::semua();
 ?>
 
@@ -28,6 +27,7 @@ $pengguna = Pengguna::semua();
             <th>Email</th>
             <th>Admin</th>
             <th>Edit</th>
+            <th>Detail Pengguna</th>
         </tr>
     </thead>
     <tbody>
@@ -40,7 +40,7 @@ $pengguna = Pengguna::semua();
                 <td><?php echo $user->getEmail(); ?></td>
                 <td><?php echo $user->getAdmin() ? 'Ya' : 'Tidak'; ?></td>
                 <td><a href="edit_pengguna.php?id=<?php echo $user->getId(); ?>"><button>Edit</button></a></td>
-
+                <td><a href="detail_pengguna.php?id=<?php echo $user->getId(); ?>"><button>Detail Pengguna</button></a></td>
             </tr>
         <?php endforeach; ?>
     </tbody>
