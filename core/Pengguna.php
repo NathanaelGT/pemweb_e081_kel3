@@ -16,6 +16,8 @@ class Pengguna extends Model
 
     protected bool $admin = false;
 
+    protected ?string $foto = null;
+
     public function getNama(): string
     {
         return $this->nama;
@@ -85,6 +87,17 @@ class Pengguna extends Model
     {
         $this->admin = $admin;
 
+        return $this;
+    }
+
+    public function getFoto(): ?string
+    {
+        return $this->foto;
+    }
+
+    public function setFoto(?string $foto): static
+    {
+        $this->foto = $foto;
         return $this;
     }
 }
