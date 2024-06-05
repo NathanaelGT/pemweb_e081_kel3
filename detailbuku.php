@@ -16,7 +16,7 @@ HTML ?>
 
     <div class="page-title__content">
         <a href="review.php?id=<?= $buku->getId() ?>" class="btn btn--yellow">Lihat Ulasan</a>
-        <a href="review.php?id=<?= $buku->getId() ?>" class="btn btn--blue">Pinjam Buku</a>
+        <a href="pinjam_buku.php?id=<?= $buku->getId() ?>" class="btn btn--blue">Pinjam Buku</a>
     </div>
 </section>
 
