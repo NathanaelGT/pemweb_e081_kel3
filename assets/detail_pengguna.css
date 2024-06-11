@@ -1,18 +1,60 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.container {
+    max-width: 960px;
+    margin: auto;
+    overflow: hidden;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+select {
+    padding: 8px;
+    font-size: 16px;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
-}
-
-table, th, td {
-    border: 1px solid #ddd;
+    margin-bottom: 20px;
 }
 
 th, td {
-    padding: 12px;
-    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd;
 }
 
 th {
+    background-color: #f4f4f4;
+}
+
+tr:nth-child(even) {
     background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+p {
+    color: #777;
 }
