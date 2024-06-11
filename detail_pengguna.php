@@ -13,13 +13,17 @@ $view = $_GET['view'] ?? '';
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detail Pengguna</title>
     <link rel="stylesheet" href="assets/detail_pengguna.css">
 </head>
 <body>
     <h1><?php echo $pengguna->getNama(); ?></h1>
+
+    <button onclick="window.location.href='daftar_pengguna.php'">Back</button>
 
     <form method="get" action="">
         <input type="hidden" name="id" value="<?php echo $id; ?>">
@@ -43,23 +47,9 @@ $view = $_GET['view'] ?? '';
             echo "<h2>Buku yang Dipinjam</h2>";
             if ($bukuDipinjam) {
                 echo "<table border='1'>";
-                echo "<tr>
-                <th>Judul</th>
-                <th>Kategori</th>
-                <th>Penerbit</th>
-                <th>Tanggal Terbit</th>
-                <th>Cover</th>
-                <th>Isbn
-                </tr>";
+                echo "<tr><th>Judul</th></tr>";
                 foreach ($bukuDipinjam as $buku) {
-                    echo "<tr>";
-                    echo "<td>" . $buku['judul'] . "</td>";
-                    echo "<td>" . $buku['kategori'] . "</td>";
-                    echo "<td>" . $buku['penerbit'] . "</td>";
-                    echo "<td>" . date('Y-m-d', strtotime($buku['terbit'])) . "</td>";
-                    echo "<td><img src='" . $buku['cover'] . "' alt='" . $buku['judul'] . "' style='max-width: 100px; max-height: 150px;'></td>";
-                    echo "<td>" . $buku['isbn'] . "</td>";
-                    echo "</tr>";
+                    echo "<tr><td>" . $buku['judul'] . "</td></tr>";
                 }
                 echo "</table>";
             } else {
@@ -76,29 +66,13 @@ $view = $_GET['view'] ?? '';
             echo "<h2>Buku yang Diniliai</h2>";
             if ($bukuDinilai) {
                 echo "<table border='1'>";
-                echo "<tr>
-                <th>Judul</th>
-                <th>Kategori</th>
-                <th>Penerbit</th>
-                <th>Tanggal Terbit</th>
-                <th>Cover</th>
-                <th>Isbn</th>
-                <th>Penilaian</th>
-                </tr>";
+                echo "<tr><th>Judul</th><th>Penilaian</th></tr>";
                 foreach ($bukuDinilai as $buku) {
-                    echo "<tr>";
-                    echo "<td>" . $buku['judul'] . "</td>";
-                    echo "<td>" . $buku['kategori'] . "</td>";
-                    echo "<td>" . $buku['penerbit'] . "</td>";
-                    echo "<td>" . date('Y-m-d', strtotime($buku['terbit'])) . "</td>";
-                    echo "<td><img src='" . $buku['cover'] . "' alt='" . $buku['judul'] . "' style='max-width: 100px; max-height: 150px;'></td>";
-                    echo "<td>" . $buku['isbn'] . "</td>";
-                    echo "<td>" . $buku['penilaian'] . "</td>";
-                    echo "</tr>";
+                    echo "<tr><td>" . $buku['judul'] . "</td><td>" . $buku['penilaian'] . "</td></tr>";
                 }
                 echo "</table>";
             } else {
-                echo "<p>Tidak ada buku yang dipinjam</p>";
+                echo "<p>Tidak ada buku yang dinilai</p>";
             }
             break;
         case 'ulasan':
@@ -111,25 +85,9 @@ $view = $_GET['view'] ?? '';
             echo "<h2>Buku yang Diulas</h2>";
             if ($bukuDiulas) {
                 echo "<table border='1'>";
-                echo "<tr>
-                <th>Judul</th>
-                <th>Kategori</th>
-                <th>Penerbit</th>
-                <th>Tanggal Terbit</th>
-                <th>Cover</th>
-                <th>Isbn</th>
-                <th>Ulasan</th>
-                </tr>";
+                echo "<tr><th>Judul</th><th>Ulasan</th></tr>";
                 foreach ($bukuDiulas as $buku) {
-                    echo "<tr>";
-                    echo "<td>" . $buku['judul'] . "</td>";
-                    echo "<td>" . $buku['kategori'] . "</td>";
-                    echo "<td>" . $buku['penerbit'] . "</td>";
-                    echo "<td>" . date('Y-m-d', strtotime($buku['terbit'])) . "</td>";
-                    echo "<td><img src='" . $buku['cover'] . "' alt='" . $buku['judul'] . "' style='max-width: 100px; max-height: 150px;'></td>";
-                    echo "<td>" . $buku['isbn'] . "</td>";
-                    echo "<td>" . $buku['ulasan'] . "</td>";
-                    echo "</tr>";
+                    echo "<tr><td>" . $buku['judul'] . "</td><td>" . $buku['ulasan'] . "</td></tr>";
                 }
                 echo "</table>";
             } else {
