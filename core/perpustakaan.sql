@@ -4,14 +4,12 @@ DROP TABLE IF EXISTS `stok_buku`;
 DROP TABLE IF EXISTS `buku`;
 DROP TABLE IF EXISTS `pengguna`;
 
-ALTER TABLE pengguna ADD COLUMN foto VARCHAR(255) DEFAULT NULL;
-
-
 CREATE TABLE `pengguna` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `nama` VARCHAR(255) NOT NULL,
     `telepon` VARCHAR(20) NOT NULL,
     `tanggal_lahir` DATE NOT NULL,
+    `foto` VARCHAR(255) DEFAULT NULL,
     `email` VARCHAR(255) NOT NULL,
     `password` VARCHAR(255) NOT NULL,
     `admin` BOOLEAN NOT NULL,
