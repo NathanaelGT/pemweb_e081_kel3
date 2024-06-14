@@ -3,7 +3,7 @@ include './core/core.php';
 
 $buku = Buku::cari($_GET['id']);
 
-$stok = StokBuku::query(['id_buku', '=', $buku], ['dipinjam_oleh_id_pengguna', 'is', null]);
+$sedangMeminjam = !empty(StokBuku::query(['id_buku', '=', $buku], ['dipinjam_oleh_id_pengguna', '=', pengguna()]));
 ?>
 
 <?php $head = <<<HTML
@@ -18,7 +18,9 @@ HTML ?>
 
     <div class="page-title__content">
         <a href="review.php?id=<?= $buku->getId() ?>" class="btn btn--yellow">Lihat Ulasan</a>
-        <?php if (empty($stok)): ?>
+        <?php if ($sedangMeminjam): ?>
+            <a href="kembalikan_buku.php?id=<?= $buku->getId() ?>" class="btn btn--blue">Kembalikan Buku</a>
+        <?php elseif(empty(StokBuku::query(['id_buku', '=', $buku], ['dipinjam_oleh_id_pengguna', 'is', null]))): ?>
             <button disabled title="Stok buku ini sedang tidak tersedia" class="btn btn--blue">Pinjam Buku</button>
         <?php else: ?>
             <a href="pinjam_buku.php?id=<?= $buku->getId() ?>" class="btn btn--blue">Pinjam Buku</a>

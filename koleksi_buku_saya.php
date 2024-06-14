@@ -20,7 +20,7 @@ $judulHalaman = 'Koleksi Buku Saya';
 <?php include './komponen/header.php' ?>
 <?php include './komponen/subheader.php' ?>
 
-<main class="book-collection page-section">
+<main class="page-section">
     <?php if (empty($koleksiBuku)): ?>
         <div class="jumbotron">
             <p>Tidak ada buku yang sedang dipinjam</p>
@@ -51,7 +51,7 @@ $judulHalaman = 'Koleksi Buku Saya';
                             <a href="./review.php?id=<?= $buku->getId() ?>#reviewForm" class="btn btn--yellow">
                                 <strong>Tulis Ulasan</strong>
                             </a>
-                            <a href="#" class="btn btn--red">
+                            <a href="./kembalikan_buku.php?id=<?= $buku->getId() ?>" class="btn btn--red">
                                 <strong>Kembalikan Buku</strong>
                             </a>
                         </p>

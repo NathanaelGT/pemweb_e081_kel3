@@ -1,52 +1,47 @@
 <?php
 include './core/core.php';
 
-// Memvalidasi input
-$idBuku = $_GET['id'] ?? null;
-if ($idBuku === null || !is_numeric($idBuku)) {
-    // Tampilkan pesan kesalahan jika ID buku tidak valid
-    echo "ID buku tidak valid";
-    exit;
+$redirectKe = './detailbuku.php?id=' . ($_GET['id'] ?? '');
+
+if (is_null($pengguna = pengguna())) {
+    $_SESSION['info'] = 'Anda harus login untuk mengembalikan buku';
+    $_SESSION['jenis_info'] = 'error';
+
+    header("Location: $redirectKe");
+    die;
 }
 
-// Mendapatkan pengguna yang sedang login
-$pengguna = pengguna();
-if ($pengguna === null) {
-    // Tampilkan pesan jika pengguna tidak login
-    echo "Anda harus login untuk mengembalikan buku";
-    exit;
-}
-
-// Mendapatkan ID pengguna
-$idPengguna = $pengguna->getId();
-
-// Cari buku berdasarkan ID
-$buku = Buku::cari($idBuku);
+$buku = Buku::cari($_GET['id'] ?? null);
 if ($buku === null) {
-    // Tampilkan pesan jika buku tidak ditemukan
-    echo "Buku tidak ditemukan";
-    exit;
+    $_SESSION['info'] = 'Buku tidak ditemukan';
+    $_SESSION['jenis_info'] = 'error';
+
+    header("Location: $redirectKe");
+    die;
 }
 
-// Memeriksa apakah pengguna sedang meminjam buku ini
-$stokBuku = StokBuku::query(['id_buku', '=', $idBuku], ['dipinjam_oleh_id_pengguna', '=', $idPengguna]);
+$stokBuku = StokBuku::query(['id_buku', '=', $buku], ['dipinjam_oleh_id_pengguna', '=', $pengguna->getId()]);
 if (empty($stokBuku)) {
-    // Tampilkan pesan jika buku tidak sedang dipinjam oleh pengguna
-    echo "Anda tidak sedang meminjam buku ini";
-    exit;
+    $_SESSION['info'] = 'Anda tidak sedang meminjam buku ini';
+    $_SESSION['jenis_info'] = 'error';
+
+    header("Location: $redirectKe");
+    die;
 }
 
-// Lakukan pengembalian buku
 foreach ($stokBuku as $stok) {
-    if ($stok->getDipinjamOlehIdPengguna() === $idPengguna) {
-        // Update catatan pengembalian
+    if ($stok->getDipinjamOlehIdPengguna() === $pengguna->getId()) {
         $stok->setDipinjamOlehIdPengguna(null)->simpan();
-        // Tampilkan pesan sukses
-        echo "Buku berhasil dikembalikan";
-        exit;
+
+        $_SESSION['info'] = 'Buku berhasil dikembalikan';
+        $_SESSION['jenis_info'] = 'success';
+
+        header("Location: $redirectKe");
+        die;
     }
 }
 
-// Jika tidak ada buku yang sesuai untuk dikembalikan
-echo "Maaf, terjadi kesalahan saat mengembalikan buku.";
-?>
+$_SESSION['info'] = 'Maaf, terjadi kesalahan saat mengembalikan buku';
+$_SESSION['jenis_info'] = 'error';
+
+header("Location: $redirectKe");
