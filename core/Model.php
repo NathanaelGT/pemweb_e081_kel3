@@ -68,7 +68,9 @@ abstract class Model
         unset($data['id']);
 
         foreach ($data as $k => $n) {
-            if (is_null($n)) {
+            $reflection = new ReflectionProperty($this, $k);
+
+            if (is_null($n) && !$reflection->getType()?->allowsNull()) {
                 unset($data[$k]);
                 continue;
             }
