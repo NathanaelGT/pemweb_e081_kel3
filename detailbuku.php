@@ -2,6 +2,8 @@
 include './core/core.php';
 
 $buku = Buku::cari($_GET['id']);
+
+$stok = StokBuku::query(['id_buku', '=', $buku], ['dipinjam_oleh_id_pengguna', 'is', null]);
 ?>
 
 <?php $head = <<<HTML
@@ -16,7 +18,11 @@ HTML ?>
 
     <div class="page-title__content">
         <a href="review.php?id=<?= $buku->getId() ?>" class="btn btn--yellow">Lihat Ulasan</a>
-        <a href="pinjam_buku.php?id=<?= $buku->getId() ?>" class="btn btn--blue">Pinjam Buku</a>
+        <?php if (empty($stok)): ?>
+            <button disabled title="Stok buku ini sedang tidak tersedia" class="btn btn--blue">Pinjam Buku</button>
+        <?php else: ?>
+            <a href="pinjam_buku.php?id=<?= $buku->getId() ?>" class="btn btn--blue">Pinjam Buku</a>
+        <?php endif ?>
     </div>
 </section>
 
@@ -29,11 +35,19 @@ HTML ?>
         />
 
         <div class="book-detail__content">
-            <h2 class="book-detail__title"><?= $buku->getJudul() ?></h2>
+            <div class="book-detail__header">
+                <div>
+                    <h2 class="book-detail__title"><?= $buku->getJudul() ?></h2>
 
-            <div class="book-detail__rating">
-                <?php $rating = Database::query('SELECT (SUM(penilaian) / COUNT(*)) AS penilaian FROM penilaian WHERE id_buku = ' . $buku->getId())[0]['penilaian'] ?>
-                <?php include './komponen/rating.php' ?>
+                    <div class="book-detail__rating">
+                        <?php $rating = Database::query('SELECT (SUM(penilaian) / COUNT(*)) AS penilaian FROM penilaian WHERE id_buku = ' . $buku->getId())[0]['penilaian'] ?>
+                        <?php include './komponen/rating.php' ?>
+                    </div>
+                </div>
+
+                <div>
+                    <?php include './komponen/info.php' ?>
+                </div>
             </div>
 
             <p class="book-detail__synopsis">

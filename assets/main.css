@@ -161,6 +161,9 @@ header nav ul {
 }
 
 .info {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
     padding: 1rem;
     margin-bottom: 1rem;
     border-radius: 0.5rem;
@@ -318,6 +321,11 @@ header nav ul {
     width: 390px;
     height: 570px;
     border-radius: 0.5rem;
+}
+
+.book-detail__header {
+    display: flex;
+    justify-content: space-between;
 }
 
 .book-detail__title {
