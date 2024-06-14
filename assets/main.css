@@ -44,8 +44,13 @@ input, button, textarea, select {
     border: none;
 }
 
-button {
+button:not(:disabled) {
     cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    filter: brightness(0.7);
 }
 
 a {
@@ -118,6 +123,7 @@ select.input {
 header {
     position: sticky;
     top: 0;
+    z-index: 999;
 }
 
 header nav {
