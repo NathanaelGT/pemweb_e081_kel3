@@ -76,15 +76,15 @@ class Database
         }
     }
 
-    public static function escape(mixed $nilai): mixed
+    public static function escape(mixed $nilai, ?string $tabelRelasi = null): mixed
     {
         return match (true) {
             is_string($nilai) => "'$nilai'",
             is_numeric($nilai) => $nilai,
             is_bool($nilai) => $nilai ? 'TRUE' : 'FALSE',
             is_null($nilai) => 'NULL',
-            is_array($nilai) => '(' . implode(', ', array_map(static::escape(...), $nilai)) . ')',
-            $nilai instanceof Model => $nilai->getId(),
+            is_array($nilai) => '(' . implode(', ', array_map(fn($n) => static::escape($n, $tabelRelasi), $nilai)) . ')',
+            $nilai instanceof Model => ($tabelRelasi ? $nilai->getForeignKey($tabelRelasi) : null) ?? $nilai->getId(),
             $nilai instanceof DateTime => "'" . $nilai->format('Y-m-d H:i:s') . "'",
             default => dd($nilai, 'Tipe data tidak diketahui'),
         };

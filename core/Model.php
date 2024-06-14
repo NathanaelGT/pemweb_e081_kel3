@@ -45,7 +45,7 @@ abstract class Model
         $where = [];
         foreach ($kondisi as [$kolom, $operator, $nilai]) {
             $operator = strtoupper($operator);
-            $nilai = Database::escape($nilai);
+            $nilai = Database::escape($nilai, static::table());
 
             if ($operator === 'IN' && $nilai === '()') {
                 $where[] = "0 = 1";
@@ -103,6 +103,11 @@ abstract class Model
     public function hapus(): bool
     {
         return Database::query('DELETE FROM ' . static::table() . " WHERE `id` = '$this->id'");
+    }
+
+    public function getForeignKey(string $tabel): ?int
+    {
+        return null;
     }
 
     protected static function table(): string
