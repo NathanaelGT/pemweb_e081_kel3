@@ -20,6 +20,32 @@ class Buku extends Model
 
     protected int $isbn;
 
+    protected ?array $stok = null;
+
+    public static function semua(bool $denganStok = false): array
+    {
+        $semua = parent::semua();
+
+        if ($denganStok) {
+            $id = array_map(fn (self $buku) => $buku->getId(), $semua);
+            $stok = array_reduce(
+                StokBuku::query(['id_buku', 'IN', $id]),
+                function (array $stok, StokBuku $stokBuku) {
+                    $stok[$stokBuku->getIdBuku()][] = $stokBuku;
+
+                    return $stok;
+                },
+                []
+            );
+
+            foreach ($semua as $buku) {
+                $buku->stok = $stok[$buku->getId()] ?? null;
+            }
+        }
+
+        return $semua;
+    }
+
     public function getJudul(): string
     {
         return $this->judul;
@@ -120,5 +146,10 @@ class Buku extends Model
         $this->isbn = $isbn;
 
         return $this;
+    }
+
+    public function getStok(): ?array
+    {
+        return $this->stok;
     }
 }

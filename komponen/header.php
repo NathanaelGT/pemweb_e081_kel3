@@ -8,12 +8,14 @@
         <div class="spacer"></div>
 
         <ul>
+            <?php if (pengguna()?->getAdmin()): ?>
+                <li><a href="<?= $basePath ?>admin/buku.php">Daftar Buku</a></li>
+            <?php endif ?>
+
             <li><a href="<?= $basePath ?>">Beranda</a></li>
 
-            <?php if ($pengguna = pengguna()): ?>
-                <?php if ($pengguna->getAdmin()): ?>
-                    <li><a href="<?= $basePath ?>admin/buku.php">Daftar Buku</a></li>
-                <?php endif ?>
+            <?php if (pengguna()): ?>
+                <li><a href="<?= $basePath ?>koleksi_buku_saya.php">Koleksi Saya</a></li>
 
                 <li><a href="<?= $basePath ?>keluar.php">Keluar</a></li>
                 <li><a href="<?= $basePath ?>akun_pengguna.php">Profile</a></li>

@@ -109,6 +109,11 @@ select.input {
     color: white;
 }
 
+.btn--red {
+    background-color: var(--red);
+    color: white;
+}
+
 /* header */
 header {
     position: sticky;
@@ -191,6 +196,7 @@ header nav ul {
 }
 
 .page-section {
+    color: var(--white);
     background-color: var(--dark-green);
 
     &:not(:last-child) {
@@ -224,7 +230,6 @@ header nav ul {
     display: grid;
     grid-template-columns: 234px 1fr;
     gap: 1.5rem;
-    color: var(--white);
 }
 
 .book-overview__image {
@@ -280,6 +285,12 @@ header nav ul {
 
 .book-overview__synopsis {
     text-align: justify;
+}
+
+.book-overview__buttons {
+    margin-top: auto;
+    display: grid;
+    gap: 1.5rem;
 }
 
 .book-detail__wrapper {
