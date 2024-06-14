@@ -40,5 +40,14 @@ class Komentar extends Model
         $this->komentar = $komentar;
         return $this;
     }
+
+    public function getForeignKey(string $tabel): ?int
+    {
+        return match ($tabel) {
+            'ulasan' => $this->id_ulasan,
+            'pengguna' => $this->id_pengguna,
+            default => null,
+        };
+    }
 }
 ?>

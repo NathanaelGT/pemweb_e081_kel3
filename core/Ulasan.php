@@ -45,4 +45,13 @@ class Ulasan extends Model
 
         return $this;
     }
+
+    public function getForeignKey(string $tabel): ?int
+    {
+        return match ($tabel) {
+            'buku' => $this->id_buku,
+            'pengguna' => $this->id_pengguna,
+            default => null,
+        };
+    }
 }

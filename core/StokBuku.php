@@ -31,4 +31,13 @@ class StokBuku extends Model
 
         return $this;
     }
+
+    public function getForeignKey(string $tabel): ?int
+    {
+        return match ($tabel) {
+            'buku' => $this->id_buku,
+            'pengguna' => $this->dipinjam_oleh_id_pengguna,
+            default => null,
+        };
+    }
 }
