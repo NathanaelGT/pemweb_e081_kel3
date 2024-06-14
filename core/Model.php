@@ -44,7 +44,16 @@ abstract class Model
     {
         $where = [];
         foreach ($kondisi as [$kolom, $operator, $nilai]) {
-            $where[] = "$kolom $operator " . Database::escape($nilai);
+            $operator = strtoupper($operator);
+            $nilai = Database::escape($nilai);
+
+            if ($operator === 'IN' && $nilai === '()') {
+                $where[] = "0 = 1";
+            } elseif ($operator === 'NOT IN' && $nilai === '()') {
+                // pilih semua
+            } else {
+                $where[] = "$kolom $operator $nilai";
+            }
         }
         $where = implode(' AND ', $where);
 
