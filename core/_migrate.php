@@ -2,7 +2,7 @@
 
 php_sapi_name() === 'cli' or die;
 
-include __DIR__ . '/Database.php';
+include __DIR__ . '/core.php';
 
 $sql = explode(';', file_get_contents(__DIR__ . '/perpustakaan.sql'));
 foreach ($sql as $q) {
