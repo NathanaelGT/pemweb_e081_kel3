@@ -1,6 +1,6 @@
 <header>
     <nav>
-        <a href="./" class="home-link">
+        <a href="<?= $basePath ?>" class="home-link">
             <img src="<?= $basePath ?>assets/logo.svg" alt="Logo" class="logo"/>
             <span>Jelajah<br/>Pustaka</span>
         </a>
