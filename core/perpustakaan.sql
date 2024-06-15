@@ -1,8 +1,11 @@
+SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `penilaian`;
+DROP TABLE IF EXISTS `komentar`;
 DROP TABLE IF EXISTS `ulasan`;
 DROP TABLE IF EXISTS `stok_buku`;
 DROP TABLE IF EXISTS `buku`;
 DROP TABLE IF EXISTS `pengguna`;
+SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE `pengguna` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -36,8 +39,8 @@ CREATE TABLE `stok_buku` (
     `id_buku` INT UNSIGNED NOT NULL,
     `dipinjam_oleh_id_pengguna` INT UNSIGNED NULL DEFAULT NULL,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`id_buku`) REFERENCES `buku`(`id`),
-    FOREIGN KEY (`dipinjam_oleh_id_pengguna`) REFERENCES `pengguna`(`id`)
+    FOREIGN KEY (`id_buku`) REFERENCES `buku`(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`dipinjam_oleh_id_pengguna`) REFERENCES `pengguna`(`id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `ulasan` (
@@ -46,8 +49,8 @@ CREATE TABLE `ulasan` (
     `id_pengguna` INT UNSIGNED NOT NULL,
     `ulasan` TEXT NOT NULL,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`id_buku`) REFERENCES `buku`(`id`),
-    FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna`(`id`)
+    FOREIGN KEY (`id_buku`) REFERENCES `buku`(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna`(`id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `komentar` (
@@ -56,8 +59,8 @@ CREATE TABLE `komentar` (
     `id_pengguna` INT UNSIGNED NOT NULL,
     `komentar` TEXT NOT NULL,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`id_ulasan`) REFERENCES `ulasan`(`id`),
-    FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna`(`id`)
+    FOREIGN KEY (`id_ulasan`) REFERENCES `ulasan`(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna`(`id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `penilaian` (
@@ -66,8 +69,8 @@ CREATE TABLE `penilaian` (
     `id_pengguna` INT UNSIGNED NOT NULL,
     `penilaian` TINYINT UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
-    FOREIGN KEY (`id_buku`) REFERENCES `buku`(`id`),
-    FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna`(`id`)
+    FOREIGN KEY (`id_buku`) REFERENCES `buku`(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna`(`id`) ON DELETE CASCADE
 );
 
 -- password: password
