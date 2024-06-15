@@ -20,7 +20,7 @@ class Buku extends Model
 
     protected int $isbn;
 
-    protected ?array $stok = null;
+    private ?array $stok = null;
 
     public static function semua(bool $denganStok = false): array
     {

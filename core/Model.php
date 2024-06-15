@@ -70,6 +70,10 @@ abstract class Model
         foreach ($data as $k => $n) {
             $reflection = new ReflectionProperty($this, $k);
 
+            if ($reflection->isPrivate()) {
+                continue;
+            }
+
             if (is_null($n) && !$reflection->getType()?->allowsNull()) {
                 unset($data[$k]);
                 continue;
