@@ -45,7 +45,7 @@ input, button, textarea, select {
     border: none;
 }
 
-button:not(:disabled) {
+input[type="checkbox"], button:not(:disabled) {
     cursor: pointer;
 }
 
@@ -379,6 +379,12 @@ header nav ul {
     border-radius: 0.5rem;
 }
 
+.profile-picture {
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+}
+
 .form__wrapper {
     display: flex;
     justify-content: center;
@@ -439,6 +445,30 @@ header nav ul {
     margin: 2rem 4rem 0;
 }
 
+.table__tab {
+    display: flex;
+    border: 1px solid var(--light-gray);
+    border-bottom: none;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    width: fit-content;
+    margin: 3rem 4rem 0;
+
+    + .table__wrapper {
+        margin-top: 0;
+        border-top-left-radius: 0;
+    }
+
+    a {
+        padding: 1rem 1.5rem;
+        color: var(--black);
+
+        &.active {
+            font-weight: bold;
+        }
+    }
+}
+
 .table__wrapper {
     margin: 3rem 4rem;
     border: 1px solid var(--light-gray);
@@ -455,10 +485,6 @@ header nav ul {
 
 .table {
     width: 100%;
-
-    thead tr {
-        /* background-color: var(--dark-gray); */
-    }
 
     tbody td {
         border-top: 1px solid var(--light-gray);
@@ -484,4 +510,23 @@ header nav ul {
 .table__actions {
     display: flex;
     gap: 1rem;
+}
+
+.detail__wrapper {
+    margin: 3rem 4rem;
+}
+
+.detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+
+    > div {
+        display: flex;
+        flex-direction: column;
+
+        > span:first-child {
+            font-weight: bold;
+        }
+    }
 }

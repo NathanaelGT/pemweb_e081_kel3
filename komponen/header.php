@@ -10,6 +10,7 @@
         <ul>
             <?php if (pengguna()?->getAdmin()): ?>
                 <li><a href="<?= $basePath ?>admin/buku.php">Daftar Buku</a></li>
+                <li><a href="<?= $basePath ?>admin/pengguna.php">Daftar Pengguna</a></li>
             <?php endif ?>
 
             <li><a href="<?= $basePath ?>">Beranda</a></li>

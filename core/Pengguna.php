@@ -90,6 +90,11 @@ class Pengguna extends Model
         return $this;
     }
 
+    public function getFotoProfil(): string
+    {
+        return 'https://ui-avatars.com/api/?name=' . urlencode($this->nama) . '&color=FFFFFF&background=09090b';
+    }
+
     public function getFoto(): ?string
     {
         return $this->foto;
