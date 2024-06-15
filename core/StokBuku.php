@@ -20,12 +20,12 @@ class StokBuku extends Model
         return $this;
     }
 
-    public function getDipinjamOlehIdPengguna(): int | null
+    public function getDipinjamOlehIdPengguna(): ?int
     {
         return $this->dipinjam_oleh_id_pengguna;
     }
 
-    public function setDipinjamOlehIdPengguna(int $dipinjamOlehIdPengguna): static
+    public function setDipinjamOlehIdPengguna(?int $dipinjamOlehIdPengguna): static
     {
         $this->dipinjam_oleh_id_pengguna = $dipinjamOlehIdPengguna;
 

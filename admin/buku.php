@@ -1,42 +1,70 @@
 <?php
 include '../core/core.php';
 
-$bukuList = Buku::semua();
+if (!pengguna()?->getAdmin()) {
+    header('Location: ../');
+    die;
+}
+
+$basePath = '../';
+$judulHalaman = 'Daftar Buku';
+$daftarBuku = Buku::semua();
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Admin - Daftar Buku</title>
-    <link rel="stylesheet" href="assets/styles.css">
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Katalog Buku Perpustakaan</h1>
-            <a href="tambah_buku.php" class="btn">Tambah Buku</a>
-        </header>
+<?php include '../komponen/open.php' ?>
+<?php include '../komponen/header.php' ?>
 
-        <div class="book-list">
-            <?php foreach ($bukuList as $buku): ?>
-                <div class="book-item">
-                    <img src="<?= $buku->getCover() ?>" alt="<?= $buku->getJudul() ?>">
-                    <div class="book-details">
-                        <h2><?= $buku->getJudul() ?></h2>
-                        <?php
-                        $stokBuku = StokBuku::query(['id_buku', '=', $buku->getId()]);
-                        $jumlahStok = count($stokBuku) ?: 'Tidak tersedia';
-                        ?>
-                        <p>Stok: <?= $jumlahStok ?></p>
-                        <p>Kategori: <?= $buku->getKategori() ?></p>
-                        <p>Penulis: <?= $buku->getPenulis() ?></p>
-                        <p><?= $buku->getSinopsis() ?></p>
-                        <a href="edit_buku.php?id=<?= $buku->getId() ?>" class="btn">Edit Buku</a>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
+<main>
+    <div class="table__info">
+        <?php include '../komponen/info.php' ?>
     </div>
-</body>
-</html>
+
+    <div class="table__wrapper">
+        <div class="table__header">
+            <h1>Daftar Buku</h1>
+            <div class="table__header__button">
+                <a href="tambah_buku.php" class="btn btn--green">Tambah Buku</a>
+            </div>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Cover</th>
+                    <th>Judul</th>
+                    <th>Penulis</th>
+                    <th>Penerbit</th>
+                    <th>Tahun Terbit</th>
+                    <th>Kategori</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody class="list">
+                <?php foreach ($daftarBuku as $buku): ?>
+                    <tr>
+                        <td>
+                            <img
+                                src="<?= $buku->getCover() ?>"
+                                alt="Cover buku <?= $buku->getJudul() ?>"
+                                class="thumbnail"
+                            />
+                        </td>
+                        <td><?= $buku->getJudul() ?></td>
+                        <td><?= $buku->getPenulis() ?></td>
+                        <td><?= $buku->getPenerbit() ?></td>
+                        <td><?= $buku->getTerbit()->format('d-m-Y') ?></td>
+                        <td><?= $buku->getKategori() ?></td>
+                        <td>
+                            <div class="table__actions">
+                                <a href="edit_buku.php?id=<?= $buku->getId() ?>" class="btn btn--yellow">Edit</a>
+                                <a href="hapus_buku.php?id=<?= $buku->getId() ?>" class="btn btn--red">Hapus</a>
+                            </div>
+                        </td>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<?php include '../komponen/close.php' ?>

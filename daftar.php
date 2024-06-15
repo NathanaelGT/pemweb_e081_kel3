@@ -64,13 +64,13 @@ HTML ?>
 <?php include './komponen/open.php' ?>
 <?php include './komponen/header.php' ?>
 
-<main class="auth">
+<main class="form__wrapper">
     <div>
         <h1>Daftar</h1>
 
         <?php include './komponen/info.php' ?>
 
-        <form method="POST">
+        <form method="POST" class="form">
             <input type="text" name="email" placeholder="Alamat email" class="input" />
             <input type="tel" name="telepon" placeholder="Nomor telepon" class="input" />
             <input type="text" name="name" placeholder="Nama lengkap" class="input" />
@@ -78,7 +78,7 @@ HTML ?>
             <input type="password" name="password" placeholder="Password" class="input" />
             <input type="password" name="konfirmasi_password" placeholder="Konfirmasi password" class="input" />
 
-            <button>Daftar</button>
+            <button class="btn btn--yellow">Daftar</button>
 
             <p>Sudah punya akun? <a href="./masuk.php">Masuk di sini</a></p>
         </form>

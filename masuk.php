@@ -46,17 +46,17 @@ HTML ?>
 <?php include './komponen/open.php' ?>
 <?php include './komponen/header.php' ?>
 
-<main class="auth">
+<main class="form__wrapper">
     <div>
         <h1>Masuk</h1>
 
         <?php include './komponen/info.php' ?>
 
-        <form method="POST">
+        <form method="POST" class="form">
             <input type="text" name="email" placeholder="Masukkan email yang terdaftar" class="input" />
             <input type="password" name="password" placeholder="Password" class="input" />
 
-            <button>Masuk</button>
+            <button class="btn btn--yellow">Masuk</button>
 
             <p>Tidak punya akun? <a href="./daftar.php">Daftar di sini</a></p>
         </form>

@@ -2,55 +2,107 @@
 include '../core/core.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $buku = new Buku();
-    $buku->setJudul($_POST['judul'])
-        ->setKategori($_POST['kategori'])
-        ->setPenulis($_POST['penulis'])
-        ->setSinopsis($_POST['sinopsis'])
-        ->setTerbit($_POST['terbit'])
-        ->setPenerbit($_POST['penerbit'])
-        ->setIsbn($_POST['isbn'])
-        ->simpan();
+    try {
+        $buku = new Buku();
+        $buku->setJudul($_POST['judul'])
+            ->setKategori($_POST['kategori'])
+            ->setPenulis($_POST['penulis'])
+            ->setSinopsis($_POST['sinopsis'])
+            ->setTerbit($_POST['terbit'])
+            ->setPenerbit($_POST['penerbit'])
+            ->setIsbn($_POST['isbn'])
+            ->simpan();
 
-    header('Location: buku.php');
-    exit;
+        $_SESSION['info'] = 'Buku berhasil ditambahkan';
+        $_SESSION['jenis_info'] = 'success';
+
+        header('Location: buku.php');
+    } catch (Throwable $e) {
+        $_SESSION['info'] = $e instanceof RuntimeException ? $e->getMessage() : 'Data tidak valid';
+        $_SESSION['jenis_info'] = 'error';
+
+        header('Location: ' . $_SERVER['REQUEST_URI']);
+    } finally {
+        die;
+    }
 }
-?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Tambah Buku</title>
-    <link rel="stylesheet" href="assets/styles.css">
-</head>
-<body>
-    <div class="container">
+$basePath = '../';
+$bodyClass = 'bookshelf-background';
+
+$head = <<<HTML
+<link href="https://cdn.jsdelivr.net/npm/air-datepicker@3.5.1/air-datepicker.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.5.1/air-datepicker.min.js" defer></script>
+<title>Tambah Buku</title>
+HTML ?>
+
+<?php include '../komponen/open.php' ?>
+<?php include '../komponen/header.php' ?>
+
+<main class="form__wrapper">
+    <div>
         <h1>Tambah Buku</h1>
-        <form method="POST" action="tambah_buku.php">
-            <label for="judul">Judul:</label>
-            <input type="text" id="judul" name="judul" required>
 
-            <label for="kategori">Kategori:</label>
-            <input type="text" id="kategori" name="kategori" required>
+        <?php include '../komponen/info.php' ?>
 
-            <label for="penulis">Penulis:</label>
-            <input type="text" id="penulis" name="penulis" required>
+        <form method="POST" class="form">
+            <label class="label">
+                <span>Judul</span>
+                <input type="text" name="judul" required class="input">
+            </label>
 
-            <label for="sinopsis">Sinopsis:</label>
-            <textarea id="sinopsis" name="sinopsis" required></textarea>
+            <label class="label">
+                <span>Kategori</span>
+                <input type="text" name="kategori" required class="input">
+            </label>
 
-            <label for="terbit">Tanggal Terbit:</label>
-            <input type="date" id="terbit" name="terbit" required>
+            <label class="label">
+                <span>Penulis</span>
+                <input type="text" name="penulis" required class="input">
+            </label>
 
-            <label for="penerbit">Penerbit:</label>
-            <input type="text" id="penerbit" name="penerbit" required>
+            <label class="label">
+                <span>Sinopsis</span>
+                <textarea name="sinopsis" required class="input textarea"></textarea>
+            </label>
 
-            <label for="isbn">ISBN:</label>
-            <input type="number" id="isbn" name="isbn" required>
+            <label class="label">
+                <span>Tanggal Terbit</span>
+                <input type="text" name="terbit" required class="input">
+            </label>
 
-            <button type="submit" class="btn">Tambah Buku</button>
+            <label class="label">
+                <span>Penerbit</span>
+                <input type="text" name="penerbit" required class="input">
+            </label>
+
+            <label class="label">
+                <span>ISBN</span>
+                <input type="number" min="1" name="isbn" required class="input">
+            </label>
+
+            <button type="submit" class="btn btn--green">Tambah Buku</button>
         </form>
     </div>
-</body>
-</html>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        new AirDatepicker('input[name="terbit"]', {
+            locale: {
+                days: ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
+                daysShort: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
+                daysMin: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
+                months: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
+                monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agt', 'Sep', 'Okt', 'Nov', 'Des'],
+                today: 'Hari ini',
+                clear: 'Hapus',
+                dateFormat: 'dd/MM/yyyy',
+                timeFormat: 'hh:mm aa',
+                firstDay: 1
+            }
+        })
+    })
+</script>
+
+<?php include '../komponen/close.php' ?>

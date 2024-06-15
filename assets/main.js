@@ -32,3 +32,9 @@ document.querySelectorAll('.input').forEach(inputable => {
         }
     })
 })
+
+Array.from(document.querySelectorAll('a')).filter(a => a.href.includes('hapus'))
+    .filter(a => a.href.includes('hapus'))
+    .map(a => {
+        a.onclick = () => confirm('Apakah Anda yakin ingin menghapus data ini?')
+    })
