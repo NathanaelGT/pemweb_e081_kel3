@@ -1,5 +1,5 @@
 <?php
-include './core/core.php';
+include '../core/core.php';
 
 $buku = Buku::cari($_GET['id']);
 ?>
@@ -17,8 +17,8 @@ HTML ?>
     </head>
 
     <body> 
-        <?php include './komponen/open.php' ?>
-        <?php include './komponen/header.php' ?>
+        <?php include '../komponen/open.php' ?>
+        <?php include '../komponen/header.php' ?>
         
         <div class="grid-atas">
             <div class="grid-item_atas">
