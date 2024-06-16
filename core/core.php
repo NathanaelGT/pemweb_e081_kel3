@@ -58,7 +58,11 @@ function array_group(callable $callback, array $array): array
 function parse_datetime(DateTime | string | null $dateTime): ?DateTime
 {
     if (is_string($dateTime)) {
-        return new DateTime($dateTime);
+        $format = str_contains($dateTime, ':')
+            ? 'd/m/Y h:i a'
+            : 'd/m/Y';
+
+        return DateTime::createFromFormat($format, $dateTime);
     }
 
     return $dateTime;
