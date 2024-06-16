@@ -50,7 +50,11 @@ $daftarBuku = Buku::semua();
                                 class="thumbnail"
                             />
                         </td>
-                        <td style="view-transition-name: buku-judul-<?= $buku->getId() ?>"><?= $buku->getJudul() ?></td>
+                        <td>
+                            <span style="view-transition-name: buku-judul-<?= $buku->getId() ?>">
+                                <?= $buku->getJudul() ?>
+                            </span>
+                        </td>
                         <td><?= $buku->getPenulis() ?></td>
                         <td><?= $buku->getPenerbit() ?></td>
                         <td><?= $buku->getTerbit()->format('d/m/Y') ?></td>

@@ -43,7 +43,7 @@ $judulHalaman = 'Detail Buku';
 
             <div>
                 <span>Judul</span>
-                <span><?= $buku->getJudul() ?></span>
+                <span style="view-transition-name: buku-judul-<?= $buku->getId() ?>"><?= $buku->getJudul() ?></span>
             </div>
 
             <div>
@@ -86,8 +86,12 @@ $judulHalaman = 'Detail Buku';
         <table class="table">
             <thead>
                 <tr>
-                    <th>Foto</th>
-                    <th>Nama</th>
+                    <th>
+                        <span style="view-transition-name: tbl-buku-foto">Foto</span>
+                    </th>
+                    <th>
+                        <span style="view-transition-name: tbl-buku-nama">Nama</span>
+                    </th>
                     <?php switch ($tab): case 'peminjaman': ?>
                         <th>Tanggal Pinjam</th>
                         <th>Tanggal Dikembalikan</th>
@@ -117,7 +121,11 @@ $judulHalaman = 'Detail Buku';
                                     class="profile-picture"
                                 />
                             </td>
-                            <td style="view-transition-name: pengguna-nama-<?= $pengguna->getId() ?>"><?= $pengguna->getNama() ?></td>
+                            <td>
+                                <span style="view-transition-name: pengguna-nama-<?= $pengguna->getId() ?>">
+                                    <?= $pengguna->getNama() ?>
+                                </span>
+                            </td>
                             <?php switch ($tab): case 'peminjaman': ?>
                                 <td><?= $d->getTanggalPinjam()->format('d/m/Y H:i') ?></td>
                                 <td><?= $d->getTanggalDikembalikan()?->format('d/m/Y H:i') ?? 'Belum dikembalikan' ?></td>

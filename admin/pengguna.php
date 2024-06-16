@@ -44,10 +44,15 @@ $daftarPengguna = Pengguna::semua();
                             <img
                                 src="<?= $pengguna->getFotoProfil() ?>"
                                 alt="Foto profil <?= $pengguna->getNama() ?>"
+                                style="view-transition-name: pengguna-foto-<?= $pengguna->getId() ?>"
                                 class="profile-picture profile-picture--large"
                             />
                         </td>
-                        <td><?= $pengguna->getNama() ?></td>
+                        <td>
+                            <span style="view-transition-name: pengguna-nama-<?= $pengguna->getId() ?>">
+                                <?= $pengguna->getNama() ?>
+                            </span>
+                        </td>
                         <td><?= $pengguna->getTelepon() ?></td>
                         <td><?= $pengguna->getTanggalLahir()->format('d-m-Y') ?></td>
                         <td><?= $pengguna->getEmail() ?></td>

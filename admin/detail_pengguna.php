@@ -38,7 +38,7 @@ $judulHalaman = 'Detail Pengguna';
         <div class="detail">
             <div>
                 <span>Nama</span>
-                <span><?= $pengguna->getNama() ?></span>
+                <span style="view-transition-name: pengguna-nama-<?= $pengguna->getId() ?>"><?= $pengguna->getNama() ?></span>
             </div>
 
             <div>
@@ -81,8 +81,12 @@ $judulHalaman = 'Detail Pengguna';
         <table class="table">
             <thead>
                 <tr>
-                    <th>Cover</th>
-                    <th>Judul</th>
+                    <th>
+                        <span style="view-transition-name: tbl-pengguna-cover">Cover</span>
+                    </th>
+                    <th>
+                        <span style="view-transition-name: tbl-pengguna-judul">Judul</span>
+                    </th>
                     <?php switch ($tab): case 'koleksi': ?>
                         <th>Tanggal Pinjam</th>
                         <th>Tanggal Kembali</th>
@@ -113,7 +117,11 @@ $judulHalaman = 'Detail Pengguna';
                                     class="thumbnail"
                                 />
                             </td>
-                            <td style="view-transition-name: buku-judul-<?= $buku->getId() ?>"><?= $buku->getJudul() ?></td>
+                            <td>
+                                <span style="view-transition-name: buku-judul-<?= $buku->getId() ?>">
+                                    <?= $buku->getJudul() ?>
+                                </span>
+                            </td>
                             <?php switch ($tab): case 'koleksi': ?>
                                 <td><?= $data[$index]->getTanggalPinjam()->format('d/m/Y H:i') ?></td>
                                 <td><?= $data[$index]->getTanggalKembali()->format('d/m/Y H:i') ?></td>
