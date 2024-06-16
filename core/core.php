@@ -75,6 +75,17 @@ function parse_datetime(DateTime | string | null $dateTime): ?DateTime
     return $dateTime;
 }
 
+/**
+ * @template TModel
+ * 
+ * @param TModel[] $model
+ * @return array<int, TModel>
+ */
+function dict(array $model): array
+{
+    return array_map_with_keys(fn(Model $m) => [$m->getId() => $m], $model);
+}
+
 if (php_sapi_name() === 'cli') {
     /**
      * @template TValue
