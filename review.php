@@ -16,7 +16,6 @@ $bodyClass = 'review-body';
 $head = <<<HTML
 <title>Ulasan</title>
 <link rel="stylesheet" href="assets/review.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
 HTML ?>
 
@@ -56,7 +55,7 @@ HTML ?>
                     <i class="bi bi-star text-secondary" data-rating="5"></i>
                 </div>
                 <div class="mb-3">
-                    <textarea name="ulasan" class="form-control" placeholder="Tulis Ulasan Anda di sini" required></textarea>
+                    <textarea name="ulasan" class="form-control textarea-review" placeholder="Tulis Ulasan Anda di sini" required></textarea>
                 </div>
                 <br>
                 <button type="submit" class="btn btn--green">Kirim</button>
