@@ -14,6 +14,7 @@
         <title><?= $judulHalaman ?></title>
     <?php endif ?>
 
+    <link rel="shortcut icon" href="<?= $basePath ?>assets/favicon.ico">
     <link rel="stylesheet" href="<?= $basePath ?>assets/main.css">
     <script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.5.1/air-datepicker.min.js" defer></script>
     <script src="https://unpkg.com/@hotwired/turbo@8.0.4/dist/turbo.es2017-umd.js" defer></script>
