@@ -45,7 +45,7 @@ HTML ?>
     <div class="tulisreview">
         <?php if ($pengguna): ?>
             <form id="reviewForm" action="submit_review.php" method="post" style="background-color: #121212; padding: 20px; border-radius: 8px; margin-top: 20px;">
-                <input type="hidden" name="id_buku" value="<?php echo $buku_id; ?>">
+                <input type="hidden" name="id_buku" value="<?= $buku->getId() ?>">
                 <input type="hidden" name="penilaian" id="rating-input" value="">
                 <p>Berikan ulasan Anda :</p>
                 <div class="star-rating">
@@ -73,7 +73,9 @@ HTML ?>
             </tbody>
             <tr>
             <?php $users = dict(Pengguna::query(['id', 'IN', $reviews])) ?>
-            <?php $komentars = dict(Komentar::query(['id_ulasan', 'IN', $reviews])) ?>
+            <?php $komentars = array_group(fn(Komentar $k) => [
+                $k->getIdUlasan() => $k,
+            ], Komentar::query(['id_ulasan', 'IN', $reviews])) ?>
             <?php foreach ($reviews as $review): ?>
                 <?php 
                     $user = $users[$review->getIdPengguna()];
@@ -106,7 +108,7 @@ HTML ?>
 
                     <!-- Comment section -->
                     <div id="comment-section-<?php echo $review->getId(); ?>" class="komentar" style="display: none; margin-top: 10px;">
-                        <input type="hidden" name="id_buku" value="<?php echo $buku_id; ?>">
+                        <input type="hidden" name="id_buku" value="<?= $buku->getId() ?>">
                         <?php foreach ($komentars[$review->getId()] ?? [] as $komentar): ?>
                             <?php $komentarUser = Pengguna::cari($komentar->getIdPengguna()); ?>
                             <div class="komentar-item" style="margin-bottom: 10px;">
