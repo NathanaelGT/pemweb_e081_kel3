@@ -9,6 +9,10 @@ if ($buku === null) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
+        if (isset($_FILES['cover'])) {
+            $buku->setCover(handle_upload($_FILES['cover'], $_POST['isbn']));
+        }
+
         $buku->setJudul($_POST['judul'])
             ->setKategori($_POST['kategori'])
             ->setPenulis($_POST['penulis'])
@@ -42,11 +46,16 @@ $judulHalaman = 'Edit Buku';
 
 <main class="form__wrapper">
     <div>
-        <h1>Edit Buku <?= $buku->getJudul() ?></h1>
+        <h1>
+            Edit Buku
+            <span style="view-transition-name: buku-judul-<?= $buku->getId() ?>">
+                <?= $buku->getJudul() ?>
+            </span>
+        </h1>
 
         <?php include '../komponen/info.php' ?>
 
-        <form method="POST" class="form">
+        <form method="POST" enctype="multipart/form-data" class="form">
             <label class="label">
                 <span>Judul</span>
                 <input type="text" name="judul" required value="<?= $buku->getJudul() ?>" class="input">
@@ -80,6 +89,11 @@ $judulHalaman = 'Edit Buku';
             <label class="label">
                 <span>ISBN</span>
                 <input type="number" min="1" name="isbn" required value="<?= $buku->getIsbn() ?>" class="input">
+            </label>
+
+            <label class="label">
+                <span>Cover</span>
+                <input type="file" name="cover" accept=".jpg, .jpeg, .png, .webp" class="input">
             </label>
 
             <button type="submit" class="btn btn--green">Edit Buku</button>

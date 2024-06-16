@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ->setTerbit($_POST['terbit'])
             ->setPenerbit($_POST['penerbit'])
             ->setIsbn($_POST['isbn'])
+            ->setCover(handle_upload($_FILES['cover'], $_POST['isbn']))
             ->simpan();
 
         $_SESSION['info'] = 'Buku berhasil ditambahkan';
@@ -75,6 +76,11 @@ $judulHalaman = 'Tambah Buku';
             <label class="label">
                 <span>ISBN</span>
                 <input type="number" min="1" name="isbn" required class="input">
+            </label>
+
+            <label class="label">
+                <span>Cover</span>
+                <input type="file" name="cover" accept=".jpg, .jpeg, .png, .webp" required class="input">
             </label>
 
             <button type="submit" class="btn btn--green">Tambah Buku</button>
