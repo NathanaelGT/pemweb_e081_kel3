@@ -65,11 +65,16 @@ function parse_datetime(DateTime | string | null $dateTime): ?DateTime
             return new DateTime();
         }
 
-        $format = str_contains($dateTime, ':')
-            ? 'd/m/Y h:i a'
-            : 'd/m/Y';
+        $separator = str_contains($dateTime, '/') ? '/' : '-';
+        $dateFormat = strpos($dateTime, $separator) === 1
+            ? "d{$separator}m{$separator}Y"
+            : "Y{$separator}m{$separator}d";
 
-        $dateTime = DateTime::createFromFormat($format, $dateTime);
+        $dateFormat = str_contains($dateTime, ':')
+            ? "$dateFormat h:i a"
+            : $dateFormat;
+
+        $dateTime = DateTime::createFromFormat($dateFormat, $dateTime);
         if ($dateTime === false) {
             throw new RuntimeException('Format tanggal tidak diketahui.');
         }
