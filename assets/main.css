@@ -160,6 +160,19 @@ header nav {
     width: 3rem;
 }
 
+.text-left {
+    text-align: left !important;
+}
+
+.mb-1 {
+    margin-bottom: 1rem !important;
+}
+
+.mx-auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
 header nav ul {
     display: flex;
     align-items: center;
@@ -438,6 +451,13 @@ header nav ul {
     a {
         font-weight: bold;
     }
+}
+
+.form__wrapper--split > div {
+    width: 80%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
 }
 
 /* admin */

@@ -7,7 +7,11 @@ if (pengguna() === null) {
     die;
 }
 
-$peminjaman = Peminjaman::query(['id_pengguna', '=', pengguna()]);
+/** @var Peminjaman[] $peminjaman */
+$peminjaman = array_map_with_keys(fn(Peminjaman $peminjaman) => [
+    $peminjaman->getIdBuku() => $peminjaman,
+], Peminjaman::query(['id_pengguna', '=', pengguna()]));
+
 $koleksiBuku = Buku::query(['id', 'IN', $peminjaman]);
 
 $judulHalaman = 'Koleksi Buku Saya';
@@ -48,9 +52,15 @@ $judulHalaman = 'Koleksi Buku Saya';
                             <a href="./review.php?id=<?= $buku->getId() ?>#reviewForm" class="btn btn--yellow">
                                 <strong>Tulis Ulasan</strong>
                             </a>
-                            <a href="./kembalikan_buku.php?id=<?= $buku->getId() ?>" class="btn btn--red">
-                                <strong>Kembalikan Buku</strong>
-                            </a>
+                            <?php if ($peminjaman[$buku->getId()]->getTanggalDikembalikan() == null): ?>
+                                <a href="./kembalikan_buku.php?id=<?= $buku->getId() ?>" class="btn btn--red">
+                                    <strong>Kembalikan Buku</strong>
+                                </a>
+                            <?php else: ?>
+                                <a href="./pinjam_buku.php.php?id=<?= $buku->getId() ?>" class="btn btn--green">
+                                    <strong>Pinjam Lagi</strong>
+                                </a>
+                            <?php endif ?>
                         </p>
                     </div>
                 </div>

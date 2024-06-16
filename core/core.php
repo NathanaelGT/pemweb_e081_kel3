@@ -10,6 +10,9 @@ include __DIR__ . '/Ulasan.php';
 include __DIR__ . '/Penilaian.php';
 include __DIR__ . '/Komentar.php';
 
+setlocale(LC_TIME, '');
+date_default_timezone_set('Asia/Jakarta');
+
 if (php_sapi_name() !== 'cli') {
     session_start();
 }
@@ -58,6 +61,10 @@ function array_group(callable $callback, array $array): array
 function parse_datetime(DateTime | string | null $dateTime): ?DateTime
 {
     if (is_string($dateTime)) {
+        if ($dateTime === 'now') {
+            return new DateTime();
+        }
+
         $format = str_contains($dateTime, ':')
             ? 'd/m/Y h:i a'
             : 'd/m/Y';

@@ -38,7 +38,10 @@ abstract class Model
     public static function cari(int | string | null $id): ?static
     {
         if ($id !== null) {
-            foreach (Database::query('SELECT * FROM ' . static::table() . " WHERE id = $id LIMIT 1") as $data) {
+            $table = static::table();
+            $id = Database::escape($id);
+
+            foreach (Database::query("SELECT * FROM $table WHERE id = $id LIMIT 1") as $data) {
                 return new static($data);
             }
         }
