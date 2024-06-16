@@ -29,12 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $basePath = '../';
 $bodyClass = 'bookshelf-background';
-
-$head = <<<HTML
-<link href="https://cdn.jsdelivr.net/npm/air-datepicker@3.5.1/air-datepicker.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.5.1/air-datepicker.min.js" defer></script>
-<title>Edit Pengguna</title>
-HTML ?>
+$judulHalaman = 'Edit Pengguna';
+?>
 
 <?php include '../komponen/open.php' ?>
 <?php include '../komponen/header.php' ?>
@@ -79,9 +75,9 @@ HTML ?>
 </main>
 
 <script>
-    document.addEventListener('turbo:load', () => {
+    $(document).ready(function () {
         new AirDatepicker('input[name="tanggal_lahir"]', { locale: airDatepickerLocale })
-    }, { once: true })
+    })
 </script>
 
 <?php include '../komponen/close.php' ?>
