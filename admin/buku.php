@@ -53,10 +53,11 @@ $daftarBuku = Buku::semua();
                         <td style="view-transition-name: buku-judul-<?= $buku->getId() ?>"><?= $buku->getJudul() ?></td>
                         <td><?= $buku->getPenulis() ?></td>
                         <td><?= $buku->getPenerbit() ?></td>
-                        <td><?= $buku->getTerbit()->format('d-m-Y') ?></td>
+                        <td><?= $buku->getTerbit()->format('d/m/Y') ?></td>
                         <td><?= $buku->getKategori() ?></td>
                         <td>
-                            <div class="table__actions">
+                            <div class="table__actions table__actions--vertical">
+                                <a href="detail_buku.php?id=<?= $buku->getId() ?>" class="btn btn--blue">Detail</a>
                                 <a href="edit_buku.php?id=<?= $buku->getId() ?>" class="btn btn--yellow">Edit</a>
                                 <a href="hapus_buku.php?id=<?= $buku->getId() ?>" class="btn btn--red">Hapus</a>
                             </div>

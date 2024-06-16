@@ -404,8 +404,8 @@ header nav ul {
 }
 
 .thumbnail {
-    width: 78px;
-    height: 114px;
+    width: 99px;
+    height: 145px;
     border-radius: 0.5rem;
 }
 
@@ -568,6 +568,11 @@ header nav ul {
 .table__actions {
     display: flex;
     gap: 1rem;
+}
+
+.table__actions--vertical {
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .detail__wrapper {
