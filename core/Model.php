@@ -35,7 +35,7 @@ abstract class Model
         return array_map(fn($d) => new static($d), $data);
     }
 
-    public static function cari(int|string $id): ?static
+    public static function cari(int | string | null $id): ?static
     {
         if ($id !== null) {
             foreach (Database::query('SELECT * FROM ' . static::table() . " WHERE id = $id LIMIT 1") as $data) {
