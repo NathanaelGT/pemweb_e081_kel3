@@ -25,7 +25,7 @@ $data = match ($tab) {
     default => header("Location: detail_pengguna.php?id={$pengguna->getId()}") and die,
 };
 
-$daftarBuku = Buku::query(['id', 'IN', $data]);
+$daftarBuku = dict(Buku::query(['id', 'IN', $data]));
 
 $judulHalaman = 'Detail Pengguna';
 ?>
@@ -100,14 +100,15 @@ $judulHalaman = 'Detail Pengguna';
                 </tr>
             </thead>
             <tbody class="list">
-                <?php if (empty($daftarBuku)): ?>
+                <?php if (empty($data)): ?>
                     <tr>
                         <td colspan="<?= 2 + ($tab === 'koleksi' ? 4 : 1) ?>">
                             Tidak ada <?= $tab ?>
                         </td>
                     </tr>
                 <?php else: ?>
-                    <?php foreach ($daftarBuku as $index => $buku): ?>
+                    <?php foreach ($data as $d): ?>
+                        <?php $buku = $daftarBuku[$d->getIdBuku()] ?>
                         <tr>
                             <td>
                                 <img
@@ -123,14 +124,14 @@ $judulHalaman = 'Detail Pengguna';
                                 </span>
                             </td>
                             <?php switch ($tab): case 'koleksi': ?>
-                                <td><?= $data[$index]->getTanggalPinjam()->format('d/m/Y H:i') ?></td>
-                                <td><?= $data[$index]->getTanggalKembali()->format('d/m/Y H:i') ?></td>
-                                <!-- <td><?= $data[$index]->getTanggalDiambil()?->format('d/m/Y H:i') ?? '-' ?></td> -->
-                                <td><?= $data[$index]->getTanggalDikembalikan()?->format('d/m/Y H:i') ?? '-' ?></td>
+                                <td><?= $d->getTanggalPinjam()->format('d/m/Y H:i') ?></td>
+                                <td><?= $d->getTanggalKembali()->format('d/m/Y H:i') ?></td>
+                                <!-- <td><?= $d->getTanggalDiambil()?->format('d/m/Y H:i') ?? '-' ?></td> -->
+                                <td><?= $d->getTanggalDikembalikan()?->format('d/m/Y H:i') ?? '-' ?></td>
                             <?php break; case 'penilaian': ?>
-                                <td><?= $data[$index]->getPenilaian() ?></td>
+                                <td><?= $d->getPenilaian() ?></td>
                             <?php break; case 'ulasan': ?>
-                                <td><?= $data[$index]->getUlasan() ?></td>
+                                <td><?= $d->getUlasan() ?></td>
                             <?php break; endswitch ?>
                         </tr>
                     <?php endforeach ?>
