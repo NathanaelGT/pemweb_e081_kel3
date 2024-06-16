@@ -83,6 +83,20 @@ function parse_datetime(DateTime | string | null $dateTime): ?DateTime
     return $dateTime;
 }
 
+function handle_upload(array $file, string $fileName): string
+{
+    $path = realpath(__DIR__ . '/../') . '/uploads';
+    $name = $fileName . '.' . pathinfo($file['name'], PATHINFO_EXTENSION);
+
+    if (!is_dir($path)) {
+        mkdir($path, 0777, true);
+    }
+
+    move_uploaded_file($file['tmp_name'], "$path/$name");
+
+    return "uploads/$name";
+}
+
 /**
  * @template TModel
  * 
