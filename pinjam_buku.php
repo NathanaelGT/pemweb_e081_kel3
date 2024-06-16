@@ -137,7 +137,7 @@ HTML ?>
 </main>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('turbo:load', () => {
         const config = {
             locale: airDatepickerLocale,
             timepicker: true,
@@ -148,7 +148,7 @@ HTML ?>
 
         new AirDatepicker('input[name="tanggal_pinjam"]', { ...config, position: 'bottom left', selectedDates: [new Date()] })
         new AirDatepicker('input[name="tanggal_kembali"]', { ...config, position: 'top left' })
-    })
+    }, { once: true })
 </script>
 
 <?php include './komponen/close.php' ?>

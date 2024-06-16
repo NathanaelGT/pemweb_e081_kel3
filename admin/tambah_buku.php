@@ -87,9 +87,9 @@ HTML ?>
 </main>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('turbo:load', () => {
         new AirDatepicker('input[name="terbit"]', { locale: airDatepickerLocale })
-    })
+    }, { once: true })
 </script>
 
 <?php include '../komponen/close.php' ?>

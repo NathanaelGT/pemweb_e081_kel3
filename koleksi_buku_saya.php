@@ -34,12 +34,13 @@ $judulHalaman = 'Koleksi Buku Saya';
                         <img
                             src="<?= $buku->getCover() ?>"
                             alt="Poster <?= $buku->getJudul() ?>"
+                            style="view-transition-name: buku-cover-<?= $buku->getId() ?>"
                             class="book-overview__image"
                         />
                     </a>
 
                     <div class="book-overview__info">
-                        <h3 class="book-overview__title">
+                        <h3 style="view-transition-name: buku-judul-<?= $buku->getId() ?>" class="book-overview__title">
                             <a href="./detailbuku.php?id=<?= $buku->getId() ?>">
                                 <?= $buku->getJudul() ?>
                             </a>

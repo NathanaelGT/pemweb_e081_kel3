@@ -67,12 +67,16 @@ HTML ?>
         </div>
         <br>
         <div class="cover">
-            <img src="<?= $buku->getCover() ?>" alt="<?= $buku->getJudul() ?>">
+            <img
+                src="<?= $buku->getCover() ?>"
+                alt="Cover <?= $buku->getJudul() ?>"
+                style="view-transition-name: buku-cover-<?= $buku->getId() ?>"
+            />
             <!-- diganti upload foto cover buku -->
         </div>
 
         <div class="judul">
-            <h1> <?= $buku->getJudul() ?></h1>
+            <h1 style="view-transition-name: buku-judul-<?= $buku->getId() ?>"><?= $buku->getJudul() ?></h1>
         </div>
 
         <div class="tulisreview">

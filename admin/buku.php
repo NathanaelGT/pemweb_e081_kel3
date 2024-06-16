@@ -46,10 +46,11 @@ $daftarBuku = Buku::semua();
                             <img
                                 src="<?= $buku->getCover() ?>"
                                 alt="Cover buku <?= $buku->getJudul() ?>"
+                                style="view-transition-name: buku-cover-<?= $buku->getId() ?>"
                                 class="thumbnail"
                             />
                         </td>
-                        <td><?= $buku->getJudul() ?></td>
+                        <td style="view-transition-name: buku-judul-<?= $buku->getId() ?>"><?= $buku->getJudul() ?></td>
                         <td><?= $buku->getPenulis() ?></td>
                         <td><?= $buku->getPenerbit() ?></td>
                         <td><?= $buku->getTerbit()->format('d-m-Y') ?></td>

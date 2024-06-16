@@ -65,11 +65,15 @@ HTML ?>
                                 src="<?= $buku->getCover() ?>"
                                 alt="Poster <?= $buku->getJudul() ?>"
                                 class="book-overview__image"
+                                style="view-transition-name: buku-cover-<?= $buku->getId() ?>"
                             />
                         </a>
 
                         <div class="book-overview__info">
-                            <h3 class="book-overview__title">
+                            <h3
+                                style="view-transition-name: buku-judul-<?= $buku->getId() ?>"
+                                class="book-overview__title"
+                            >
                                 <a href="./detailbuku.php?id=<?= $buku->getId() ?>">
                                     <?= $buku->getJudul() ?>
                                 </a>
@@ -78,7 +82,9 @@ HTML ?>
                                 <?php $rating = $penilaian[$buku->getId()] ?? null ?>
                                 <?php include './komponen/rating.php' ?>
 
-                                <a href="#" class="book-overview__rating__review">Lihat ulasan</a>
+                                <a href="review.php?id=<?= $buku->getId() ?>" class="book-overview__rating__review">
+                                    Lihat ulasan
+                                </a>
                             </div>
 
                             <table class="book-overview__table">
@@ -96,7 +102,7 @@ HTML ?>
                                 </tr>
                             </table>
 
-                            <p class="book-overview__synopsis">
+                            <p style="view-transition-name: buku-sinopsis-<?= $buku->getId() ?>" class="book-overview__synopsis">
                                 “<?= $buku->getSinopsis() ?>”
                             </p>
                         </div>

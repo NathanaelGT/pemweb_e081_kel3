@@ -33,12 +33,18 @@ HTML ?>
             src="<?= $buku->getCover() ?>"
             alt="Poster <?= $buku->getJudul() ?>"
             class="book-detail__image"
+            style="view-transition-name: buku-cover-<?= $buku->getId() ?>"
         />
 
         <div class="book-detail__content">
             <div class="book-detail__header">
                 <div>
-                    <h2 class="book-detail__title"><?= $buku->getJudul() ?></h2>
+                    <h2
+                        style="view-transition-name: buku-judul-<?= $buku->getId() ?>"
+                        class="book-detail__title"
+                    >
+                        <?= $buku->getJudul() ?>
+                    </h2>
 
                     <div class="book-detail__rating">
                         <?php $rating = Database::query('SELECT (SUM(penilaian) / COUNT(*)) AS penilaian FROM penilaian WHERE id_buku = ' . $buku->getId())[0]['penilaian'] ?>
@@ -51,7 +57,7 @@ HTML ?>
                 </div>
             </div>
 
-            <p class="book-detail__synopsis">
+            <p style="view-transition-name: buku-sinopsis-<?= $buku->getId() ?>" class="book-detail__synopsis">
                 “<?= $buku->getSinopsis() ?>”
             </p>
 

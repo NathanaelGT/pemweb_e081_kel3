@@ -109,10 +109,11 @@ $judulHalaman = 'Detail Pengguna';
                                 <img
                                     src="<?= $buku->getCover() ?>"
                                     alt="Cover buku <?= $buku->getJudul() ?>"
+                                    style="view-transition-name: buku-cover-<?= $buku->getId() ?>"
                                     class="thumbnail"
                                 />
                             </td>
-                            <td><?= $buku->getJudul() ?></td>
+                            <td style="view-transition-name: buku-judul-<?= $buku->getId() ?>"><?= $buku->getJudul() ?></td>
                             <?php switch ($tab): case 'koleksi': ?>
                                 <td><?= $data[$index]->getTanggalPinjam()->format('d/m/Y H:i') ?></td>
                                 <td><?= $data[$index]->getTanggalKembali()->format('d/m/Y H:i') ?></td>

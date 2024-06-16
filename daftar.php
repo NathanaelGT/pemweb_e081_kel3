@@ -86,9 +86,9 @@ HTML ?>
 </main>
 
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('turbo:load', () => {
         new AirDatepicker('input[name="tanggal_lahir"]', { locale: airDatepickerLocale })
-    })
+    }, { once: true })
 </script>
 
 <?php include './komponen/close.php' ?>
