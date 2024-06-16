@@ -69,7 +69,10 @@ function parse_datetime(DateTime | string | null $dateTime): ?DateTime
             ? 'd/m/Y h:i a'
             : 'd/m/Y';
 
-        return DateTime::createFromFormat($format, $dateTime);
+        $dateTime = DateTime::createFromFormat($format, $dateTime);
+        if ($dateTime === false) {
+            throw new RuntimeException('Format tanggal tidak diketahui.');
+        }
     }
 
     return $dateTime;
