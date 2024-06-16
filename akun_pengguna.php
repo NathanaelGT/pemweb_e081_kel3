@@ -8,29 +8,14 @@ if (is_null($pengguna = pengguna())) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
+        if (isset($_FILES['foto'])) {
+            $pengguna->setFoto(handle_upload($_FILES['foto'], 'pengguna-' . $pengguna->getId()));
+        }
+
         $pengguna->setNama($_POST['nama'])
             ->setEmail($_POST['email'])
             ->setTelepon($_POST['telepon'])
             ->setTanggalLahir($_POST['tanggal_lahir']);
-
-        if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
-            $fileTmpPath = $_FILES['foto']['tmp_name'];
-            $fileName = $_FILES['foto']['name'];
-            $fileSize = $_FILES['foto']['size'];
-            $fileType = $_FILES['foto']['type'];
-            $fileNameCmps = explode(".", $fileName);
-            $fileExtension = strtolower(end($fileNameCmps));
-
-            $allowedfileExtensions = ['jpg', 'jpeg', 'png', 'webp'];
-            if (in_array($fileExtension, $allowedfileExtensions)) {
-                $uploadFileDir = './uploads/';
-                $dest_path = $uploadFileDir . $pengguna->getId() . '.' . $fileExtension;
-
-                if (move_uploaded_file($fileTmpPath, $dest_path)) {
-                    $pengguna->setFoto($dest_path);
-                }
-            }
-        }
 
         if ($pengguna->simpan()) {
             $_SESSION['info'] = 'Data berhasil diperbarui';
@@ -56,7 +41,6 @@ $editMode = isset($_SESSION['info']);
 $bodyClass = 'dark-gray-background';
 $head = <<<HTML
 <title>Profile</title>
-<link rel="stylesheet" href="assets/akunpengguna.css">
 HTML ?>
 
 <?php include './komponen/open.php' ?>

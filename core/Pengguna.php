@@ -92,17 +92,24 @@ class Pengguna extends Model
 
     public function getFotoProfil(): string
     {
-        return 'https://ui-avatars.com/api/?name=' . urlencode($this->nama) . '&color=FFFFFF&background=09090b';
+        return $this->getFoto() ?? 'https://ui-avatars.com/api/?name=' . urlencode($this->nama) . '&color=FFFFFF&background=09090b';
     }
 
     public function getFoto(): ?string
     {
-        return $this->foto;
+        if ($this->foto === null) {
+            return null;
+        }
+
+        global $basePath;
+
+        return $basePath . $this->foto;
     }
 
     public function setFoto(?string $foto): static
     {
         $this->foto = $foto;
+
         return $this;
     }
 }
