@@ -16,7 +16,7 @@ if ($pengguna === null) {
 
 $tab = $_GET['tab'] ?? 'buku_yang_sedang_dipinjam';
 $data = match ($tab) {
-    'buku_yang_sedang_dipinjam' => StokBuku::query(['dipinjam_oleh_id_pengguna', '=', $pengguna]),
+    'buku_yang_sedang_dipinjam' => Peminjaman::query(['id_pengguna', '=', pengguna()], ['tanggal_dikembalikan', 'is', null]),
 
     'penilaian' => Penilaian::query(['id_pengguna', '=', $pengguna]),
 
@@ -86,6 +86,8 @@ $judulHalaman = 'Detail Pengguna';
                     <?php switch ($tab): case 'buku_yang_sedang_dipinjam': ?>
                         <th>Tanggal Pinjam</th>
                         <th>Tanggal Kembali</th>
+                        <th>Tanggal Diambil</th>
+                        <th>Tanggal Dikembalikan</th>
                     <?php break; case 'penilaian': ?>
                         <th>Penilaian</th>
                     <?php break; case 'ulasan': ?>
@@ -96,7 +98,9 @@ $judulHalaman = 'Detail Pengguna';
             <tbody class="list">
                 <?php if (empty($daftarBuku)): ?>
                     <tr>
-                        <td colspan="4">Tidak ada <?= implode(' ', explode('_', $tab)) ?></td>
+                        <td colspan="<?= 2 + ($tab === 'buku_yang_sedang_dipinjam' ? 4 : 1) ?>">
+                            Tidak ada <?= implode(' ', explode('_', $tab)) ?>
+                        </td>
                     </tr>
                 <?php else: ?>
                     <?php foreach ($daftarBuku as $index => $buku): ?>
@@ -110,8 +114,10 @@ $judulHalaman = 'Detail Pengguna';
                             </td>
                             <td><?= $buku->getJudul() ?></td>
                             <?php switch ($tab): case 'buku_yang_sedang_dipinjam': ?>
-                                <td>WIP</td>
-                                <td>WIP</td>
+                                <td><?= $data[$index]->getTanggalPinjam()->format('d-m-Y H:i') ?></td>
+                                <td><?= $data[$index]->getTanggalKembali()->format('d-m-Y H:i') ?></td>
+                                <td><?= $data[$index]->getTanggalDiambil()->format('d-m-Y H:i') ?></td>
+                                <td><?= $data[$index]->getTanggalDikembalikan()->format('d-m-Y H:i') ?></td>
                             <?php break; case 'penilaian': ?>
                                 <td><?= $data[$index]->getPenilaian() ?></td>
                             <?php break; case 'ulasan': ?>

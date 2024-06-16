@@ -4,10 +4,11 @@ include __DIR__ . '/Database.php';
 include __DIR__ . '/Model.php';
 include __DIR__ . '/Pengguna.php';
 include __DIR__ . '/Buku.php';
+include __DIR__ . '/Peminjaman.php';
 include __DIR__ . '/StokBuku.php';
 include __DIR__ . '/Ulasan.php';
 include __DIR__ . '/Penilaian.php';
-include __DIR__ . '/komentar.php';
+include __DIR__ . '/Komentar.php';
 
 if (php_sapi_name() !== 'cli') {
     session_start();
@@ -52,6 +53,15 @@ function array_group(callable $callback, array $array): array
     }
 
     return $hasil;
+}
+
+function parse_datetime(DateTime | string | null $dateTime): ?DateTime
+{
+    if (is_string($dateTime)) {
+        return new DateTime($dateTime);
+    }
+
+    return $dateTime;
 }
 
 if (php_sapi_name() === 'cli') {

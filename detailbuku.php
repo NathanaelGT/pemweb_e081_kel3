@@ -1,10 +1,9 @@
 <?php
 include './core/core.php';
 
-$buku = Buku::cari($_GET['id']);
-?>
+$buku = Buku::cari(@$_GET['id']);
 
-<?php $head = <<<HTML
+$head = <<<HTML
 <title>Detail Buku {$buku->getJudul()}</title>
 HTML ?>
 
@@ -17,9 +16,9 @@ HTML ?>
     <div class="page-title__content">
         <a href="review.php?id=<?= $buku->getId() ?>" class="btn btn--yellow">Lihat Ulasan</a>
         <?php if (pengguna() !== null): ?>
-            <?php if (!empty(StokBuku::query(['id_buku', '=', $buku], ['dipinjam_oleh_id_pengguna', '=', pengguna()]))): ?>
+            <?php if (!empty(Peminjaman::query(['id_buku', '=', $buku], ['id_pengguna', '=', pengguna()], ['tanggal_dikembalikan', 'is', null]))): ?>
                 <a href="kembalikan_buku.php?id=<?= $buku->getId() ?>" class="btn btn--blue">Kembalikan Buku</a>
-            <?php elseif(empty(StokBuku::query(['id_buku', '=', $buku], ['dipinjam_oleh_id_pengguna', 'is', null]))): ?>
+            <?php elseif(empty(StokBuku::query(['id_buku', '=', $buku], ['id_peminjaman', 'is', null]))): ?>
                 <button disabled title="Stok buku ini sedang tidak tersedia" class="btn btn--blue">Pinjam Buku</button>
             <?php else: ?>
                 <a href="pinjam_buku.php?id=<?= $buku->getId() ?>" class="btn btn--blue">Pinjam Buku</a>

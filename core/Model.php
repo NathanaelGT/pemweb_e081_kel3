@@ -8,10 +8,17 @@ abstract class Model
     {
         foreach ($data as $kolom => $nilai) {
             $reflection = new ReflectionProperty($this, $kolom);
+            $type = $reflection->getType();
 
-            $this->$kolom = ctype_upper(($class = $reflection->getType()?->getName() ?? 'a')[0])
-                ? new $class($nilai)
-                : $nilai;
+            if (ctype_upper(($class = $type?->getName() ?? 'a')[0])) {
+                if ($nilai === null && $type?->allowsNull()) {
+                    $this->$kolom = null;
+                } else {
+                    $this->$kolom = new $class($nilai);
+                }
+            } else {
+                $this->$kolom = $nilai;
+            }
         }
     }
 

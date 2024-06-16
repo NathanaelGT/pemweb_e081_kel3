@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS `penilaian`;
 DROP TABLE IF EXISTS `komentar`;
 DROP TABLE IF EXISTS `ulasan`;
 DROP TABLE IF EXISTS `stok_buku`;
+DROP TABLE IF EXISTS `peminjaman`;
 DROP TABLE IF EXISTS `buku`;
 DROP TABLE IF EXISTS `pengguna`;
 SET FOREIGN_KEY_CHECKS = 1;
@@ -34,13 +35,26 @@ CREATE TABLE `buku` (
     UNIQUE (`isbn`)
 );
 
+CREATE TABLE `peminjaman` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `id_buku` INT UNSIGNED NOT NULL,
+    `id_pengguna` INT UNSIGNED NOT NULL,
+    `tanggal_pinjam` DateTime NOT NULL,
+    `tanggal_kembali` DateTime NOT NULL,
+    `tanggal_diambil` DateTime NULL DEFAULT NULL,
+    `tanggal_dikembalikan` DateTime NULL DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`id_buku`) REFERENCES `buku`(`id`) ON DELETE CASCADE,
+    FOREIGN KEY (`id_pengguna`) REFERENCES `pengguna`(`id`) ON DELETE CASCADE
+);
+
 CREATE TABLE `stok_buku` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `id_buku` INT UNSIGNED NOT NULL,
-    `dipinjam_oleh_id_pengguna` INT UNSIGNED NULL DEFAULT NULL,
+    `id_peminjaman` INT UNSIGNED NULL DEFAULT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`id_buku`) REFERENCES `buku`(`id`) ON DELETE CASCADE,
-    FOREIGN KEY (`dipinjam_oleh_id_pengguna`) REFERENCES `pengguna`(`id`) ON DELETE CASCADE
+    FOREIGN KEY (`id_peminjaman`) REFERENCES `peminjaman`(`id`) ON DELETE CASCADE
 );
 
 CREATE TABLE `ulasan` (
@@ -112,19 +126,49 @@ INSERT INTO `buku` (`judul`, `kategori`, `penulis`, `sinopsis`, `terbit`, `pener
 ('Gadis Pantai', 'Sejarah Fiksi', 'Pramoedya Ananta Toer', 'Gadis Pantai bercerita tentang kehidupan seorang gadis pesisir yang menikah dengan seorang priyayi dan menghadapi banyak tantangan.', '2020-11-01 00:00:00', 'Hasta Mitra', 'https://cdn.gramedia.com/uploads/items/98752_f.jpg', 112345678),
 ('Dilan: Dia adalah Dilanku Tahun 1990', 'Romantis', 'Pidi Baiq', 'Dilan: Dia adalah Dilanku Tahun 1990 adalah kisah romantis tentang Dilan dan Milea yang berlatar belakang kehidupan remaja di Bandung.', '2020-12-01 00:00:00', 'Pastel Books', 'https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,q_auto:best,w_640/v1529766227/dilan1_rgsiyd.jpg', 122345678);
 
-INSERT INTO `stok_buku` (`id_buku`, `dipinjam_oleh_id_pengguna`) VALUES
-(1, 3), (1, NULL), (1, 8), (1, NULL), (1, NULL), (1, NULL), (1, 13), (1, NULL), (1, NULL), (1, NULL),
-(2, NULL), (2, 8), (2, NULL), (2, NULL), (2, 2), (2, NULL), (2, NULL), (2, NULL),
-(3, NULL), (3, NULL), (3, NULL), (3, 12), (3, NULL), (3, NULL), (3, NULL),
-(4, NULL), (4, NULL), (4, 17), (4, NULL), (4, NULL), (4, NULL), (4, NULL), (4, NULL), (4, 9), (4, NULL), (4, NULL), (4, NULL),
-(5, 9), (5, NULL), (5, NULL), (5, NULL), (5, 5), (5, NULL), (5, NULL), (5, NULL), (5, NULL), (5, 15), (5, NULL), (5, NULL), (5, NULL), (5, NULL), (5, NULL),
-(6, NULL), (6, 7), (6, NULL), (6, NULL), (6, NULL), (6, 4), (6, NULL), (6, NULL), (6, NULL), (6, NULL),
-(7, NULL), (7, NULL), (7, 18), (7, NULL), (7, NULL), (7, NULL), (7, 6), (7, NULL), (7, NULL),
-(8, NULL), (8, 2), (8, NULL), (8, NULL), (8, NULL), (8, NULL), (8, NULL), (8, 12), (8, NULL), (8, NULL), (8, NULL),
-(9, NULL), (9, 16), (9, NULL), (9, NULL), (9, NULL), (9, 17), (9, NULL), (9, NULL),
-(10, 19), (10, NULL), (10, NULL), (10, NULL), (10, NULL), (10, 8), (10, NULL), (10, NULL), (10, NULL), (10, NULL), (10, NULL), (10, NULL), (10, NULL),
-(11, NULL), (11, NULL), (11, 21), (11, NULL), (11, NULL), (11, NULL), (11, 8), (11, NULL), (11, NULL), (11, NULL),
-(12, NULL), (12, NULL), (12, 22), (12, NULL), (12, NULL), (12, 13), (12, NULL);
+
+INSERT INTO `peminjaman` (`id_buku`, `id_pengguna`, `tanggal_pinjam`, `tanggal_kembali`, `tanggal_diambil`, `tanggal_dikembalikan`)
+VALUES 
+(1, 3, '2024-06-01 10:00:00', '2024-06-15 10:00:00', '2024-06-01 10:30:00', '2024-06-14 15:30:00'),
+(1, 4, '2024-06-02 11:00:00', '2024-06-16 11:00:00', '2024-06-02 11:30:00', NULL),
+(2, 5, '2024-06-03 12:00:00', '2024-06-17 12:00:00', '2024-06-03 12:30:00', NULL),
+(2, 6, '2024-06-04 13:00:00', '2024-06-18 13:00:00', '2024-06-04 13:30:00', NULL),
+(3, 7, '2024-06-05 14:00:00', '2024-06-19 14:00:00', '2024-06-05 14:30:00', NULL),
+(3, 8, '2024-06-06 15:00:00', '2024-06-20 15:00:00', '2024-06-06 15:30:00', NULL),
+(4, 9, '2024-06-07 16:00:00', '2024-06-21 16:00:00', '2024-06-07 16:30:00', NULL),
+(4, 10, '2024-06-08 17:00:00', '2024-06-22 17:00:00', '2024-06-08 17:30:00', NULL),
+(5, 11, '2024-06-09 18:00:00', '2024-06-23 18:00:00', '2024-06-09 18:30:00', NULL),
+(5, 12, '2024-06-10 19:00:00', '2024-06-24 19:00:00', '2024-06-10 19:30:00', NULL),
+(6, 13, '2024-06-11 20:00:00', '2024-06-25 20:00:00', '2024-06-11 20:30:00', NULL),
+(6, 14, '2024-06-12 21:00:00', '2024-06-26 21:00:00', '2024-06-12 21:30:00', NULL),
+(7, 15, '2024-06-13 22:00:00', '2024-06-27 22:00:00', '2024-06-13 22:30:00', NULL),
+(7, 16, '2024-06-14 23:00:00', '2024-06-28 23:00:00', '2024-06-14 23:30:00', NULL),
+(8, 17, '2024-06-15 10:00:00', '2024-06-29 10:00:00', '2024-06-15 10:30:00', NULL),
+(8, 18, '2024-06-16 11:00:00', '2024-06-30 11:00:00', '2024-06-16 11:30:00', NULL),
+(9, 19, '2024-06-17 12:00:00', '2024-07-01 12:00:00', '2024-06-17 12:30:00', NULL),
+(9, 20, '2024-06-18 13:00:00', '2024-07-02 13:00:00', '2024-06-18 13:30:00', NULL),
+(10, 1, '2024-06-19 14:00:00', '2024-07-03 14:00:00', '2024-06-19 14:30:00', NULL),
+(10, 2, '2024-06-20 15:00:00', '2024-07-04 15:00:00', '2024-06-20 15:30:00', NULL),
+(11, 3, '2024-06-21 16:00:00', '2024-07-05 16:00:00', '2024-06-21 16:30:00', NULL),
+(11, 4, '2024-06-22 17:00:00', '2024-07-06 17:00:00', '2024-06-22 17:30:00', NULL),
+(12, 5, '2024-06-23 18:00:00', '2024-07-07 18:00:00', '2024-06-23 18:30:00', NULL),
+(12, 6, '2024-06-24 19:00:00', '2024-07-08 19:00:00', '2024-06-24 19:30:00', NULL);
+
+
+INSERT INTO `stok_buku` (`id_buku`, `id_peminjaman`)
+VALUES 
+(1, NULL), (1, NULL), (1, NULL), (1, NULL), (1, NULL), (1, NULL), (1, NULL), (1, NULL), (1, 1), (1, 2),
+(2, NULL), (2, NULL), (2, NULL), (2, NULL), (2, NULL), (2, NULL), (2, NULL), (2, NULL), (2, 3), (2, 4),
+(3, NULL), (3, NULL), (3, NULL), (3, NULL), (3, NULL), (3, NULL), (3, NULL), (3, NULL), (3, 5), (3, 6),
+(4, NULL), (4, NULL), (4, NULL), (4, NULL), (4, NULL), (4, NULL), (4, NULL), (4, NULL), (4, 7), (4, 8),
+(5, NULL), (5, NULL), (5, NULL), (5, NULL), (5, NULL), (5, NULL), (5, NULL), (5, NULL), (5, 9), (5, 10),
+(6, NULL), (6, NULL), (6, NULL), (6, NULL), (6, NULL), (6, NULL), (6, NULL), (6, NULL), (6, 11), (6, 12),
+(7, NULL), (7, NULL), (7, NULL), (7, NULL), (7, NULL), (7, NULL), (7, NULL), (7, NULL), (7, 13), (7, 14),
+(8, NULL), (8, NULL), (8, NULL), (8, NULL), (8, NULL), (8, NULL), (8, NULL), (8, NULL), (8, 15), (8, 16),
+(9, NULL), (9, NULL), (9, NULL), (9, NULL), (9, NULL), (9, NULL), (9, NULL), (9, NULL), (9, 17), (9, 18),
+(10, NULL), (10, NULL), (10, NULL), (10, NULL), (10, NULL), (10, NULL), (10, NULL), (10, NULL), (10, 19), (10, 20),
+(11, NULL), (11, NULL), (11, NULL), (11, NULL), (11, NULL), (11, NULL), (11, NULL), (11, NULL), (11, 21), (11, 22),
+(12, NULL), (12, NULL), (12, NULL), (12, NULL), (12, NULL), (12, NULL), (12, NULL), (12, NULL), (12, 23), (12, 24);
 
 
 INSERT INTO `ulasan` (`id_buku`, `id_pengguna`, `ulasan`) VALUES 

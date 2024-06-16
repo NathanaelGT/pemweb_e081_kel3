@@ -29,19 +29,26 @@ if (empty($stokBuku)) {
     die;
 }
 
-foreach ($stokBuku as $stok) {
-    if ($stok->getDipinjamOlehIdPengguna() === $pengguna->getId()) {
-        $_SESSION['info'] = 'Anda sudah meminjam buku ini';
-        $_SESSION['jenis_info'] = 'error';
+$peminjaman = Peminjaman::query(['id_buku', '=', $buku], ['id_pengguna', '=', $pengguna], ['tanggal_dikembalikan', 'is', null]);
+if (!empty($peminjaman)) {
+    $_SESSION['info'] = 'Anda sudah meminjam buku ini';
+    $_SESSION['jenis_info'] = 'error';
 
-        header("Location: $redirectKe");
-        die;
-    }
+    header("Location: $redirectKe");
+    die;
 }
 
 foreach ($stokBuku as $stok) {
-    if ($stok->getDipinjamOlehIdPengguna() === null) {
-        $stok->setDipinjamOlehIdPengguna($pengguna->getId())->simpan();
+    if ($stok->getIdPeminjaman() === null) {
+        $peminjaman = new Peminjaman();
+        $peminjaman
+            ->setIdBuku($buku->getId())
+            ->setIdPengguna($pengguna->getId())
+            ->setTanggalPinjam(new DateTime('now'))
+            ->setTanggalKembali(new DateTime('+7 days'))
+            ->simpan();
+
+        $stok->setIdPeminjaman($peminjaman->getId())->simpan();
 
         $_SESSION['info'] = 'Buku berhasil dipinjam';
         $_SESSION['jenis_info'] = 'success';

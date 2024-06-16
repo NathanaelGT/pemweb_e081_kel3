@@ -7,11 +7,8 @@ if (pengguna() === null) {
     die;
 }
 
-$koleksiBuku = Buku::query([
-    'id', 'IN', StokBuku::query([
-        'dipinjam_oleh_id_pengguna', '=', pengguna()->getId()
-    ])
-]);
+$peminjaman = Peminjaman::query(['id_pengguna', '=', pengguna()]);
+$koleksiBuku = Buku::query(['id', 'IN', $peminjaman]);
 
 $judulHalaman = 'Koleksi Buku Saya';
 ?>

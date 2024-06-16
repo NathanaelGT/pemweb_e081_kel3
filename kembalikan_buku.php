@@ -20,25 +20,26 @@ if ($buku === null) {
     die;
 }
 
-$stokBuku = StokBuku::query(['id_buku', '=', $buku], ['dipinjam_oleh_id_pengguna', '=', $pengguna->getId()]);
-if (empty($stokBuku)) {
+$peminjaman = Peminjaman::query(['id_buku', '=', $buku], ['id_pengguna', '=', $pengguna], ['tanggal_dikembalikan', 'is', null]);
+if (empty($peminjaman)) {
     $_SESSION['info'] = 'Anda tidak sedang meminjam buku ini';
     $_SESSION['jenis_info'] = 'error';
 
     header("Location: $redirectKe");
     die;
 }
+$peminjaman = $peminjaman[0];
 
+$stokBuku = StokBuku::query(['id_buku', '=', $buku], ['id_peminjaman', '=', $peminjaman]);
 foreach ($stokBuku as $stok) {
-    if ($stok->getDipinjamOlehIdPengguna() === $pengguna->getId()) {
-        $stok->setDipinjamOlehIdPengguna(null)->simpan();
+    $peminjaman->setTanggalDikembalikan(new DateTime('now'))->simpan();
+    $stok->setIdPeminjaman(null)->simpan();
 
-        $_SESSION['info'] = 'Buku berhasil dikembalikan';
-        $_SESSION['jenis_info'] = 'success';
+    $_SESSION['info'] = 'Buku berhasil dikembalikan';
+    $_SESSION['jenis_info'] = 'success';
 
-        header("Location: $redirectKe");
-        die;
-    }
+    header("Location: $redirectKe");
+    die;
 }
 
 $_SESSION['info'] = 'Maaf, terjadi kesalahan saat mengembalikan buku';

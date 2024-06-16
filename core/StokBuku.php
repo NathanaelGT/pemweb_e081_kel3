@@ -6,7 +6,7 @@ class StokBuku extends Model
 
     protected int $id_buku;
 
-    protected ?int $dipinjam_oleh_id_pengguna = null;
+    protected ?int $id_peminjaman = null;
 
     public function getIdBuku(): int
     {
@@ -20,14 +20,14 @@ class StokBuku extends Model
         return $this;
     }
 
-    public function getDipinjamOlehIdPengguna(): ?int
+    public function getIdPeminjaman(): ?int
     {
-        return $this->dipinjam_oleh_id_pengguna;
+        return $this->id_peminjaman;
     }
 
-    public function setDipinjamOlehIdPengguna(?int $dipinjamOlehIdPengguna): static
+    public function setIdPeminjaman(?int $idPeminjaman): static
     {
-        $this->dipinjam_oleh_id_pengguna = $dipinjamOlehIdPengguna;
+        $this->id_peminjaman = $idPeminjaman;
 
         return $this;
     }
@@ -36,7 +36,7 @@ class StokBuku extends Model
     {
         return match ($tabel) {
             'buku' => $this->id_buku,
-            'pengguna' => $this->dipinjam_oleh_id_pengguna,
+            'peminjaman' => $this->id_peminjaman,
             default => null,
         };
     }
