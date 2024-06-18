@@ -58,6 +58,23 @@ function array_group(callable $callback, array $array): array
     return $hasil;
 }
 
+/**
+ * @template TValue
+ * @template TDefault
+ * 
+ * @param TValue[] $array
+ * @param TDefault $default
+ * @return TValue|TDefault
+ */
+function array_first(array $array, mixed $default = null): mixed
+{
+    foreach ($array as $value) {
+        return $value;
+    }
+
+    return $default;
+}
+
 function parse_datetime(DateTime | string | null $dateTime): ?DateTime
 {
     if (is_string($dateTime)) {
