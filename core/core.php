@@ -66,7 +66,7 @@ function parse_datetime(DateTime | string | null $dateTime): ?DateTime
         }
 
         $separator = str_contains($dateTime, '/') ? '/' : '-';
-        $dateFormat = strpos($dateTime, $separator) === 1
+        $dateFormat = strpos($dateTime, $separator) === 2
             ? "d{$separator}m{$separator}Y"
             : "Y{$separator}m{$separator}d";
 
