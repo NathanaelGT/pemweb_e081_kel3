@@ -138,7 +138,7 @@ HTML ?>
 
 
 <script>
-$(document).ready(function() {
+scripts.add(function() {
     $('.star-rating .bi').on('click', function() {
         var rating = $(this).data('rating');
         $('#rating-input').val(rating); // Menetapkan nilai rating ke elemen input

@@ -18,7 +18,16 @@
     <link rel="stylesheet" href="<?= $basePath ?>assets/main.css">
     <script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.5.1/air-datepicker.min.js" defer></script>
     <script src="https://unpkg.com/@hotwired/turbo@8.0.4/dist/turbo.es2017-umd.js" defer></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" defer></script>
     <script src="<?= $basePath ?>assets/main.js" defer></script>
+    <script>
+        const scripts = {
+            scripts: [],
+            add(script) {
+                this.scripts.push(script)
+                document.dispatchEvent(new Event('scripts-added'))
+            }
+        }
+    </script>
 </head>
 <body <?= isset($bodyClass) ? "class=\"$bodyClass\"" : '' ?>>

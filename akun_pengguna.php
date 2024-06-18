@@ -122,7 +122,7 @@ HTML ?>
         }
     }
 
-    $(document).ready(function () {
+    scripts.add(function () {
         new AirDatepicker('input[name="tanggal_lahir"]', { locale: airDatepickerLocale })
     })
 </script>

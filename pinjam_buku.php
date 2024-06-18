@@ -133,7 +133,7 @@ $judulHalaman = 'Pinjam Buku';
 </main>
 
 <script>
-    $(document).ready(function () {
+    scripts.add(function () {
         const config = {
             locale: airDatepickerLocale,
             timepicker: true,

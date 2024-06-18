@@ -13,6 +13,8 @@ const airDatepickerLocale = {
 
 const xIcon = '<svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>'
 
+let firstTime = true
+
 $(document).ready(function () {
     const $info = $('.info')
 
@@ -43,4 +45,17 @@ $(document).ready(function () {
         .map(a => {
             a.onclick = () => confirm('Apakah Anda yakin ingin menghapus data ini?')
         })
+
+    if (!firstTime) {
+        return
+    }
+    firstTime = false
+
+    const executeScript = () => {
+        scripts.scripts.forEach(script => script())
+        scripts.scripts.length = 0
+    }
+
+    executeScript()
+    document.addEventListener('scripts-added', executeScript)
 })
