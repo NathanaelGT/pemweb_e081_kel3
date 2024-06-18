@@ -47,70 +47,72 @@ HTML ?>
 <?php include './komponen/header.php' ?>
 <?php include './komponen/subheader.php' ?>
 
-<?php if (empty($daftarBukuKategori)): ?>
-    <div class="jumbotron">
-        <p>Tidak ada buku yang ditemukan</p>
-    </div>
-<?php else: ?>
-    <?php foreach ($daftarBukuKategori as $kategori => $daftarBuku): ?>
-        <section class="page-section">
-            <h2 class="page-section__title"><?= $kategori ?></h2>
+<main class="fill-height">
+    <?php if (empty($daftarBukuKategori)): ?>
+        <div class="jumbotron">
+            <p>Tidak ada buku yang ditemukan</p>
+        </div>
+    <?php else: ?>
+        <?php foreach ($daftarBukuKategori as $kategori => $daftarBuku): ?>
+            <section class="page-section">
+                <h2 class="page-section__title"><?= $kategori ?></h2>
 
-            <div class="page-section__content">
-                <?php /** @var Buku $buku */ ?>
-                <?php foreach ($daftarBuku as $buku): ?>
-                    <div class="book-overview">
-                        <a href="./detailbuku.php?id=<?= $buku->getId() ?>">
-                            <img
-                                src="<?= $buku->getCover() ?>"
-                                alt="Poster <?= $buku->getJudul() ?>"
-                                class="book-overview__image"
-                                style="view-transition-name: buku-cover-<?= $buku->getId() ?>"
-                            />
-                        </a>
+                <div class="page-section__content">
+                    <?php /** @var Buku $buku */ ?>
+                    <?php foreach ($daftarBuku as $buku): ?>
+                        <div class="book-overview">
+                            <a href="./detailbuku.php?id=<?= $buku->getId() ?>">
+                                <img
+                                    src="<?= $buku->getCover() ?>"
+                                    alt="Poster <?= $buku->getJudul() ?>"
+                                    class="book-overview__image"
+                                    style="view-transition-name: buku-cover-<?= $buku->getId() ?>"
+                                />
+                            </a>
 
-                        <div class="book-overview__info">
-                            <h3
-                                style="view-transition-name: buku-judul-<?= $buku->getId() ?>"
-                                class="book-overview__title"
-                            >
-                                <a href="./detailbuku.php?id=<?= $buku->getId() ?>">
-                                    <?= $buku->getJudul() ?>
-                                </a>
-                            </h3>
-                            <div class="book-overview__rating">
-                                <?php $rating = $penilaian[$buku->getId()] ?? null ?>
-                                <?php include './komponen/rating.php' ?>
+                            <div class="book-overview__info">
+                                <h3
+                                    style="view-transition-name: buku-judul-<?= $buku->getId() ?>"
+                                    class="book-overview__title"
+                                >
+                                    <a href="./detailbuku.php?id=<?= $buku->getId() ?>">
+                                        <?= $buku->getJudul() ?>
+                                    </a>
+                                </h3>
+                                <div class="book-overview__rating">
+                                    <?php $rating = $penilaian[$buku->getId()] ?? null ?>
+                                    <?php include './komponen/rating.php' ?>
 
-                                <a href="review.php?id=<?= $buku->getId() ?>" class="book-overview__rating__review">
-                                    Lihat ulasan
-                                </a>
+                                    <a href="review.php?id=<?= $buku->getId() ?>" class="book-overview__rating__review">
+                                        Lihat ulasan
+                                    </a>
+                                </div>
+
+                                <table class="book-overview__table">
+                                    <tr>
+                                        <td>Stok</td>
+                                        <td>: <?= $stok[$buku->getId()] ?? 0 ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kategori</td>
+                                        <td>: <?= $kategori ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Penulis</td>
+                                        <td>: <?= $buku->getPenulis() ?></td>
+                                    </tr>
+                                </table>
+
+                                <p style="view-transition-name: buku-sinopsis-<?= $buku->getId() ?>" class="book-overview__synopsis">
+                                    “<?= $buku->getSinopsis() ?>”
+                                </p>
                             </div>
-
-                            <table class="book-overview__table">
-                                <tr>
-                                    <td>Stok</td>
-                                    <td>: <?= $stok[$buku->getId()] ?? 0 ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Kategori</td>
-                                    <td>: <?= $kategori ?></td>
-                                </tr>
-                                <tr>
-                                    <td>Penulis</td>
-                                    <td>: <?= $buku->getPenulis() ?></td>
-                                </tr>
-                            </table>
-
-                            <p style="view-transition-name: buku-sinopsis-<?= $buku->getId() ?>" class="book-overview__synopsis">
-                                “<?= $buku->getSinopsis() ?>”
-                            </p>
                         </div>
-                    </div>
-                <?php endforeach ?>
-            </div>
-        </section>
-    <?php endforeach ?>
-<?php endif ?>
+                    <?php endforeach ?>
+                </div>
+            </section>
+        <?php endforeach ?>
+    <?php endif ?>
+</main>
 
 <?php include './komponen/close.php' ?>

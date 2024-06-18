@@ -27,6 +27,15 @@ body {
 
     & > main {
         flex-grow: 1;
+
+        &.fill-height {
+            display: flex;
+            flex-direction: column;
+
+            & > :last-child {
+                flex: 1;
+            }
+        }
     }
 
     &.bookshelf-background {
