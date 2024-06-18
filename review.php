@@ -8,7 +8,6 @@ if ($buku === null) {
 }
 
 $reviews = Ulasan::query(['id_buku', '=', $buku]);
-$ratings = Penilaian::query(['id_buku', '=', $buku]);
 
 $pengguna = pengguna();
 
@@ -43,19 +42,23 @@ HTML ?>
 
     <div class="tulisreview">
         <?php if ($pengguna): ?>
+            <?php $rating = array_first(Penilaian::query(['id_buku', '=', $buku], ['id_pengguna', '=', $pengguna])) ?>
+            <?php $stars = $rating?->getPenilaian() ?>
             <form id="reviewForm" action="submit_review.php" method="post" style="background-color: #121212; padding: 20px; border-radius: 8px; margin-top: 20px;">
                 <input type="hidden" name="id_buku" value="<?= $buku->getId() ?>">
-                <input type="hidden" name="penilaian" id="rating-input" value="">
+                <input type="hidden" name="penilaian" id="rating-input" value="<?= $stars ?>">
                 <p>Berikan ulasan Anda :</p>
                 <div class="star-rating">
-                    <i class="bi bi-star text-secondary" data-rating="1"></i>
-                    <i class="bi bi-star text-secondary" data-rating="2"></i>
-                    <i class="bi bi-star text-secondary" data-rating="3"></i>
-                    <i class="bi bi-star text-secondary" data-rating="4"></i>
-                    <i class="bi bi-star text-secondary" data-rating="5"></i>
+                    <?php for ($i = 0; $i < 5; $i++): ?>
+                        <?php if ($i < $stars): ?>
+                            <i class="bi bi-star text-warning" data-rating="<?= $i + 1 ?>"></i>
+                        <?php else: ?>
+                            <i class="bi bi-star text-secondary" data-rating="<?= $i + 1 ?>"></i>
+                        <?php endif ?>
+                    <?php endfor ?>
                 </div>
                 <div class="mb-3">
-                    <textarea name="ulasan" class="form-control textarea-review" placeholder="Tulis Ulasan Anda di sini" required></textarea>
+                    <textarea name="ulasan" class="form-control textarea-review" placeholder="Tulis Ulasan Anda di sini"></textarea>
                 </div>
                 <br>
                 <button type="submit" class="btn btn--green">Kirim</button>
@@ -76,30 +79,9 @@ HTML ?>
                 $k->getIdUlasan() => $k,
             ], Komentar::query(['id_ulasan', 'IN', $reviews])) ?>
             <?php foreach ($reviews as $review): ?>
-                <?php 
-                    $user = $users[$review->getIdPengguna()];
-                    $rating = null;
-                    foreach ($ratings as $r) {
-                        if ($r->getIdPengguna() == $review->getIdPengguna()) {
-                            $rating = $r;
-                            break;
-                        }
-                    }
-                ?>
+                <?php $user = $users[$review->getIdPengguna()] ?>
                 <div>
                     <strong><?php echo htmlspecialchars($user->getNama()); ?></strong>
-                    <?php if ($rating): ?>
-                        <p><?php 
-                            $stars = $rating->getPenilaian();
-                            for ($i = 0; $i < 5; $i++) {
-                                if ($i < $stars) {
-                                    echo '<i class="bi bi-star-fill"></i>';
-                                } else {
-                                    echo '<i class="bi bi-star"></i>';
-                                }
-                            }
-                        ?></p>
-                    <?php endif; ?>
                     <p><?php echo htmlspecialchars($review->getUlasan()); ?></p>
 
                     <!-- ikon comment -->
