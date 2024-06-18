@@ -64,16 +64,17 @@ $judulHalaman = 'Detail Pengguna';
     </div>
 
     <div class="table__tab">
-        <?php foreach (['koleksi', 'penilaian', 'ulasan'] as $urlTab): ?>
+        <?php foreach (['koleksi', 'penilaian', 'ulasan'] as $index => $urlTab): ?>
             <a
                 href="detail_pengguna.php?id=<?= $pengguna->getId() ?>&tab=<?= $urlTab ?>"
+                style="view-transition-name: pengguna-tab-<?= $pengguna->getId() ?>-<?= $index ?>"
                 <?= $urlTab === $tab ? 'class="active"' : '' ?>
             >
                 <?= ucfirst($urlTab) ?>
             </a>
         <?php endforeach ?>
     </div>
-    <div class="table__wrapper">
+    <div style="view-transition-name: pengguna-table-<?= $pengguna->getId() ?>" class="table__wrapper">
         <div class="table__header">
             <h1><?= ucfirst($tab) ?></h1>
         </div>

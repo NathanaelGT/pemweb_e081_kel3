@@ -14,14 +14,39 @@ HTML ?>
     <h1 class="page-title__title">Detail Buku</h1>
 
     <div class="page-title__content">
-        <a href="review.php?id=<?= $buku->getId() ?>" class="btn btn--yellow">Lihat Ulasan</a>
+        <a
+            href="review.php?id=<?= $buku->getId() ?>"
+            style="view-transition-name: subheader-item-1"
+            class="btn btn--yellow"
+        >
+            Lihat Ulasan
+        </a>
         <?php if (pengguna() !== null): ?>
             <?php if (!empty(Peminjaman::query(['id_buku', '=', $buku], ['id_pengguna', '=', pengguna()], ['tanggal_dikembalikan', 'is', null]))): ?>
-                <a href="kembalikan_buku.php?id=<?= $buku->getId() ?>" class="btn btn--blue">Kembalikan Buku</a>
+                <a
+                    href="kembalikan_buku.php?id=<?= $buku->getId() ?>"
+                    style="view-transition-name: subheader-item-2"
+                    class="btn btn--blue"
+                >
+                    Kembalikan Buku
+                </a>
             <?php elseif(empty(StokBuku::query(['id_buku', '=', $buku], ['id_peminjaman', 'is', null]))): ?>
-                <button disabled title="Stok buku ini sedang tidak tersedia" class="btn btn--blue">Pinjam Buku</button>
+                <button
+                    disabled
+                    title="Stok buku ini sedang tidak tersedia"
+                    style="view-transition-name: subheader-item-2"
+                    class="btn btn--blue"
+                >
+                    Pinjam Buku
+                </button>
             <?php else: ?>
-                <a href="pinjam_buku.php?id=<?= $buku->getId() ?>" class="btn btn--blue">Pinjam Buku</a>
+                <a
+                    href="pinjam_buku.php?id=<?= $buku->getId() ?>"
+                    style="view-transition-name: subheader-item-2"
+                    class="btn btn--blue"
+                >
+                    Pinjam Buku
+                </a>
             <?php endif ?>
         <?php endif ?>
     </div>

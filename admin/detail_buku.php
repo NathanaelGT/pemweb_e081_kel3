@@ -35,7 +35,7 @@ $judulHalaman = 'Detail Buku';
 
 <main>
     <div class="detail__wrapper">
-        <div class="detail">
+        <div style="view-transition-name: buku-detail-<?= $buku->getId() ?>" class="detail">
             <div>
                 <span>ISBN</span>
                 <span><?= $buku->getIsbn() ?></span>
@@ -69,16 +69,17 @@ $judulHalaman = 'Detail Buku';
     </div>
 
     <div class="table__tab">
-        <?php foreach (['peminjaman', 'ulasan', 'penilaian'] as $urlTab): ?>
+        <?php foreach (['peminjaman', 'ulasan', 'penilaian'] as $index => $urlTab): ?>
             <a
                 href="detail_buku.php?id=<?= $buku->getId() ?>&tab=<?= $urlTab ?>"
+                style="view-transition-name: buku-tab-<?= $buku->getId() ?>-<?= $index ?>"
                 <?= $urlTab === $tab ? 'class="active"' : '' ?>
             >
                 <?= ucfirst($urlTab) ?>
             </a>
         <?php endforeach ?>
     </div>
-    <div class="table__wrapper">
+    <div style="view-transition-name: buku-table-<?= $buku->getId() ?>" class="table__wrapper">
         <div class="table__header">
             <h1><?= ucfirst($tab) ?></h1>
         </div>

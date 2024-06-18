@@ -1,4 +1,4 @@
-<header>
+<header style="view-transition-name: header">
     <nav>
         <a href="<?= $basePath ?>" class="home-link">
             <img src="<?= $basePath ?>assets/logo.svg" alt="Logo" class="logo"/>
