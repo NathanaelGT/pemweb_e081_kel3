@@ -13,14 +13,12 @@ const airDatepickerLocale = {
 
 const xIcon = '<svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>'
 
-let firstTime = true
-
-$(document).ready(function () {
+const init = () => {
     const $info = $('.info')
 
     $info.append($(xIcon))
     $info.on('click', 'svg', function () {
-        $(this).parent.slideUp()
+        $(this).parent().slideUp()
     })
 
     document.querySelectorAll('.input').forEach(inputable => {
@@ -45,11 +43,10 @@ $(document).ready(function () {
         .map(a => {
             a.onclick = () => confirm('Apakah Anda yakin ingin menghapus data ini?')
         })
+}
 
-    if (!firstTime) {
-        return
-    }
-    firstTime = false
+$(document).ready(function () {
+    init()
 
     const executeScript = () => {
         scripts.scripts.forEach(script => script())
@@ -59,3 +56,5 @@ $(document).ready(function () {
     executeScript()
     document.addEventListener('scripts-added', executeScript)
 })
+
+document.addEventListener('turbo:load', init)
