@@ -99,9 +99,9 @@ class Buku extends Model
         return $this->terbit;
     }
 
-    public function setTerbit(string $terbit): static
+    public function setTerbit(DateTime | string $terbit): static
     {
-        $this->terbit = new DateTime($terbit);
+        $this->terbit = parse_datetime($terbit);
 
         return $this;
     }
