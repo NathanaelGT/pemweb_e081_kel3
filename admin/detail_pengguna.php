@@ -16,7 +16,7 @@ if ($pengguna === null) {
 
 $tab = $_GET['tab'] ?? 'koleksi';
 $data = match ($tab) {
-    'koleksi' => Peminjaman::query(['id_pengguna', '=', pengguna()]),
+    'koleksi' => Peminjaman::query(['id_pengguna', '=', $pengguna]),
 
     'penilaian' => Penilaian::query(['id_pengguna', '=', $pengguna]),
 
