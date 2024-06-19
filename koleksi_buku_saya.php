@@ -58,7 +58,7 @@ $judulHalaman = 'Koleksi Buku Saya';
                                     <strong>Kembalikan Buku</strong>
                                 </a>
                             <?php else: ?>
-                                <a href="./pinjam_buku.php.php?id=<?= $buku->getId() ?>" class="btn btn--green">
+                                <a href="./pinjam_buku.php?id=<?= $buku->getId() ?>" class="btn btn--green">
                                     <strong>Pinjam Lagi</strong>
                                 </a>
                             <?php endif ?>
