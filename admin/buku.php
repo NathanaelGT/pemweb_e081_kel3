@@ -1,12 +1,13 @@
 <?php
 include '../core/core.php';
 
+$basePath = '../';
+
 if (!pengguna()?->getAdmin()) {
-    header('Location: ../');
+    header("Location: $basePath");
     die;
 }
 
-$basePath = '../';
 $judulHalaman = 'Daftar Buku';
 $daftarBuku = Buku::semua();
 ?>

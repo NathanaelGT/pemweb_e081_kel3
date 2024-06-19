@@ -1,7 +1,14 @@
 <?php
 include '../core/core.php';
 
-$buku = Buku::cari($_GET['id'] ?? null);
+$basePath = '../';
+
+if (!pengguna()?->getAdmin()) {
+    header("Location: $basePath");
+    die;
+}
+
+$buku = Buku::cari(@$_GET['id']);
 if ($buku === null) {
     header('Location: buku.php');
     die;

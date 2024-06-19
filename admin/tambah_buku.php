@@ -1,6 +1,13 @@
 <?php
 include '../core/core.php';
 
+$basePath = '../';
+
+if (!pengguna()?->getAdmin()) {
+    header("Location: $basePath");
+    die;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     process(function () {
         $buku = new Buku();
@@ -21,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     });
 }
 
-$basePath = '../';
 $bodyClass = 'bookshelf-background';
 $judulHalaman = 'Tambah Buku';
 ?>
