@@ -47,7 +47,7 @@ class Peminjaman extends Model
 
     public function setTanggalPinjam(DateTime | string $tanggalPinjam): static
     {
-        $this->tanggal_pinjam = parse_datetime($tanggalPinjam);
+        $this->tanggal_pinjam = parse_datetime($tanggalPinjam, 'tanggal pinjam');
 
         return $this;
     }
@@ -59,7 +59,7 @@ class Peminjaman extends Model
 
     public function setTanggalKembali(DateTime | string $tanggalKembali): static
     {
-        $this->tanggal_kembali = parse_datetime($tanggalKembali);
+        $this->tanggal_kembali = parse_datetime($tanggalKembali, 'tanggal kembali');
 
         return $this;
     }
@@ -71,7 +71,7 @@ class Peminjaman extends Model
 
     public function setTanggalDiambil(DateTime | string | null $tanggalDiambil): static
     {
-        $this->tanggal_diambil = parse_datetime($tanggalDiambil);
+        $this->tanggal_diambil = parse_datetime($tanggalDiambil, 'tanggal diambil');
 
         return $this;
     }
@@ -83,7 +83,7 @@ class Peminjaman extends Model
 
     public function setTanggalDikembalikan(DateTime | string | null $tanggalDikembalikan): static
     {
-        $this->tanggal_dikembalikan = parse_datetime($tanggalDikembalikan);
+        $this->tanggal_dikembalikan = parse_datetime($tanggalDikembalikan, 'tanggal dikembalikan');
 
         return $this;
     }

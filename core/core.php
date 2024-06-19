@@ -82,10 +82,12 @@ function array_first(array $array, mixed $default = null): mixed
     return $default;
 }
 
-function parse_datetime(DateTime | string | null $dateTime): ?DateTime
+function parse_datetime(DateTime | string | null $dateTime, ?string $kolom = null): ?DateTime
 {
     if (is_string($dateTime)) {
-        if ($dateTime === 'now') {
+        if ($dateTime === '') {
+            throw new RuntimeException("Kolom $kolom tidak boleh kosong.");
+        } elseif ($dateTime === 'now') {
             return new DateTime();
         }
 
@@ -100,6 +102,9 @@ function parse_datetime(DateTime | string | null $dateTime): ?DateTime
 
         $dateTime = DateTime::createFromFormat($dateFormat, $dateTime);
         if ($dateTime === false) {
+            if ($kolom) {
+                throw new RuntimeException("Format $kolom tidak diketahui.");
+            }
             throw new RuntimeException('Format tanggal tidak diketahui.');
         }
     }

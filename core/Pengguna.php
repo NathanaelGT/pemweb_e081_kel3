@@ -49,7 +49,7 @@ class Pengguna extends Model
 
     public function setTanggalLahir(DateTime | string $tanggal_lahir): static
     {
-        $this->tanggal_lahir = parse_datetime($tanggal_lahir);
+        $this->tanggal_lahir = parse_datetime($tanggal_lahir, 'tanggal lahir');
 
         return $this;
     }
