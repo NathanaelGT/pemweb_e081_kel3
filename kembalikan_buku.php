@@ -44,11 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die;
         }
 
-        $_SESSION['info'] = 'Maaf, terjadi kesalahan saat mengembalikan buku';
-        $_SESSION['jenis_info'] = 'error';
-
-        header("Location: $redirectKe");
-    });
+        throw new RuntimeException('Maaf, terjadi kesalahan saat mengembalikan buku');
+    }, $redirectKe);
 }
 
 $bodyClass = 'bookshelf-background';

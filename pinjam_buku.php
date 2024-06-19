@@ -60,10 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        $_SESSION['info'] = 'Maaf, buku tidak tersedia untuk dipinjam saat ini';
-        $_SESSION['jenis_info'] = 'error';
-
-        header("Location: $redirectKe");
+        throw new RuntimeException('Maaf, buku tidak tersedia untuk dipinjam saat ini');
     });
 }
 

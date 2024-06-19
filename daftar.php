@@ -7,23 +7,15 @@ if (pengguna() !== null) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ($_POST['password'] !== $_POST['konfirmasi_password']) {
-        $_SESSION['info'] = 'Konfirmasi password tidak sama';
-        $_SESSION['jenis_info'] = 'error';
-
-        header('Location: ' . $_SERVER['REQUEST_URI']);
-        die;
-    }
-
-    if (!empty(Pengguna::query(['email', '=', $_POST['email']]))) {
-        $_SESSION['info'] = 'Email sudah terdaftar';
-        $_SESSION['jenis_info'] = 'error';
-
-        header('Location: ' . $_SERVER['REQUEST_URI']);
-        die;
-    }
-
     process(function () {
+        if ($_POST['password'] !== $_POST['konfirmasi_password']) {
+            throw new RuntimeException('Konfirmasi password tidak sama');
+        }
+
+        if (!empty(Pengguna::query(['email', '=', $_POST['email']]))) {
+            throw new RuntimeException('Email sudah terdaftar');
+        }
+
         $pengguna = (new Pengguna)
             ->setEmail($_POST['email'])
             ->setTelepon($_POST['telepon'])

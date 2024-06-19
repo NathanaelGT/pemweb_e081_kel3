@@ -16,6 +16,10 @@ if ($pengguna === null) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     process(function () use ($pengguna) {
+        if (!empty(Pengguna::query(['email', '=', $_POST['email']]))) {
+            throw new RuntimeException('Email sudah terdaftar');
+        }
+
         $pengguna
             ->setNama($_POST['nama'])
             ->setTelepon($_POST['telepon'])
@@ -46,22 +50,22 @@ $judulHalaman = 'Edit Pengguna';
         <form method="POST" style="view-transition-name: edit_pengguna-<?= $pengguna->getId() ?>-form" class="form">
             <label class="label">
                 <span>Nama</span>
-                <?= input(name: 'nama', value: $buku->getNama(), required: true, class: 'input') ?>
+                <?= input(name: 'nama', value: $pengguna->getNama(), required: true, class: 'input') ?>
             </label>
 
             <label class="label">
                 <span>Email</span>
-                <?= input(name: 'email', value: $buku->getEmail(), required: true, class: 'input', type: 'email') ?>
+                <?= input(name: 'email', value: $pengguna->getEmail(), required: true, class: 'input', type: 'email') ?>
             </label>
 
             <label class="label">
                 <span>Telepon</span>
-                <?= input(name: 'telepon', value: $buku->getTelepon(), required: true, class: 'input', type: 'tel') ?>
+                <?= input(name: 'telepon', value: $pengguna->getTelepon(), required: true, class: 'input', type: 'tel') ?>
             </label>
 
             <label class="label">
                 <span>Tanggal Lahir</span>
-                <?= input(name: 'tanggal_lahir', value: $buku->getTanggalLahir()->format('Y-m-d'), required: true, class: 'input') ?>
+                <?= input(name: 'tanggal_lahir', value: $pengguna->getTanggalLahir()->format('Y-m-d'), required: true, class: 'input') ?>
             </label>
 
             <label class="label">

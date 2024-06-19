@@ -10,10 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     process(function () {
         $pengguna = array_first(Pengguna::query(['email', '=', $_POST['email']]));
         if ($pengguna === null) {
-            $_SESSION['info'] = 'Email tidak ditemukan';
-            $_SESSION['jenis_info'] = 'error';
-            header('Location: ' . $_SERVER['REQUEST_URI']);
-            die;
+            throw new RuntimeException('Email tidak ditemukan');
         }
 
         if ($pengguna->cekPassword($_POST['password'])) {
@@ -22,9 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['pengguna'] = $pengguna->getId();
             header('Location: ./');
         } else {
-            $_SESSION['info'] = 'Password salah';
-            $_SESSION['jenis_info'] = 'error';
-            header('Location: ' . $_SERVER['REQUEST_URI']);
+            throw new RuntimeException('Password salah');
         }
     });
 }
