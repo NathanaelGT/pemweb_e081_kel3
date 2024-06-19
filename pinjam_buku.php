@@ -76,7 +76,7 @@ $judulHalaman = 'Pinjam Buku';
 
 <main class="form__wrapper form__wrapper--split">
     <div>
-        <section class="text-left">
+        <section style="view-transition-name: pinjam_buku-detail" class="text-left">
             <h2 class="mb-1">Informasi Buku</h2>
 
             <table class="book-detail__info__table">
@@ -112,11 +112,13 @@ $judulHalaman = 'Pinjam Buku';
         </section>
 
         <section>
-            <h2 class="text-left mb-1">Informasi Peminjaman</h2>
+            <h2 style="view-transition-name: pinjam_buku-form-judul" class="text-left mb-1">
+                Informasi Peminjaman
+            </h2>
 
             <?php include './komponen/info.php' ?>
 
-            <form method="POST" class="form">
+            <form method="POST" style="view-transition-name: pinjam_buku-form" class="form">
                 <label class="label">
                     <span>Tanggal pinjam</span>
                     <input type="text" name="tanggal_pinjam" class="input" />

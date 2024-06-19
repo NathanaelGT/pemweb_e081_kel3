@@ -39,7 +39,7 @@ $judulHalaman = 'Edit Buku';
 
 <main class="form__wrapper">
     <div>
-        <h1>
+        <h1 style="view-transition-name: edit_buku-<?= $buku->getId() ?>-form-judul">
             Edit Buku
             <span style="view-transition-name: buku-judul-<?= $buku->getId() ?>">
                 <?= $buku->getJudul() ?>
@@ -48,7 +48,12 @@ $judulHalaman = 'Edit Buku';
 
         <?php include '../komponen/info.php' ?>
 
-        <form method="POST" enctype="multipart/form-data" class="form">
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+            style="view-transition-name: edit_buku-<?= $buku->getId() ?>-form"
+            class="form"
+        >
             <label class="label">
                 <span>Judul</span>
                 <input type="text" name="judul" required value="<?= $buku->getJudul() ?>" class="input">

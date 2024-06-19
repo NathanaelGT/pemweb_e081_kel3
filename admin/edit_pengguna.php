@@ -38,11 +38,13 @@ $judulHalaman = 'Edit Pengguna';
 
 <main class="form__wrapper">
     <div>
-        <h1>Edit Pengguna</h1>
+        <h1 style="view-transition-name: edit_pengguna-<?= $pengguna->getId() ?>-form-judul">
+            Edit Pengguna
+        </h1>
 
         <?php include '../komponen/info.php' ?>
 
-        <form method="POST" class="form">
+        <form method="POST" style="view-transition-name: edit_pengguna-<?= $pengguna->getId() ?>-form" class="form">
             <label class="label">
                 <span>Nama</span>
                 <input type="text" name="nama" required value="<?= $pengguna->getNama() ?>" class="input">

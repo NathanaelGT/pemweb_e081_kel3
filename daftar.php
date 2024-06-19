@@ -55,11 +55,11 @@ $judulHalaman = 'Daftar';
 
 <main class="form__wrapper">
     <div>
-        <h1>Daftar</h1>
+        <h1 style="view-transition-name: daftar-form-judul">Daftar</h1>
 
         <?php include './komponen/info.php' ?>
 
-        <form method="POST" class="form">
+        <form method="POST" style="view-transition-name: daftar-form" class="form">
             <input type="text" name="email" placeholder="Alamat email" class="input" />
             <input type="tel" name="telepon" placeholder="Nomor telepon" class="input" />
             <input type="text" name="name" placeholder="Nama lengkap" class="input" />

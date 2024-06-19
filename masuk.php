@@ -39,11 +39,11 @@ HTML ?>
 
 <main class="form__wrapper">
     <div>
-        <h1>Masuk</h1>
+        <h1 style="view-transition-name: masuk-form-judul">Masuk</h1>
 
         <?php include './komponen/info.php' ?>
 
-        <form method="POST" class="form">
+        <form method="POST" style="view-transition-name: masuk-form" class="form">
             <input type="text" name="email" placeholder="Masukkan email yang terdaftar" class="input" />
             <input type="password" name="password" placeholder="Password" class="input" />
 

@@ -41,11 +41,11 @@ HTML ?>
 
 <main class="form__wrapper">
     <div>
-        <h1>Profile</h1>
+        <h1 style="view-transition-name: akun_pengguna-judul">Profile</h1>
 
         <?php include './komponen/info.php' ?>
 
-        <div id="view-mode" <?= $editMode ? 'style="display:none"' : '' ?>>
+        <div id="view-mode" style="view-transition-name: akun_pengguna-view-mode<?= $editMode ? '; display: none' : '' ?>">
             <div class="profile__info">
                 <div>
                     <img
@@ -66,7 +66,7 @@ HTML ?>
             <button class="btn btn--green" onclick="toggleEditMode()">Edit Biodata</button>
         </div>
 
-        <div id="edit-mode" <?= $editMode ? '' : 'style="display:none"' ?>>
+        <div id="edit-mode" style="view-transition-name: akun_pengguna-edit-mode<?= $editMode ? '' : '; display: none' ?>">
             <form method="POST" enctype="multipart/form-data" class="form">
                 <label class="label">
                     <span>Nama</span>
