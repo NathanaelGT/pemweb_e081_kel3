@@ -121,12 +121,12 @@ $judulHalaman = 'Pinjam Buku';
             <form method="POST" style="view-transition-name: pinjam_buku-form" class="form">
                 <label class="label">
                     <span>Tanggal pinjam</span>
-                    <input type="text" name="tanggal_pinjam" class="input" />
+                    <?= input(name: 'tanggal_pinjam', class: 'input') ?>
                 </label>
 
                 <label class="label">
                     <span>Tanggal kembali</span>
-                    <input type="text" name="tanggal_kembali" class="input" />
+                    <?= input(name: 'tanggal_kembali', class: 'input') ?>
                 </label>
 
                 <button class="btn btn--blue mx-auto">Reservasi Peminjaman</button>

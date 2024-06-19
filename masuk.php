@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['info'] = 'Email tidak ditemukan';
             $_SESSION['jenis_info'] = 'error';
             header('Location: ' . $_SERVER['REQUEST_URI']);
+            die;
         }
 
         if ($pengguna->cekPassword($_POST['password'])) {
@@ -44,8 +45,8 @@ HTML ?>
         <?php include './komponen/info.php' ?>
 
         <form method="POST" style="view-transition-name: masuk-form" class="form">
-            <input type="text" name="email" placeholder="Masukkan email yang terdaftar" class="input" />
-            <input type="password" name="password" placeholder="Password" class="input" />
+            <?= input(name: 'email', placeholder: 'Masukkan email yang terdaftar', class: 'input', type: 'email') ?>
+            <?= input(name: 'password', placeholder: 'Password', class: 'input', type: 'password', restoreValue: false) ?>
 
             <button class="btn btn--yellow">Masuk</button>
 

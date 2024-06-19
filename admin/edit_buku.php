@@ -62,37 +62,39 @@ $judulHalaman = 'Edit Buku';
         >
             <label class="label">
                 <span>Judul</span>
-                <input type="text" name="judul" required value="<?= $buku->getJudul() ?>" class="input">
+                <?= input(name: 'judul', value: $buku->getJudul(), required: true, class: 'input') ?>
             </label>
 
             <label class="label">
                 <span>Kategori</span>
-                <input type="text" name="kategori" required value="<?= $buku->getKategori() ?>" class="input">
+                <?= input(name: 'kategori', value: $buku->getKategori(), required: true, class: 'input') ?>
             </label>
 
             <label class="label">
                 <span>Penulis</span>
-                <input type="text" name="penulis" required value="<?= $buku->getPenulis() ?>" class="input">
+                <?= input(name: 'penulis', value: $buku->getPenulis(), required: true, class: 'input') ?>
             </label>
 
             <label class="label">
                 <span>Sinopsis</span>
-                <textarea name="sinopsis" required class="input textarea"><?= $buku->getSinopsis() ?></textarea>
+                <textarea name="sinopsis" required class="input textarea"><?=
+                    $_SESSION['old']['sinopsis'] ?? $buku->getSinopsis()
+                ?></textarea>
             </label>
 
             <label class="label">
                 <span>Tanggal Terbit</span>
-                <input type="text" name="terbit" required value="<?= $buku->getTerbit()->format('Y-m-d') ?>" class="input">
+                <?= input(name: 'terbit', value: $buku->getTerbit()->format('Y-m-d'), required: true, class: 'input') ?>
             </label>
 
             <label class="label">
                 <span>Penerbit</span>
-                <input type="text" name="penerbit" required value="<?= $buku->getPenerbit() ?>" class="input">
+                <?= input(name: 'penerbit', value: $buku->getPenerbit(), required: true, class: 'input') ?>
             </label>
 
             <label class="label">
                 <span>ISBN</span>
-                <input type="number" min="1" name="isbn" required value="<?= $buku->getIsbn() ?>" class="input">
+                <?= input(name: 'isbn', value: $buku->getIsbn(), required: true, class: 'input', type: 'number', min: 1) ?>
             </label>
 
             <label class="label">

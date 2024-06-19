@@ -17,6 +17,13 @@ if (php_sapi_name() !== 'cli') {
     session_start();
 }
 
+if (
+    @$_SESSION['old_url'] !== $_SERVER['REQUEST_URI'] || // ganti halaman
+    in_array(@$_SERVER['HTTP_CACHE_CONTROL'], ['max-age=0', 'no-cache']) // refresh
+) {
+    unset($_SESSION['old'], $_SESSION['old_url']);
+}
+
 $basePath = './';
 
 function pengguna(): ?Pengguna
@@ -100,6 +107,36 @@ function parse_datetime(DateTime | string | null $dateTime): ?DateTime
     return $dateTime;
 }
 
+function input(
+    string $name,
+    string $class,
+    ?string $placeholder = null,
+    string $type = 'text',
+    bool $required = false,
+    bool $disabled = false,
+    ?string $value = null,
+    ?int $min = null,
+    ?int $max = null,
+    bool $restoreValue = true,
+    ?string $style = null,
+): string
+{
+    $value = $restoreValue ? $_SESSION['old'][$name] ?? $value : $value;
+    $value = $value ? " value=\"$value\"" : '';
+
+    $name = " name=\"$name\"";
+    $class = " class=\"$class\"";
+    $placeholder = $placeholder ? " placeholder=\"$placeholder\"" : '';
+    $type = " type=\"$type\"";
+    $required = $required ? ' required' : '';
+    $disabled = $disabled ? ' disabled' : '';
+    $min = $min ? " min=\"$min\"" : '';
+    $max = $max ? " max=\"$max\"" : '';
+    $style = $style ? " style=\"$style\"" : '';
+
+    return "<input$type$name$placeholder$required$value$min$max$style$class>";
+}
+
 function process(Closure $callback, ?string $redirectOnError = null): never
 {
     try {
@@ -107,6 +144,8 @@ function process(Closure $callback, ?string $redirectOnError = null): never
     } catch (Throwable $e) {
         $_SESSION['info'] = $e instanceof RuntimeException ? $e->getMessage() : 'Data tidak valid';
         $_SESSION['jenis_info'] = 'error';
+        $_SESSION['old'] = $_POST;
+        $_SESSION['old_url'] = $_SERVER['REQUEST_URI'];
 
         global $basePath;
 

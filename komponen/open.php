@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="turbo-prefetch" content="false">
+    <meta name="turbo-cache-control" content="no-preview">
     <meta name="view-transition" content="same-origin">
     <link href="https://fonts.cdnfonts.com/css/metropolis-2" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">

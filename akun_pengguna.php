@@ -70,28 +70,28 @@ HTML ?>
             <form method="POST" enctype="multipart/form-data" class="form">
                 <label class="label">
                     <span>Nama</span>
-                    <input type="text" name="nama" required value="<?= $pengguna->getNama() ?>" class="input">
+                    <?= input(name: 'nama', value: $pengguna->getNama(), required: true, class: 'input') ?>
                 </label>
 
                 <label class="label">
                     <span>Email</span>
-                    <input type="email" name="email" required value="<?= $pengguna->getEmail() ?>" class="input">
+                    <?= input(name: 'email', value: $pengguna->getEmail(), required: true, class: 'input', type: 'email') ?>
                 </label>
 
                 <label class="label">
                     <span>Telepon</span>
-                    <input type="text" name="telepon" required value="<?= $pengguna->getTelepon() ?>" class="input">
+                    <?= input(name: 'telepon', value: $pengguna->getTelepon(), required: true, class: 'input', type: 'tel') ?>
                 </label>
 
                 <label class="label">
                     <span>Tanggal lahir</span>
-                    <input type="text" name="tanggal_lahir" required value="<?= $pengguna->getTanggalLahir()->format('Y-m-d') ?>" class="input">
+                    <?= input(name: 'tanggal_lahir', value: $pengguna->getTanggalLahir()->format('Y-m-d'), required: true, class: 'input') ?>
                 </label>
 
                 <label class="label">
                     <span>Foto profil</span>
                     <input type="file" name="foto" accept=".jpg, .jpeg, .png, .webp" class="input">
-                </label>
+                </label>    
 
                 <div class="form__button-groups">
                     <button type="button" class="btn btn--light-gray" onclick="toggleEditMode()">Batal</button>

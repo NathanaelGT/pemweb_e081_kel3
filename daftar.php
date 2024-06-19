@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pengguna = (new Pengguna)
             ->setEmail($_POST['email'])
             ->setTelepon($_POST['telepon'])
-            ->setNama($_POST['name'])
+            ->setNama($_POST['nama'])
             ->setTanggalLahir($_POST['tanggal_lahir'])
             ->setPassword($_POST['password']);
 
@@ -60,12 +60,12 @@ $judulHalaman = 'Daftar';
         <?php include './komponen/info.php' ?>
 
         <form method="POST" style="view-transition-name: daftar-form" class="form">
-            <input type="text" name="email" placeholder="Alamat email" class="input" />
-            <input type="tel" name="telepon" placeholder="Nomor telepon" class="input" />
-            <input type="text" name="name" placeholder="Nama lengkap" class="input" />
-            <input type="text" name="tanggal_lahir" placeholder="Tanggal lahir" class="input" />
-            <input type="password" name="password" placeholder="Password" class="input" />
-            <input type="password" name="konfirmasi_password" placeholder="Konfirmasi password" class="input" />
+            <?= input(name: 'email', placeholder: 'Alamat email', class: 'input', type: 'email') ?>
+            <?= input(name: 'telepon', placeholder: 'Nomor telepon', class: 'input', type: 'tel') ?>
+            <?= input(name: 'nama', placeholder: 'Nama lengkap', class: 'input') ?>
+            <?= input(name: 'tanggal_lahir', placeholder: 'Tanggal lahir', class: 'input') ?>
+            <?= input(name: 'password', placeholder: 'Password', class: 'input', type: 'password', restoreValue: false) ?>
+            <?= input(name: 'konfirmasi_password', placeholder: 'Konfirmasi password', class: 'input', type: 'password', restoreValue: false) ?>
 
             <button class="btn btn--yellow">Daftar</button>
 

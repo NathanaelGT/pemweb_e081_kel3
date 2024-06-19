@@ -44,37 +44,41 @@ $judulHalaman = 'Tambah Buku';
         <form method="POST" style="view-transition-name: tambah_buku-form" class="form">
             <label class="label">
                 <span>Judul</span>
+                <?= input(name: 'judul', required: true, class: 'input') ?>
                 <input type="text" name="judul" required class="input">
             </label>
 
             <label class="label">
                 <span>Kategori</span>
-                <input type="text" name="kategori" required class="input">
+                <?= input(name: 'kategori', required: true, class: 'input') ?>
             </label>
 
             <label class="label">
                 <span>Penulis</span>
-                <input type="text" name="penulis" required class="input">
+                <?= input(name: 'penulis', required: true, class: 'input') ?>
             </label>
 
             <label class="label">
                 <span>Sinopsis</span>
-                <textarea name="sinopsis" required class="input textarea"></textarea>
+                <textarea name="sinopsis" required class="input textarea"><?=
+                    $_SESSION['old']['sinopsis'] ?? ''
+                ?></textarea>
             </label>
 
             <label class="label">
                 <span>Tanggal Terbit</span>
-                <input type="text" name="terbit" required class="input">
+                <?= input(name: 'terbit', required: true, class: 'input') ?>
             </label>
 
             <label class="label">
                 <span>Penerbit</span>
+                <?= input(name: 'penerbit', required: true, class: 'input') ?>
                 <input type="text" name="penerbit" required class="input">
             </label>
 
             <label class="label">
                 <span>ISBN</span>
-                <input type="number" min="1" name="isbn" required class="input">
+                <?= input(name: 'isbn', required: true, class: 'input', type: 'number', min: 1) ?>
             </label>
 
             <label class="label">
