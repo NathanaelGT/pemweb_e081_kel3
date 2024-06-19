@@ -21,6 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ->setCover(handle_upload($_FILES['cover'], $_POST['isbn']))
             ->simpan();
 
+        for ($i = 0; $i < $_POST['jumlah_stok']; $i++) {
+            (new StokBuku)
+                ->setIdBuku($buku->getId())
+                ->simpan();
+        }
+
         $_SESSION['info'] = 'Buku berhasil ditambahkan';
         $_SESSION['jenis_info'] = 'success';
 
@@ -41,11 +47,15 @@ $judulHalaman = 'Tambah Buku';
 
         <?php include '../komponen/info.php' ?>
 
-        <form method="POST" style="view-transition-name: tambah_buku-form" class="form">
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+            style="view-transition-name: tambah_buku-form"
+            class="form"
+        >
             <label class="label">
                 <span>Judul</span>
                 <?= input(name: 'judul', required: true, class: 'input') ?>
-                <input type="text" name="judul" required class="input">
             </label>
 
             <label class="label">
@@ -73,7 +83,6 @@ $judulHalaman = 'Tambah Buku';
             <label class="label">
                 <span>Penerbit</span>
                 <?= input(name: 'penerbit', required: true, class: 'input') ?>
-                <input type="text" name="penerbit" required class="input">
             </label>
 
             <label class="label">
@@ -84,6 +93,11 @@ $judulHalaman = 'Tambah Buku';
             <label class="label">
                 <span>Cover</span>
                 <input type="file" name="cover" accept=".jpg, .jpeg, .png, .webp" required class="input">
+            </label>
+
+            <label class="label">
+                <span>Jumlah Buku</span>
+                <?= input(name: 'jumlah_stok', value: 1, required: true, class: 'input', type: 'number', min: 1) ?>
             </label>
 
             <button type="submit" class="btn btn--green">Tambah Buku</button>

@@ -16,8 +16,30 @@ if ($buku === null) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     process(function () use ($buku) {
-        if (isset($_FILES['cover'])) {
-            $buku->setCover(handle_upload($_FILES['cover'], $_POST['isbn']));
+        $semuaStokBuku = StokBuku::query(['id_buku', '=', $buku]);
+        $jumlahStokBuku = count($semuaStokBuku);
+        $stokBuku = array_group(fn (StokBuku $stok) => [
+            $stok->getIdPeminjaman() === null ? 'tersedia' : 'dipinjam' => $stok
+        ], $semuaStokBuku);
+
+        if ($_POST['jumlah_stok'] > $jumlahStokBuku) {
+            for ($i = 0; $i < $_POST['jumlah_stok'] - $jumlahStokBuku; $i++) {
+                (new StokBuku)
+                    ->setIdBuku($buku->getId())
+                    ->simpan();
+            }
+        } elseif ($_POST['jumlah_stok'] < $jumlahStokBuku) {
+            $stokTersedia = $stokBuku['tersedia'] ?? [];
+
+            if (count($stokTersedia) < $jumlahStokBuku - $_POST['jumlah_stok']) {
+                throw new RuntimeException(
+                    'Jumlah stok yang tersedia tidak boleh kurang dari jumlah stok yang sedang dipinjam'
+                );
+            }
+
+            foreach (array_slice($stokTersedia, 0, $jumlahStokBuku - $_POST['jumlah_stok']) as $stok) {
+                $stok->hapus();
+            }
         }
 
         $buku->setJudul($_POST['judul'])
@@ -26,8 +48,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ->setSinopsis($_POST['sinopsis'])
             ->setTerbit($_POST['terbit'])
             ->setPenerbit($_POST['penerbit'])
-            ->setIsbn($_POST['isbn'])
-            ->simpan();
+            ->setIsbn($_POST['isbn']);
+
+        if (isset($_FILES['cover']) && $_FILES['cover']['error'] === UPLOAD_ERR_OK) {
+            $buku->setCover(handle_upload($_FILES['cover'], $_POST['isbn']));
+        }
+
+        $buku->simpan();
 
         $_SESSION['info'] = "Buku \"{$buku->getJudul()}\" berhasil diedit";
         $_SESSION['jenis_info'] = 'success';
@@ -100,6 +127,18 @@ $judulHalaman = 'Edit Buku';
             <label class="label">
                 <span>Cover</span>
                 <input type="file" name="cover" accept=".jpg, .jpeg, .png, .webp" class="input">
+            </label>
+
+            <label class="label">
+                <span>Jumlah Buku</span>
+                <?= input(
+                    name: 'jumlah_stok',
+                    value: fn() => count(StokBuku::query(['id_buku', '=', $buku])),
+                    required: true,
+                    class: 'input',
+                    type: 'number',
+                    min: 1
+                ) ?>
             </label>
 
             <button type="submit" class="btn btn--green">Edit Buku</button>
