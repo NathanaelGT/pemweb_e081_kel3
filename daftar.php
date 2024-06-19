@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die;
     }
 
-    try {
+    process(function () {
         $pengguna = (new Pengguna)
             ->setEmail($_POST['email'])
             ->setTelepon($_POST['telepon'])
@@ -43,14 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['jenis_info'] = 'error';
             header('Location: ' . $_SERVER['REQUEST_URI']);
         }
-    } catch (Throwable $e) {
-        $_SESSION['info'] = $e instanceof RuntimeException ? $e->getMessage() : 'Data tidak valid';
-        $_SESSION['jenis_info'] = 'error';
-
-        header('Location: ' . $_SERVER['REQUEST_URI']);
-    } finally {
-        die;
-    }
+    });
 }
 
 $bodyClass = 'bookshelf-background';

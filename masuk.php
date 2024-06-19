@@ -7,15 +7,13 @@ if (pengguna() !== null) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    try {
-        $pengguna = Pengguna::query(['email', '=', $_POST['email']]);
-        if (empty($pengguna)) {
+    process(function () {
+        $pengguna = array_first(Pengguna::query(['email', '=', $_POST['email']]));
+        if ($pengguna === null) {
             $_SESSION['info'] = 'Email tidak ditemukan';
             $_SESSION['jenis_info'] = 'error';
             header('Location: ' . $_SERVER['REQUEST_URI']);
         }
-
-        $pengguna = $pengguna[0];
 
         if ($pengguna->cekPassword($_POST['password'])) {
             session_regenerate_id(true);
@@ -27,14 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['jenis_info'] = 'error';
             header('Location: ' . $_SERVER['REQUEST_URI']);
         }
-    } catch (Throwable $e) {
-        $_SESSION['info'] = $e instanceof RuntimeException ? $e->getMessage() : 'Data tidak valid';
-        $_SESSION['jenis_info'] = 'error';
-
-        header('Location: ' . $_SERVER['REQUEST_URI']);
-    } finally {
-        die;
-    }
+    });
 }
 
 $bodyClass = 'bookshelf-background';

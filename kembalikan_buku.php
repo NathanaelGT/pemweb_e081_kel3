@@ -31,22 +31,24 @@ if (empty($peminjaman)) {
 $peminjaman = $peminjaman[0];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $stokBuku = StokBuku::query(['id_buku', '=', $buku], ['id_peminjaman', '=', $peminjaman]);
-    foreach ($stokBuku as $stok) {
-        $peminjaman->setTanggalDikembalikan('now')->simpan();
-        $stok->setIdPeminjaman(null)->simpan();
+    process(function () use ($buku, $peminjaman, $redirectKe) {
+        $stokBuku = StokBuku::query(['id_buku', '=', $buku], ['id_peminjaman', '=', $peminjaman]);
+        foreach ($stokBuku as $stok) {
+            $peminjaman->setTanggalDikembalikan('now')->simpan();
+            $stok->setIdPeminjaman(null)->simpan();
 
-        $_SESSION['info'] = 'Buku berhasil dikembalikan';
-        $_SESSION['jenis_info'] = 'success';
+            $_SESSION['info'] = 'Buku berhasil dikembalikan';
+            $_SESSION['jenis_info'] = 'success';
+
+            header("Location: $redirectKe");
+            die;
+        }
+
+        $_SESSION['info'] = 'Maaf, terjadi kesalahan saat mengembalikan buku';
+        $_SESSION['jenis_info'] = 'error';
 
         header("Location: $redirectKe");
-        die;
-    }
-
-    $_SESSION['info'] = 'Maaf, terjadi kesalahan saat mengembalikan buku';
-    $_SESSION['jenis_info'] = 'error';
-
-    header("Location: $redirectKe");
+    });
 }
 
 $bodyClass = 'bookshelf-background';

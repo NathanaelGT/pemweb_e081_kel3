@@ -39,31 +39,32 @@ if (empty($stokBuku)) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    foreach ($stokBuku as $stok) {
-        if ($stok->getIdPeminjaman() === null) {
-            $peminjaman = new Peminjaman();
-            $peminjaman
-                ->setIdBuku($buku->getId())
-                ->setIdPengguna($pengguna->getId())
-                ->setTanggalPinjam($_POST['tanggal_pinjam'])
-                ->setTanggalKembali($_POST['tanggal_kembali'])
-                ->simpan();
+    process(function () use ($stokBuku, $buku, $pengguna, $redirectKe) {
+        foreach ($stokBuku as $stok) {
+            if ($stok->getIdPeminjaman() === null) {
+                $peminjaman = new Peminjaman();
+                $peminjaman
+                    ->setIdBuku($buku->getId())
+                    ->setIdPengguna($pengguna->getId())
+                    ->setTanggalPinjam($_POST['tanggal_pinjam'])
+                    ->setTanggalKembali($_POST['tanggal_kembali'])
+                    ->simpan();
 
-            $stok->setIdPeminjaman($peminjaman->getId())->simpan();
+                $stok->setIdPeminjaman($peminjaman->getId())->simpan();
 
-            $_SESSION['info'] = 'Buku berhasil dipinjam';
-            $_SESSION['jenis_info'] = 'success';
+                $_SESSION['info'] = 'Buku berhasil dipinjam';
+                $_SESSION['jenis_info'] = 'success';
 
-            header("Location: $redirectKe");
-            die;
+                header("Location: $redirectKe");
+                die;
+            }
         }
-    }
 
-    $_SESSION['info'] = 'Maaf, buku tidak tersedia untuk dipinjam saat ini';
-    $_SESSION['jenis_info'] = 'error';
+        $_SESSION['info'] = 'Maaf, buku tidak tersedia untuk dipinjam saat ini';
+        $_SESSION['jenis_info'] = 'error';
 
-    header("Location: $redirectKe");
-    die;
+        header("Location: $redirectKe");
+    });
 }
 
 $bodyClass = 'bookshelf-background';

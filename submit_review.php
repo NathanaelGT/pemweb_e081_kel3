@@ -1,10 +1,16 @@
 <?php
 include 'core/core.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $pengguna = pengguna();
+if (is_null($pengguna = pengguna())) {
+    $_SESSION['info'] = 'Anda harus login untuk memberikan ulasan';
+    $_SESSION['jenis_info'] = 'error';
 
-    if ($pengguna) {
+    header('Location: masuk.php');
+    die;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    process(function () use ($pengguna) {
         $id_buku = $_POST['id_buku'];
         $ulasan = @$_POST['ulasan'];
         $penilaian = @$_POST['penilaian'];
@@ -41,9 +47,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // mengarahkan ke laman ulasan lagi
         header('Location: review.php?id=' . $id_buku);
-        exit;
-    } else {
-        echo 'You must be logged in to submit a review.';
-    }
+    });
 }
-?>

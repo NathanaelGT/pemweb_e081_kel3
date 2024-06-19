@@ -15,16 +15,17 @@ if ($pengguna === null) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $pengguna
-        ->setNama($_POST['nama'])
-        ->setTelepon($_POST['telepon'])
-        ->setTanggalLahir($_POST['tanggal_lahir'])
-        ->setEmail($_POST['email'])
-        ->setAdmin(isset($_POST['admin']) ? 1 : 0)
-        ->simpan();
+    process(function () use ($pengguna) {
+        $pengguna
+            ->setNama($_POST['nama'])
+            ->setTelepon($_POST['telepon'])
+            ->setTanggalLahir($_POST['tanggal_lahir'])
+            ->setEmail($_POST['email'])
+            ->setAdmin(isset($_POST['admin']) ? 1 : 0)
+            ->simpan();
 
-    header('Location: pengguna.php');
-    die;
+        header('Location: pengguna.php');
+    });
 }
 
 $basePath = '../';

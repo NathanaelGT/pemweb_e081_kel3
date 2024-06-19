@@ -8,7 +8,7 @@ if ($buku === null) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    try {
+    process(function () use ($buku) {
         if (isset($_FILES['cover'])) {
             $buku->setCover(handle_upload($_FILES['cover'], $_POST['isbn']));
         }
@@ -26,14 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['jenis_info'] = 'success';
 
         header('Location: buku.php');
-    } catch (Throwable $e) {
-        $_SESSION['info'] = $e instanceof RuntimeException ? $e->getMessage() : 'Data tidak valid';
-        $_SESSION['jenis_info'] = 'error';
-
-        header('Location: ' . $_SERVER['REQUEST_URI']);
-    } finally {
-        die;
-    }
+    });
 }
 
 $basePath = '../';

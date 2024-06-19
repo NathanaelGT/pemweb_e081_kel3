@@ -100,6 +100,22 @@ function parse_datetime(DateTime | string | null $dateTime): ?DateTime
     return $dateTime;
 }
 
+function process(Closure $callback, ?string $redirectOnError = null): never
+{
+    try {
+        $callback();
+    } catch (Throwable $e) {
+        $_SESSION['info'] = $e instanceof RuntimeException ? $e->getMessage() : 'Data tidak valid';
+        $_SESSION['jenis_info'] = 'error';
+
+        global $basePath;
+
+        header('Location: ' . ($redirectOnError ?: $_SERVER['REQUEST_URI'] ?: $basePath));
+    } finally {
+        die;
+    }
+}
+
 function handle_upload(array $file, string $fileName): string
 {
     $path = realpath(__DIR__ . '/../') . '/uploads';

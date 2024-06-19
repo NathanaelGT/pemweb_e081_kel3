@@ -7,7 +7,7 @@ if (is_null($pengguna = pengguna())) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    try {
+    process(function () use ($pengguna) {
         if (isset($_FILES['foto'])) {
             $pengguna->setFoto(handle_upload($_FILES['foto'], 'pengguna-' . $pengguna->getId()));
         }
@@ -26,14 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         header('Location: ./akun_pengguna.php');
-    } catch (Throwable $e) {
-        $_SESSION['info'] = $e instanceof RuntimeException ? $e->getMessage() : 'Data tidak valid';
-        $_SESSION['jenis_info'] = 'error';
-
-        header('Location: ./akun_pengguna.php');
-    } finally {
-        die;
-    }
+    }, './akun_pengguna.php');
 }
 
 $editMode = isset($_SESSION['info']);
