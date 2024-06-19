@@ -119,7 +119,7 @@ function input(
     string $type = 'text',
     bool $required = false,
     bool $disabled = false,
-    ?string $value = null,
+    Closure | string | null $value = null,
     ?int $min = null,
     ?int $max = null,
     bool $restoreValue = true,
@@ -127,6 +127,7 @@ function input(
 ): string
 {
     $value = $restoreValue ? $_SESSION['old'][$name] ?? $value : $value;
+    $value = $value instanceof Closure ? $value() : $value;
     $value = $value ? " value=\"$value\"" : '';
 
     $name = " name=\"$name\"";
@@ -147,7 +148,9 @@ function process(Closure $callback, ?string $redirectOnError = null): never
     try {
         $callback();
     } catch (Throwable $e) {
-        $_SESSION['info'] = $e instanceof RuntimeException ? $e->getMessage() : 'Data tidak valid';
+        $_SESSION['info'] = $e instanceof RuntimeException
+            ? $e->getMessage()
+            : 'Data tidak valid (' . $e->getMessage() . ')';
         $_SESSION['jenis_info'] = 'error';
         $_SESSION['old'] = $_POST;
         $_SESSION['old_url'] = $_SERVER['REQUEST_URI'];
