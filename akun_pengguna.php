@@ -8,6 +8,10 @@ if (is_null($pengguna = pengguna())) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     process(function () use ($pengguna) {
+        if (!empty(Pengguna::query(['email', '=', $_POST['email']], ['id', '!=', $pengguna]))) {
+            throw new RuntimeException('Email sudah terdaftar');
+        }
+
         if (isset($_FILES['foto'])) {
             $pengguna->setFoto(handle_upload($_FILES['foto'], 'pengguna-' . $pengguna->getId()));
         }

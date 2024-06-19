@@ -16,7 +16,7 @@ if ($pengguna === null) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     process(function () use ($pengguna) {
-        if (!empty(Pengguna::query(['email', '=', $_POST['email']]))) {
+        if (!empty(Pengguna::query(['email', '=', $_POST['email']], ['id', '!=', $pengguna]))) {
             throw new RuntimeException('Email sudah terdaftar');
         }
 
@@ -27,6 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ->setEmail($_POST['email'])
             ->setAdmin(isset($_POST['admin']) ? 1 : 0)
             ->simpan();
+
+        $_SESSION['info'] = "Data \"{$pengguna->getNama()}\" berhasil diedit";
+        $_SESSION['jenis_info'] = 'success';
 
         header('Location: pengguna.php');
     });
