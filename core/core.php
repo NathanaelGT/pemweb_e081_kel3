@@ -18,7 +18,7 @@ if (php_sapi_name() !== 'cli') {
 }
 
 if (
-    @$_SESSION['old_url'] !== $_SERVER['REQUEST_URI'] || // ganti halaman
+    @$_SESSION['old_url'] !== @$_SERVER['REQUEST_URI'] || // ganti halaman
     in_array(@$_SERVER['HTTP_CACHE_CONTROL'], ['max-age=0', 'no-cache']) // refresh
 ) {
     unset($_SESSION['old'], $_SESSION['old_url']);
